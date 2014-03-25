@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset addfieldpath="/administrator/components/com_adh/models/fields">
+		<field
+			name="id" type="hidden"
+		/>
+		<field
+			name="adherent_id" type="adherent"
+			label="COM_ADH_ADHERENT_LABEL" description="COM_ADH_ADHERENT_DESC"
+			class="inputbox" default=""
+		/>
+		<field
+			name="tarif_id" type="tarif"
+			label="COM_ADH_TARIF_LABEL"	description="COM_ADH_TARIF_DESC"
+			class="inputbox" default=""
+		/>
+		<field
+			name="montant" type="text"
+			label="COM_ADH_MONTANT_LABEL"	description="COM_ADH_MONTANT_DESC"
+			class="inputbox prix" default=""
+		/>
+		<field
+			name="mode_paiement" type="list"
+			label="COM_ADH_MODEPAIEMENT_LABEL"	description="COM_ADH_MODEPAIEMENT_DESC"
+			class="inputbox" default=""
+		>
+			<option value="gratuit">COM_ADH_PAIEMENT_SETTINGS_GRATUIT_LABEL</option>
+			<option value="espèce">COM_ADH_PAIEMENT_SETTINGS_ESPECE_LABEL</option>
+			<option value="chèque">COM_ADH_PAIEMENT_SETTINGS_CHEQUE_LABEL</option>
+			<option value="virement bancaire">COM_ADH_PAIEMENT_SETTINGS_VIREMENT_LABEL</option>
+			<option value="paypal">COM_ADH_PAIEMENT_SETTINGS_PAYPAL_LABEL</option>
+		</field>
+		<field
+			name="date" type="calendar"
+			label="COM_ADH_DATE_LABEL"	description="COM_ADH_DATE_DESC"
+			size="40" class="date" default=""
+		/>
+		<field
+			name="date_debut_cotiz" type="calendar"
+			label="COM_ADH_DATEDEBUT_LABEL"	description="COM_ADH_DATEDEBUT_DESC"
+			size="40" class="date" default=""
+		/>
+		<field
+			name="date_fin_cotiz" type="calendar"
+			label="COM_ADH_DATEFIN_LABEL" description="COM_ADH_DATEFIN_DESC"
+			size="40" class="date" default=""
+		/>
+		<field
+			name="payee" type="radio"
+			label="COM_ADH_PAYEE_LABEL" description="COM_ADH_PAYEE_DESC"
+			class="radiobox" default="0"
+		>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field
+			name="commentaire" type="text"
+			label="COM_ADH_COMMENT_LABEL"	description="COM_ADH_COMMENT_DESC"
+			class="inputbox" default=""
+		/>
+		<field
+			name="creation_date" type="calendar"
+			label="JGLOBAL_CREATED_DATE"	description="JGLOBAL_FIELD_CREATED_DESC"
+			size="40" class="date" default=""
+		/>
+		<field
+			name="modification_date" type="calendar"
+			label="JGLOBAL_FIELD_MODIFIED_LABEL"	description="JGLOBAL_FIELD_MODIFIED_DESC"
+			class="readonly" readonly="true"
+		/>
+		<field
+			name="modified_by" type="user"
+			label="JGLOBAL_FIELD_MODIFIED_BY_LABEL"	description="JGLOBAL_FIELD_MODIFIED_BY_DESC"
+			class="readonly" readonly="true"
+		/>
+	</fieldset>
+</form>

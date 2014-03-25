@@ -1,0 +1,1 @@
+ALTER TABLE  `#__adh_adherents` CHANGE  `prenom`  `prenom` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL;

@@ -1,0 +1,154 @@
+/**
+ * GENERAL placement
+ */
+.left {
+	float:left;
+}
+.right {
+	float: right;
+}
+.center {
+	text-align: center;
+	float: none;
+}
+
+
+/*
+ * Fieldset
+ */
+fieldset.adminform {
+	/*display: table;*/
+}
+fieldset.adminform div.tr {
+	width: 100%;
+	/*display: table-row;*/
+	/*margin: 0 0 5px 0;*/
+}
+fieldset.adminform div.th {
+	float: left;
+	clear: left;
+	width: 10%;
+	/*display: table-cell;*/
+}
+fieldset.adminform div.td {
+	display: inline-block;
+	margin: 0 2%;
+	width: 85%;
+/*	padding: 0 2% 0% 2%;*/
+}
+fieldset.adminform div.tth {
+	display: inline-block;
+	/*min-width: 110px;*/
+	width: 10%;
+	vertical-align: middle;
+}
+fieldset.adminform div.ttd {
+	display: inline-block;
+	margin: 0 2%;
+	width: 35%;
+}
+
+fieldset.adminform textarea, fieldset.adminform input:not([type="checkbox"]):not([type="radio"]):not([type="number"]) {
+	/*min-width: 500px;*/
+	width: 100%;
+}
+fieldset.adminform input.date {
+	width: 90% ! important;
+}
+fieldset.adminform input.width_auto {
+	width: auto ! important;
+}
+fieldset.adminform input.prix {
+	width: 15% ! important;
+	text-align: right;		/* on affiche les chiffres alignés à droite */
+}
+/*fieldset.adminform span {
+	color: navy;
+	text-align: middle;
+}*/
+/*fieldset.adminform span.help {
+	font-size: smaller;
+	color: grey;
+}*/
+fieldset input, li > fieldset label, fieldset textarea, fieldset select, fieldset img, fieldset button {
+	/*float: none ! important;*/
+	vertical-align: middle;         /* pour aligner les images correctement */
+}
+fieldset select {
+	max-width: 100%;
+}
+
+fieldset input[type="radio"] {
+	margin-top: 0;					/* pour éviter le décalage des radio button */
+}
+fieldset input[type="number"] {
+	width: 50px;
+	text-align: right;
+}
+/*fieldset.radio {
+	display: inline-block;
+	float: none ! important;
+	border: 0;
+	float: left;
+	padding: 0;
+	margin: 0 0 5px 0;
+}
+fieldset.radio input[type="radio"] {
+	width: auto ! important;
+}*/
+fieldset input.prix {
+	text-align: right;
+	max-width: 32px;
+	margin-right: 10px;
+}
+
+ul.adminformlist-inline li {
+	display: inline;
+}
+
+fieldset.adminform div.tr > div.ttd > span, fieldset.panelform li span {
+	float: left;
+	min-width: 32px;
+	margin: 5px 5px 5px 0;
+	padding: 1px;
+}
+
+div.tarifs_liste {
+	background:white;
+	padding-top:1%;
+	padding-bottom:3%;
+	margin-top:1%;
+	margin-bottom:1%;
+	border:dotted 2px grey;
+	border-radius: 20px;
+	/* pour les browsers non-HTML5-compliant */
+    -moz-border-radius: 20px;  
+    -webkit-border-radius: 20px;  
+}
+/*.tarifs_liste p {
+	text-align:center;
+}
+.tarifs_liste_error {
+	background:white;
+	padding-top:1%;
+	padding-bottom:3%;
+	margin-top:1%;
+	margin-bottom:1%;
+	border:5px red dotted ! important;
+	border-radius: 20px;
+}
+.tarifs_liste_error p {
+	text-align:center;
+}*/
+
+.adherer_options {
+	margin-left: 20%; /* div.tth width */
+}
+
+div.spacer {
+	min-height: 20px;
+}
+
+.star {
+	color: red;
+}

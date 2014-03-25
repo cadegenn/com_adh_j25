@@ -1,0 +1,10 @@
+ALTER TABLE  `#__adh_adherents` CHANGE  `creation_date`  `creation_date` DATETIME NULL DEFAULT NULL ;
+ALTER TABLE  `#__adh_adherents` CHANGE  `modification_date`  `modification_date` DATETIME NULL DEFAULT NULL ;
+ALTER TABLE  `#__adh_groups` CHANGE  `creation_date`  `creation_date` DATETIME NULL DEFAULT NULL ;
+ALTER TABLE  `#__adh_groups` CHANGE  `modification_date`  `modification_date` DATETIME NULL DEFAULT NULL ;
+ALTER TABLE  `#__adh_tarifs` CHANGE  `creation_date`  `creation_date` DATETIME NULL DEFAULT NULL ;
+ALTER TABLE  `#__adh_tarifs` CHANGE  `modification_date`  `modification_date` DATETIME NULL DEFAULT NULL ;
+ALTER TABLE  `#__adh_professions` CHANGE  `creation_date`  `creation_date` DATETIME NULL DEFAULT NULL ;
+ALTER TABLE  `#__adh_professions` CHANGE  `modification_date`  `modification_date` DATETIME NULL DEFAULT NULL ;
+ALTER TABLE  `#__adh_cotisations` CHANGE  `creation_date`  `creation_date` DATETIME NULL DEFAULT NULL ;
+ALTER TABLE  `#__adh_cotisations` CHANGE  `modification_date`  `modification_date` DATETIME NULL DEFAULT NULL ;

@@ -1,0 +1,133 @@
+@TODO
+	admin:
+	. importV2adherents: créer une cotisation non payée pour les nouveaux
+	. adherent: créer une bouton "réinitialiser mot de passe et envoyer"
+	. préférences: choisir finement quels champs doivent apparaitre sur la page d'inscription
+	. adh: créer une page qui recence les anomalies (NOM = PRENOM, adresse douteuse, etc...)
+	. adhérent: utiliser le filter "TEL" pour les numéros de tel/portable
+	site:
+	. créer une page de login
+
+@version 0.0.19 - @date
+	admin:
+	. adherents: colonnes sortables
+
+@version 0.0.18 - @date 2014.02.10
+	admin:
+	. importV2cotisations: ne pas importer les cotiz dont l'id_adherents est 0 -> OK
+	. afficher des boutons "ajouter adhérent", "ajouter un groupe", "ajouter cotisations" dès la page d'acceuil dans la toolbar -> OK
+	. adherent: ajouter le champ mot de passe & encrypter lors de l'enregistrement -> OK
+	. préférences: fix bug du "toggle button" de l'onglet "Association" -> OK (création d'une page dédiée)
+	. cotisations: colonnes sortable -> OK
+
+@version 0.0.17 - @date 2013.03.20
+	admin:
+	. importV2adherents: ajout de la possibilité de tout importer
+	. importV2adherents: optimisation des queries
+	. importV2cotisations: ajout de la possibilité de tout importer
+	. importV2cotisations: optimisation des queries
+	com_adh: ajout du bouton "préférences" dès la page d'acceuil
+
+@version 0.0.16 - @date 2013.03.14
+	admin:
+		page d'acceuil du composant
+			. stats google chart : nb d'adhésions vs nb de primo-adhérents
+			. les dernières inscriptions en ligne
+			. paiements en attente
+
+@version 0.0.15 - @date 2013.03.11
+	site:
+		page "adhérer" côté site
+	admin:
+		page d'extraction des email -> n'extrait que les adhérents avec published = 1
+		page d'extraction des adresses postales -> n'extrait que les adhérents avec published = 1
+		importV2adherents : nettoyage du champ adresse2 lors de l'importation
+		importV2adherents : fix bug import ville au format cp-ville
+		champs 'cp' (code postal) devient type chaine
+		importV2cotisations : si date is null -> payee = false et les dates_cotiz_{debut,fin} sont positionnées au début / fin d'année en cours
+		views/adherent : ajout de tous les boutons standards
+
+@version 0.0.14 - @date 2012.12.04
+	page de configuration du component : ajouter les modes de paiement
+	page d'import des cotisations -> OK
+	DB : remise des TRIGGER
+	page d'édition des cotisations -> OK
+	page de liste des cotisations -> OK
+	suppression des icon 16x16 inutiles
+	ajout des index.html dans chaque dossier
+	DB : re-suppression des TRIGGER car visiblement, chez OVH, on n'a pas le droit
+
+
+@version 0.0.13 - @date 2012.11.16
+	DB : suppression des TRIGGER
+	views: config: transformation des th/td en tth/ttd pour uniformiser avec l'édition de l'adhérent
+	imports adhérents : conversion des 'Mlle' en 'Mme'
+	édition d'un adhérent : ajout du custom field profession
+
+
+@version 0.0.12 - @date 2012.11.09
+	ajout d'un alphabet pour filtrer la liste des adhérents
+	ajout d'un alphabet pour filtrer la liste des adhérents lors de l'import
+
+
+@version 0.0.11 - @date 2012.11.05
+	ajout d'un filtre de recherche à la liste des adhérents
+	ajout d'un filtre de recherche à la liste des adhérents lors de l'import
+
+
+@version 0.0.10 - @date 2012.11.04
+	page d'import des adhérents -> OK
+	page d'édition des adhérents -> OK
+
+
+@version 0.0.9 - @date 2012.11.02
+	page d'import des professions -> OK
+	page d'édition des professions -> OK
+
+
+@version 0.0.8 - @date 2012.11.02
+	page d'import des tarifs -> OK
+	page d'édition des tarifs -> OK
+
+
+@version 0.0.7 - @date 2012.11.01
+	BD : les _date doivent être NULL DEFAULT NULL pour que les triggers fonctionnent
+	page d'accueil des configurations -> OK
+	page d'édition des origines -> OK
+
+
+@version 0.0.6 - @date 2012.11.01
+	renommer les tables #__adh_adherents_origines et #__adh_adherents_professions en #__adh_origines et #__adh_professions
+	page d'import des origines -> OK
+
+
+@version 0.0.5 - @date 2012.11.01
+	fix png icons des menus
+	page d'accueil des imports -> OK
+
+
+@version 0.0.4 - @date 2012.11.01
+	Renommer *apl* -> *adh* (/admin/helper)
+	remplacer apl -> adh (/admin/helper)
+	remplacer APL -> ADH (/admin/helper)
+	sous-menus du helper OK
+	Renommer *apl* -> *adh* (/admin/views/adh)
+	remplacer apl -> adh (/admin/views/adh)
+	remplacer APL -> ADH (/admin/views/adh)
+	install...sql fonctionne correctement
+
+
+@version 0.0.3 - @date 2012.31.10
+	fix TRIGGER BEFORE UPDATE pour les triggers update au lieu de BEFORE INSERT
+	Renommer *apl* -> *adh* (/language/fr-FR)
+	ajouter des DROP TRIGGER IF EXISTS avant la création des triggers
+
+
+@version 0.0.2 - @date 2012.31.10
+	Renommer *apl* -> *adh*
+	remplacer COM_APL_* -> COM_ADH_*
+	ajouter les DROP TRIGGER au uninstall.mysql
+
+
+@version 0.0.1 - @date 2012.31.10
+	création du projet

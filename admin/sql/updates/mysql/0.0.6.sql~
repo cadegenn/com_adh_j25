@@ -1,0 +1,34 @@
+--
+-- Structure de la table `chantiers`
+--
+
+CREATE TABLE IF NOT EXISTS `#__apl_chantiers` (
+  `id` double NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) COLLATE utf8_bin NOT NULL,
+  `lieu` varchar(255) COLLATE utf8_bin NOT NULL,
+  `pays` varchar(255) COLLATE utf8_bin NOT NULL,
+  `Glat` float NOT NULL DEFAULT '0',
+  `Glng` float NOT NULL DEFAULT '0',
+  `organisateurs` mediumtext COLLATE utf8_bin,
+  `contexte` mediumtext COLLATE utf8_bin,
+  `actions` mediumtext COLLATE utf8_bin,
+  `benevole` mediumtext COLLATE utf8_bin,
+  `date_debut` timestamp NULL DEFAULT '0000-00-00 00:00:00',
+  `date_fin` timestamp NULL DEFAULT '0000-00-00 00:00:00',
+  `date_exacte` tinyint(1) NOT NULL COMMENT 'Si date_exacte n''est pas cochÃ©e (0), alors le site affiche des dates "vagues" genre "de mi-aout Ã  fin septembre" au lieu de "du 14 aout au 21 septembre"',
+  `date_text` mediumtext COLLATE utf8_bin,
+  `profile` mediumtext COLLATE utf8_bin,
+  `cout` int(11) DEFAULT '0',
+  `cout_text` mediumtext COLLATE utf8_bin,
+  `fiche_info` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `fiche_inscription` varchar(255) COLLATE utf8_bin NOT NULL,
+  `test` tinyint(1) NOT NULL DEFAULT '0',
+  `complet` tinyint(4) NOT NULL DEFAULT '0',
+  `urgence` tinyint(4) NOT NULL DEFAULT '0',
+  `obsolete` tinyint(4) NOT NULL DEFAULT '0',
+  `visible` tinyint(1) NOT NULL DEFAULT '0',
+  `categorie` smallint(6) NOT NULL DEFAULT '0',
+  `type` smallint(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=61 ;
+

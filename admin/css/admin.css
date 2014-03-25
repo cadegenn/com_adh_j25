@@ -1,0 +1,105 @@
+/*
+ * Fieldset
+ */
+fieldset.adminform {
+	/*display: table;*/
+}
+fieldset.adminform div.tr {
+	width: 100%;
+	/*display: table-row;*/
+	/*margin: 0 0 5px 0;*/
+}
+fieldset.adminform div.th {
+	float: left;
+	clear: left;
+	max-width: 15%;
+	/*display: table-cell;*/
+}
+fieldset.adminform div.td {
+	display: inline-block;
+	margin: 0 2%;
+	width: 80%;
+/*	padding: 0 2% 0% 2%;*/
+}
+fieldset.adminform div.tth {
+	display: inline-block;
+	/*min-width: 110px;*/
+	max-width: 15%;
+	vertical-align: top;
+}
+fieldset.adminform div.ttd {
+	display: inline-block;
+	margin: 0 2%;
+	min-width: 30%;
+	max-width: 30%;
+}
+
+fieldset.adminform textarea, fieldset.adminform input:not([type="checkbox"]) {
+	/*min-width: 500px;*/
+	width: 100% ! important;
+}
+fieldset.adminform input.width_auto {
+	width: auto ! important;
+}
+fieldset.adminform input.date {
+	width: 80% ! important;
+}
+fieldset.adminform input.prix {
+	width: 15% ! important;
+	text-align: right;		/* on affiche les chiffres alignés à droite */
+}
+fieldset.adminform span {
+	color: navy;
+	/*vertical-align: middle;*/
+	text-align: middle;
+}
+fieldset.adminform span.help {
+	font-size: smaller;
+	color: grey;
+}
+/*fieldset.adminform label {
+	float: none ! important;
+	clear: none ! important;
+	display: inline;
+	vertical-align: middle;
+	text-align: middle;
+}*/
+fieldset input, li > fieldset label, fieldset textarea, fieldset select, fieldset img, fieldset button {
+	/*float: none ! important;*/
+	vertical-align: middle;         /* pour aligner les images correctement */
+	max-width: 100%;
+}
+/*fieldset input, fieldset textarea, fieldset select, fieldset img, fieldset button {
+	margin: 0 2px ! important;
+}*/
+
+fieldset.radio {
+	display: inline-block;
+	float: none ! important;
+}
+fieldset.radio input[type="radio"] {
+	width: auto ! important;
+}
+
+fieldset input.prix {
+	text-align: right;
+	max-width: 32px;
+	margin-right: 10px;
+}
+
+ul.adminformlist-inline li {
+	display: inline;
+}
+
+fieldset.adminform div.tr > span, fieldset.adminform div.tr > div.ttd > span, fieldset.panelform li span {
+	float: left;
+	min-width: 32px;
+	margin: 5px 5px 5px 0;
+	padding: 1px;
+}
+
+div.list_columns {
+	-moz-column-count:3; /* Firefox */
+	-webkit-column-count:3; /* Safari and Chrome */
+	column-count:3;
+}

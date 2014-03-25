@@ -1,0 +1,1 @@
+ALTER TABLE `#__adh_adherents` ADD `personne_morale` VARCHAR( 255 ) DEFAULT NULL COMMENT 'Nom de la société ou association. Entrez les coordonnées du contact dans nom/prénom' AFTER  `titre`;
