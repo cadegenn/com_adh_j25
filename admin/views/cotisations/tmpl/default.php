@@ -9,8 +9,6 @@ JHtml::_('behavior.tooltip');
 // Import library dependencies
 JLoader::register('ADHControls', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/controls.php');
 
-$user           = JFactory::getUser();
-$userId         = $user->get('id');
 $listOrder      = $this->escape($this->state->get('list.ordering'));
 $listDirn       = $this->escape($this->state->get('list.direction'));
 ?>

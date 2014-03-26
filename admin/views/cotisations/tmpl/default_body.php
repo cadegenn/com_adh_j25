@@ -4,6 +4,8 @@ defined('_JEXEC') or die('Restricted Access');
 
 $params = JComponentHelper::getParams('com_adh');
 
+$user           = JFactory::getUser();
+$userId         = $user->get('id');
 ?>
 
 <?php foreach($this->items as $i => $item):
