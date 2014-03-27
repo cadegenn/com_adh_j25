@@ -23,7 +23,25 @@ $userId         = $user->get('id');
 			<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 		</td>
 		<td>
-			<a href="<?php echo JRoute::_('index.php?option=com_adh&view=adherent&layout=edit&id=' . $item->id); ?>"><?php echo ($item->personne_morale != "" ? $item->personne_morale : $item->nom." ".$item->prenom); ?></a>
+			<?php 
+			$class = "";
+			if ($item->personne_morale != "") {
+				$class = "structure";
+				$label = $item->personne_morale;
+			} else {
+				switch (strtolower($item->titre)) {
+					case "m." :
+					case "mr" : $class = "user-male";
+								break;
+					case "mme" :
+					case "mlle":$class = "user-female";
+								break;
+					default :	$class = "user-male";
+								break;
+				}
+				$label = $item->nom." ".$item->prenom;
+			}?>
+			<a class="icon-<?php echo $class; ?>" href="<?php echo JRoute::_('index.php?option=com_adh&view=adherent&layout=edit&id=' . $item->id); ?>"><?php echo($label); ?></a>
 		</td>
 		<td>
 			<a href='mailto:<?php echo $item->email; ?>'><?php echo $item->email; ?></a>

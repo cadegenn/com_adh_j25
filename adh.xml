@@ -10,7 +10,7 @@
 	<copyright>Copyright Info</copyright>
 	<license>GPL v3</license>
 	<!--  The version string is recorded in the components table -->
-	<version>0.0.18</version>
+	<version>0.0.19</version>
 	<!-- The description is optional and defaults to the name -->
 	<description>COM_ADH_COMPONENT_DESCRIPTION</description>
 	

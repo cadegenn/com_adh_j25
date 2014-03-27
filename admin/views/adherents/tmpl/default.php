@@ -64,7 +64,7 @@ $listDirn       = $this->escape($this->state->get('list.direction'));
 			</th>			
 			<th>
 				<?php //echo JText::_('COM_ADH_NOM_LABEL'); ?> <?php //echo JText::_('COM_ADH_PRENOM_LABEL'); ?>
-				<?php echo JHtml::_('grid.sort', 'COM_ADH_NOMPRENOM_LABEL', 'LOWER(nom), LOWER(prenom)', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort', 'COM_ADH_NOMPRENOM_LABEL', 'LOWER(a.nom)', $listDirn, $listOrder); ?>
 			</th>
 			<th>
 				<?php //echo JText::_('COM_ADH_EMAIL_LABEL'); ?>

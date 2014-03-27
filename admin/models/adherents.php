@@ -21,9 +21,10 @@ class adhModelAdherents extends JModelList
 		if (empty($config['filter_fields'])) {
 			$config['filter_fields'] = array(
 				'id', 'a.id',
-				'personne_morale', 'a.personne_morale', 'LOWER(personne_morale)',
+				'personne_morale', 'a.personne_morale', 'LOWER(a.personne_morale)',
 				'nom', 'a.nom', 'LOWER(a.nom)',
 				'prenom', 'a.prenom', 'LOWER(a.prenom)',
+				'LOWER(a.nom), LOWER(a.prenom)',
 				'email', 'a.email',
 				'ville', 'a.ville', 'LOWER(ville)',
 				'pays', 'a.pays', 'LOWER(pays)',
@@ -89,13 +90,16 @@ class adhModelAdherents extends JModelList
 		}
 				
 		// Add the list ordering clause.
-		$orderCol	= $this->state->get('list.ordering', 'c.date_debut_cotiz');
+		$orderCol	= $this->state->get('list.ordering', 'LOWER(nom)');
 		$orderDirn	= $this->state->get('list.direction', 'asc');
 		$query->order($db->escape($orderCol.' '.$orderDirn));
 		//$query->order('catid');
 		//$query->order('pays');
-		$query->order('LOWER(nom)');
-		$query->order('LOWER(prenom)');
+		/*$query->order('LOWER(nom)');*/
+		
+		// quelque soit l'ordre demandé, on ajoute le classement par NOM et prénom
+		$query->order('LOWER(nom) '.$orderDirn);
+		$query->order('LOWER(prenom) '.$orderDirn);
 
 		return $query;
 	}
