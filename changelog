@@ -8,9 +8,12 @@
 	site:
 	. créer une page de login
 
-@version 0.0.19 - @date
+@version 0.0.19 - @date 2014.03.27
 	admin:
 	. adherents: colonnes sortables
+	. adherents: ajout d'une icône pour différentier les structures/les personnes hommes/femmes
+	. com_adh est maintenant au format less => on n'édite plus le css directement
+	. cotisations: colonnes sortables
 
 @version 0.0.18 - @date 2014.02.10
 	admin:
