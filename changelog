@@ -8,6 +8,10 @@
 	site:
 	. créer une page de login
 
+@version 0.0.20 - @date
+	admin:
+	. adherents: créer une page qui recence les anomalies (NOM = PRENOM, adresse douteuse, etc...)
+
 @version 0.0.19 - @date 2014.03.27
 	admin:
 	. adherents: colonnes sortables
