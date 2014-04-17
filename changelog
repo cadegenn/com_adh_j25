@@ -7,6 +7,17 @@
 	. adhérent: utiliser le filter "TEL" pour les numéros de tel/portable
 	site:
 	. créer une page de login
+	
+	REUNION du 16/04/2014
+	admin:
+	. view/adherents: afficher le code postale
+	. adhésions: ya pas 2014 pourquoi? -> voir importv2cotisations
+	. view/adhesions: afficher le nombre d'adhésion en fonction du filtre
+	site:
+	. inscription: champs ville faire une auto-completion
+	. inscription: n'ajoute pas la personne dans la base
+	. inscription: ajouter une adhésion "non payée"
+	. inscription: envoyer des mails aux admins
 
 @version 0.0.20 - @date
 	admin:

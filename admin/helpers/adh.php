@@ -31,6 +31,9 @@ abstract class ADHHelper
 								JSubMenuHelper::addEntry(JText::_('COM_ADH_SUBMENU_IMPORT_TARIFS'), 'index.php?option=com_adh&view=importV2Tarifs', true);
 								JSubMenuHelper::addEntry(JText::_('COM_ADH_SUBMENU_IMPORT_COTISATIONS'), 'index.php?option=com_adh&view=importV2Cotisations', true);
 								break;
+			case 'anomalies' :	JSubMenuHelper::addEntry(JText::_('COM_ADH_SUBMENU_ANOMALIES_1'), 'index.php?option=com_adh&view=1anomalies', true);
+								JSubMenuHelper::addEntry(JText::_('COM_ADH_SUBMENU_ANOMALIES_2'), 'index.php?option=com_adh&view=2anomalies', true);
+								break;
 		}
 		// set some global property
 		/*$document = JFactory::getDocument();
