@@ -11,7 +11,7 @@
 
 /** 
  *  Copyright (C) 2012-2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
- *  com_adh is a joomla! 2.5 component [http://www.apasdeloup.org]
+ *  com_adh is a joomla! 2.5 component [http://www.volontairesnature.org]
  *  
  *  This file is part of com_apl.
  * 

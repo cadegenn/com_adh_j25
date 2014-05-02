@@ -1,4 +1,35 @@
 <?php
+/**
+ * @package		com_adh
+ * @subpackage	
+ * @brief		com_adh helps you manage the people within an association
+ * @copyright	Copyright (C) 2010 - 2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
+ * @license		Affero GNU General Public License version 3 or later; see LICENSE.txt
+ * 
+ * @TODO		
+ */
+
+/** 
+ *  Copyright (C) 2012-2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
+ *  com_adh is a joomla! 2.5 component [http://www.volontairesnature.org]
+ *  
+ *  This file is part of com_apl.
+ * 
+ *     com_adh is free software: you can redistribute it and/or modify
+ *     it under the terms of the Affero GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * 
+ *     com_adh is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     Affero GNU General Public License for more details.
+ * 
+ *     You should have received a copy of the Affero GNU General Public License
+ *     along with com_adh.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
  
@@ -100,11 +131,12 @@ class adhModelAdherent extends JModelForm
 		$query->clear();
 		$query->select('id')->from('#__adh_adherents')->where('UPPER(nom) = UPPER("'.$adherent->nom.'") AND UPPER(prenom) = UPPER("'.$adherent->prenom.'") AND UPPER(email) = UPPER("'.$adherent->email.'") AND date_naissance = "'.$adherent->date_naissance.'"');
 		$db->setQuery($query->__toString(), 0, 1);		// $query, $offset, $limit
-		$db->query();
-		$adh_record = $db->loadObject();
-		$adherent->id = $adh_record->id;
+		if ($db->query()) {
+			$adh_record = $db->loadObject();
+			$adherent->id = $adh_record->id;
+		}
 		
-		if (is_null($adherent->id)) {	// insert new record into database
+		if ($adherent->id == 0) {	// insert new record into database
 			//echo("<pre>insert : "); var_dump($adherent); echo("</pre>"); die();
 			$saved = $db->insertObject('#__adh_adherents', $adherent);
 			if ($saved) return $db->insertid();
@@ -134,9 +166,10 @@ class adhModelAdherent extends JModelForm
 	public function enregistrer_cotiz($data, $adherent_id) {
 		$db = $this->getDbo();
 		$query  = $db->getQuery(true);
-		echo("<pre>"); var_dump($data); echo("</pre>");
+		//echo("<pre>"); var_dump($data); echo("</pre>");
 		
 		$cotiz = new stdClass();
+		$cotiz->id = 0;
 		$cotiz->adherent_id = $adherent_id;
 		$cotiz->tarif_id = $data['tarif_id'];
 		$cotiz->montant = $data['montant'.$cotiz->tarif_id];
@@ -151,11 +184,11 @@ class adhModelAdherent extends JModelForm
 		$query->clear();
 		$query->select('c.id')->from('#__adh_cotisations AS c')->where('c.adherent_id = '.$adherent_id.' AND YEAR(date_debut_cotiz) = '.date("Y",strtotime($cotiz->date_debut_cotiz)));
 		$db->setQuery($query->__toString(), 0, 1);		// $query, $offset, $limit
-		$db->query();
-		$cotiz_record = $db->loadObject();
-		$cotiz->id = $cotiz_record->id;
-		
-		if (is_null($cotiz->id)) {	// insert new record into database
+		if ($db->query()) {
+			$cotiz_record = $db->loadObject();
+			$cotiz->id = $cotiz_record->id;
+		}
+		if ($cotiz->id == 0) {	// insert new record into database
 			//echo("<pre>insert : "); var_dump($adherent); echo("</pre>"); die();
 			$cotiz->creation_date = date('Y-m-d H:M:S');
 			$saved = $db->insertObject('#__adh_cotisations', $cotiz);

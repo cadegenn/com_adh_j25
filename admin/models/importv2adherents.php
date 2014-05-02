@@ -172,7 +172,7 @@ class adhModelImportV2Adherents extends JModelList
 				$adherent->personne_morale = "";
 				$adherent->gsm = "";
 				$adherent->url = "";
-				$adherent->profession_id;
+				$adherent->profession_id = 0;
 				//$adherent->published = 0;//($row->obsolete ? 2 : $adherent->published);
 				$adherent->creation_date = ($row->date_creation == "0000-00-00" ? $row->cotiz_date : $row->date_creation);
 				$adherent->modification_date = ($row->date_modification == "0000-00-00" ? null : $row->date_modification);

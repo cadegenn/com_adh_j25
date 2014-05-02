@@ -10,18 +10,27 @@
 	
 	REUNION du 16/04/2014
 	admin:
-	. view/adherents: afficher le code postale
+	. view/adherents: afficher le code postale	[OK]
 	. adhésions: ya pas 2014 pourquoi? -> voir importv2cotisations
-	. view/adhesions: afficher le nombre d'adhésion en fonction du filtre
+	. view/adhesions: afficher le nombre d'adhésion en fonction du filtre	[OK]
 	site:
 	. inscription: champs ville faire une auto-completion
-	. inscription: n'ajoute pas la personne dans la base
-	. inscription: ajouter une adhésion "non payée"
+	. inscription: n'ajoute pas la personne dans la base	[OK]
+	. inscription: ajouter une adhésion "non payée"			[OK]
 	. inscription: envoyer des mails aux admins
 
-@version 0.0.20 - @date
+@version 0.0.20 - @date 2014.05.02
 	admin:
 	. adherents: créer une page qui recence les anomalies (NOM = PRENOM, adresse douteuse, etc...)
+	. 1anomalies: toute modification sur un adhérent fait rester sur la page "1anomalies" au lieu de revenir à la page "adhérents"
+	. adh: affichage du numéro de version du composant
+	. adherents: afficher le code postal
+	. adherents: afficher le numbre d'adhérents correspondant à la requête (aux filtres quoi)
+	. cotisations: afficher le numbre de cotisations correspondant à la requête (aux filtres quoi)
+	. ajout d'en-têtes de licences dans pas mal de fichiers
+	site:
+	. adhérer: fonctionne correctement
+	. adhérer: ajout de messages Joomla! en fin de procédure
 
 @version 0.0.19 - @date 2014.03.27
 	admin:
