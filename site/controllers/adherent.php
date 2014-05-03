@@ -77,18 +77,18 @@ class adhControllerAdherent extends JControllerForm
 		// check if ok and display appropriate message.  This can also have a redirect if desired.
 		if ($saved) {
 			$id = $saved;	// if saved > false, then it equals adherent's id
-			$app->enqueueMessage(JText::_('ADH_ADHERENT_SAVED'));
+			$app->enqueueMessage(JText::_('COM_ADH_ADHERENT_SAVED'));
 		} else {
-			JError::raiseError( 4711, JText::_('ADH_ADHERENT_NOT_SAVED') );
+			JError::raiseError( 4711, JText::_('COM_ADH_ADHERENT_NOT_SAVED') );
 		}
 
 		// record soon-to-be-paid cotisation :-)
 		$saved = $model->enregistrer_cotiz($data, $id);	// -> models/adherent.php -> enregistrer_cotiz()
 		// check if ok and display appropriate message.  This can also have a redirect if desired.
 		if ($saved) {
-			$app->enqueueMessage(JText::_('ADH_COTISATION_SAVED'));
+			$app->enqueueMessage(JText::_('COM_ADH_COTISATION_SAVED'));
 		} else {
-			JError::raiseError( 4711, JText::_('ADH_COTISATION_NOT_SAVED') );
+			JError::raiseError( 4711, JText::_('COM_ADH_COTISATION_NOT_SAVED') );
 		}
 
 				return true;

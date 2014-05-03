@@ -38,10 +38,15 @@
 			description="COM_ADH_DATE_NAISSANCE_DESC"
 			size="40" class="date required" default="" format="%Y-%m-%d" formatEXPECTED="%d %B %Y" required="true"
 		/>
+		<!-- input field to host autocomplete of google place's API -->
 		<field
-			name="adresse" type="text"
+			name="adresseAC" type="text"
 			label="COM_ADH_ADRESSE_LABEL"
 			description="COM_ADH_ADRESSE_DESC"
+			class="inputbox required" default="" required="true"
+		/>
+		<field
+			name="adresse" type="hidden"
 			class="inputbox required" default="" required="true"
 		/>
 		<field

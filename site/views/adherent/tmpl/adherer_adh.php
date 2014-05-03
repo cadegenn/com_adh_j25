@@ -27,8 +27,9 @@
 	<div class="ttd"><?php echo html_entity_decode($this->form->getField("gsm")->input); ?></div>
 </div>
 <div class="tr">
-	<div class="tth"><?php echo $this->form->getField("adresse")->label; ?></div>
-	<div class="td"><?php echo html_entity_decode($this->form->getField("adresse")->input); ?></div>
+	<div class="tth"><?php echo $this->form->getField("adresseAC")->label; ?></div>
+	<div class="td"><?php echo html_entity_decode($this->form->getField("adresseAC")->input); ?>
+					<?php echo html_entity_decode($this->form->getField("adresse")->input); ?></div>
 </div>
 <div class="tr">
 	<div class="tth"><?php echo $this->form->getField("adresse2")->label; ?></div>

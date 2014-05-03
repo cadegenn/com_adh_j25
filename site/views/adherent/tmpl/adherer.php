@@ -12,6 +12,11 @@ JLoader::register('ADHControls', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/contr
 JLoader::register('ADHdb', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/db.php');
 
 $params = JComponentHelper::getParams('com_adh');
+
+switch ($params->get("map_provider")) {
+	case 'googlemap-v3'	:	require(JPATH_COMPONENT_ADMINISTRATOR . '/js/google-places.php');
+							break;
+}
 ?>
 <h1><?php echo $this->document->title; ?></h1>
 

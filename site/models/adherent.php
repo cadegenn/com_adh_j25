@@ -178,7 +178,7 @@ class adhModelAdherent extends JModelForm
 		$cotiz->date_debut_cotiz = date('Y-m-d');
 		$cotiz->date_fin_cotiz = date("Y-m-d",strtotime($cotiz->date_debut_cotiz." +1 year"));
 		$cotiz->payee = false;
-		$cotiz->commentaire = $data['commentaire'];
+		//$cotiz->commentaire = $data['commentaire'];
 		
 		// check if adherent has already register this year
 		$query->clear();

@@ -96,7 +96,7 @@
 			<option value="googlemap-v3">COM_ADH_MAP_PROVIDER_GOOGLEMAPV3_LABEL</option>
 		</field>
 		<field
-			name="map_apikey"
+			name="googlemap_apikey"
 			type="text"
 			label="COM_ADH_MAP_PROVIDER_APIKEY_LABEL"
 			description="COM_ADH_MAP_PROVIDER_APIKEY_DESC"

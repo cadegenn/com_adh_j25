@@ -19,6 +19,10 @@
 	. inscription: ajouter une adhésion "non payée"			[OK]
 	. inscription: envoyer des mails aux admins
 
+@version 0.0.21	- @date 2014.05.03
+	site:
+	. adherer: auto-completion des champs cp, ville, pays avec l'API google places
+
 @version 0.0.20 - @date 2014.05.02
 	admin:
 	. adherents: créer une page qui recence les anomalies (NOM = PRENOM, adresse douteuse, etc...)

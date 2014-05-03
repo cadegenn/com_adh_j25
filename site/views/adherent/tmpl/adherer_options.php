@@ -2,7 +2,7 @@
 
 <?php // Comment ai-je connu $monasso$ ? ?>
 <div class="tr">
-	<?php echo JText::sprintf('COM_ADH_ADHERER_ORIGINE_TXT', "<span class='mon_asso'>".$params->get('nom_assoc')."</span>"); ?>
+	<?php echo JText::sprintf('COM_ADH_ADHERER_ORIGINE_TXT', "<span class='apl'>".$params->get('nom_assoc')."</span>"); ?>
 </div>
 <div class="tr">
 	<div class="adherer_options">
@@ -67,7 +67,7 @@
 						break;
 			case 2 :	echo JText::_('COM_ADH_ADHERER_ADHESIONVALIDITE_ANNEEENCOURS');
 						$timestamp = strtotime("+1 year");?>
-						<span class="warning"><?php echo ( "(".date("d/m/Y").")"); ?></span>
+						<span class="warning"><?php echo ( date("d/m/Y")); ?></span>)
 						<?php break;
 		endswitch; ?>
 	</small><br />

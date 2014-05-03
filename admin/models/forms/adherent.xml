@@ -56,7 +56,7 @@
 			name="ville" type="text"
 			label="COM_ADH_VILLE_LABEL"
 			description="COM_ADH_VILLE_DESC"
-			class="inputbox" default=""
+			class="inputbox" default="" onchange="javascript:getVilles();"
 		/>
 		<field
 			name="pays" type="text"

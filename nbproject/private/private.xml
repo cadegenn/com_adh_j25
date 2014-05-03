@@ -3,17 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/controllers/importv2cotisations.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/changelog</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/1anomalies/view.html.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/site/models/adherent.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/adh/tmpl/default.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/site/views/adherent/tmpl/adherer.php</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/models/adh.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/1anomalies/tmpl/default.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/1anomalies/tmpl/default_foot.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/adh/view.html.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/controllers/adherent.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/site/views/adherent/tmpl/adherer_options.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/site/controllers/adherent.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/language/fr-FR/fr-FR.com_adh.ini</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/js/google-places.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/config.xml</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/changelog</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/models/forms/adherent.xml</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/adh.xml</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/1anomalies/tmpl/default_body.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/controllers/adherents.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/adh/view.html.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/site/views/adherent/tmpl/adherer_adh.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/site/models/forms/adherent.xml</file>
         </group>
     </open-files>
 </project-private>
