@@ -6,14 +6,15 @@
  * @copyright	Copyright (C) 2010 - 2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
  * @license		Affero GNU General Public License version 3 or later; see LICENSE.txt
  * 
- * @TODO		
+ * @TODO		enregistrer_cotiz(): should be in admin/helpers/cotiz.php::save()
+ * @TODO		adherer(): saving adherent should go in admin/helpers/user-adh.php::save()
  */
 
 /** 
  *  Copyright (C) 2012-2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
  *  com_adh is a joomla! 2.5 component [http://www.volontairesnature.org]
  *  
- *  This file is part of com_apl.
+ *  This file is part of com_adh.
  * 
  *     com_adh is free software: you can redistribute it and/or modify
  *     it under the terms of the Affero GNU General Public License as published by
@@ -39,7 +40,7 @@ jimport('joomla.application.component.modelform');
 jimport('joomla.application.component.modelitem');
 // Include dependancy of the dispatcher
 jimport('joomla.event.dispatcher');
- 
+
 /**
  * Adherer Model
  */
@@ -159,9 +160,9 @@ class adhModelAdherent extends JModelForm
 	/**
 	 * @brief	record cotisation that adherent will pay / has paid
 	 * 
-	 * @param	string		$data	données du formulaire d'inscription
-	 * @param	integer		$adherent_id	id de l'adhérent dans la base
-	 * @return	mixed		id de l'adhérent on success, false otherwise
+	 * @param	string		$data	data from registration form
+	 * @param	integer		$adherent_id	id user from database
+	 * @return	mixed		id of cotiz on success, false otherwise
 	 */
 	public function enregistrer_cotiz($data, $adherent_id) {
 		$db = $this->getDbo();
@@ -183,22 +184,24 @@ class adhModelAdherent extends JModelForm
 		// check if adherent has already register this year
 		$query->clear();
 		$query->select('c.id')->from('#__adh_cotisations AS c')->where('c.adherent_id = '.$adherent_id.' AND YEAR(date_debut_cotiz) = '.date("Y",strtotime($cotiz->date_debut_cotiz)));
-		$db->setQuery($query->__toString(), 0, 1);		// $query, $offset, $limit
+		$db->setQuery($query, 0, 1);		// $query, $offset, $limit
 		if ($db->query()) {
 			$cotiz_record = $db->loadObject();
 			$cotiz->id = $cotiz_record->id;
 		}
 		if ($cotiz->id == 0) {	// insert new record into database
-			//echo("<pre>insert : "); var_dump($adherent); echo("</pre>"); die();
+			//echo("<pre>insert : "); var_dump($cotiz); echo("</pre>"); die();
 			$cotiz->creation_date = date('Y-m-d H:M:S');
 			$saved = $db->insertObject('#__adh_cotisations', $cotiz);
-			if ($saved) return $db->insertid();
+			if ($saved) { return $db->insertid(); }
 		} else {						// update existing record into database
-			//echo("<pre>update : "); var_dump($adherent); echo("</pre>"); die();
+			//echo("<pre>update : "); var_dump($cotiz); echo("</pre>"); die();
 			$cotiz->modification_date = date('Y-m-d H:M:S');
 			$cotiz->modified_by = $adherent_id;
-			$saved = $db->updateObject('#__adh_cotisations', $cotiz, 'id');
-			if ($saved) return $cotiz->id;
+			// users can not update their own cotiz, only staff can do that
+			//$saved = $db->updateObject('#__adh_cotisations', $cotiz, 'id');
+			//if ($saved) { return $cotiz->id; }
+			return $cotiz->id;
 		}
 
 		return $saved;
@@ -206,9 +209,11 @@ class adhModelAdherent extends JModelForm
 
 	/**
 	 * @brief	get all the tarifs availables
-	 * 
+	 *			use helper @since 0.0.20
 	 */
 	public function getTarifs() {
+		return ADHHelper::getTarifs();
+		/*
 		// Create a new query object.		
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
@@ -222,5 +227,7 @@ class adhModelAdherent extends JModelForm
 		$db->setQuery($query);
 		$db->execute();
 		return $db->loadObjectList();
+		 * 
+		 */
 	}
 }

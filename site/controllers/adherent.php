@@ -13,7 +13,7 @@
  *  Copyright (C) 2012-2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
  *  com_adh is a joomla! 2.5 component [http://www.volontairesnature.org]
  *  
- *  This file is part of com_apl.
+ *  This file is part of com_adh.
  * 
  *     com_adh is free software: you can redistribute it and/or modify
  *     it under the terms of the Affero GNU General Public License as published by
@@ -65,33 +65,82 @@ class adhControllerAdherent extends JControllerForm
 
 		// Initialise variables.
 		$app    = JFactory::getApplication();
+		$params = JComponentHelper::getParams('com_adh');
 		$model  = $this->getModel('adherent');
 		$id = 0;
+		$body = "";
+
+		// will we need to send an email ? if so prepare things up
+		if ((int)$params->get('alert_sendmail_on_inscription_cb') == 1) {
+			// @url http://docs.joomla.org/Sending_email_from_extensions
+			$mailer = JFactory::getMailer();
+			$config = JFactory::getConfig();
+			$sender = array( 
+				$config->getValue( 'config.mailfrom' ),
+				$config->getValue( 'config.fromname' ) );
+			$mailer->setSender($sender);
+			// get members of the recipient's group
+			//$groupId = JGroupHelper::getGroupId($params->alert_sendmail_on_inscription_dest);
+			$group_vpn = new JGroup($params->get('alert_sendmail_on_inscription_dest'));
+			$users = $group_vpn->getUsers();
+			foreach ($users as $uid) {
+				$user = JFactory::getUser($uid);
+				$recipient = $user->email;
+				$mailer->addRecipient($recipient);
+			}
+			$mailer->isHTML(true);
+			$mailer->Encoding = 'base64';
+		}
 
 		// Get the data from the form POST
 		$data = JRequest::getVar('jform', array(), 'post', 'array');
-
+		//$app->enqueueMessage('<pre>'.var_dump($data).'</pre>', 'Notice');
 		// Now update the loaded data to the database via a function in the model
 		// record new adherent
-		$saved = $model->adherer($data);	// -> models/adherent.php -> adherer()
+		$userId = $model->adherer($data);	// -> models/adherent.php -> adherer()
 		// check if ok and display appropriate message.  This can also have a redirect if desired.
-		if ($saved) {
-			$id = $saved;	// if saved > false, then it equals adherent's id
+		if ($userId) {
 			$app->enqueueMessage(JText::_('COM_ADH_ADHERENT_SAVED'));
+			if ((int)$params->get('alert_sendmail_on_inscription_cb') == 1) {
+				$body = ADHHelper::buildBulletinAdhesionUser($userId);
+				//$app->enqueueMessage('<pre>'.var_dump($body).'</pre>', 'Notice');
+			}
 		} else {
-			JError::raiseError( 4711, JText::_('COM_ADH_ADHERENT_NOT_SAVED') );
+			$app->enqueueMessage(JText::_('COM_ADH_ADHERENT_NOT_SAVED'), 'Error');
+			//JError::raiseError( 4711, JText::_('COM_ADH_ADHERENT_NOT_SAVED') );
 		}
 
 		// record soon-to-be-paid cotisation :-)
-		$saved = $model->enregistrer_cotiz($data, $id);	// -> models/adherent.php -> enregistrer_cotiz()
+		$cotizId = $model->enregistrer_cotiz($data, $userId);	// -> models/adherent.php -> enregistrer_cotiz()
 		// check if ok and display appropriate message.  This can also have a redirect if desired.
-		if ($saved) {
+		if ($cotizId) {
 			$app->enqueueMessage(JText::_('COM_ADH_COTISATION_SAVED'));
+			if ((int)$params->get('alert_sendmail_on_inscription_cb') == 1) {
+				$body .= ADHHelper::buildBulletinAdhesionCotiz($cotizId);
+				//$app->enqueueMessage('<pre>'.var_dump($body).'</pre>', 'Notice');
+			}
 		} else {
-			JError::raiseError( 4711, JText::_('COM_ADH_COTISATION_NOT_SAVED') );
+			$app->enqueueMessage(JText::_('COM_ADH_COTISATION_NOT_SAVED'), 'Error');
+			//JError::raiseError( 4711, JText::_('COM_ADH_COTISATION_NOT_SAVED') );
 		}
 
-				return true;
+		if ((int)$params->get('alert_sendmail_on_inscription_cb') == 1) {
+			$mailer->setSubject(JText::sprintf('COM_ADH_ADHERER_MAIL_SUBJECT', JURI::base(), strtoupper($data['nom']), $data['prenom']));
+			$mailer->setBody($body);
+			$send = $mailer->Send();
+			if ($send !== true) {
+				$app->enqueueMessage(JText::_('COM_USERS_REGISTRATION_SEND_MAIL_FAILED'), 'Error');
+				//$app->enqueueMessage('<pre>'.var_dump($mailer).'</pre>', 'Notice');
+				//JError::raiseError( 4711, JText::_('COM_ADH_ADHERENT_MAIL_NOT_SENT') );
+			} else {
+				$app->enqueueMessage(JText::_('COM_ADH_ADHERER_MAIL_SENT'));
+			}
+		}
+		echo $body;
+		
+		// @TODO	route to display summary to let user print it
+		
+		return true;
 	}
 
 }

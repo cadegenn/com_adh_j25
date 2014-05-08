@@ -10,6 +10,10 @@ $document->addStyleSheet( 'components/com_adh/css/com_adh.css' );
 
 // require helper file
 JLoader::register('adhHelper', dirname(__FILE__).'/helpers/adh.php');
+// joomla lacks a group object with suitable methods like it have for users
+// we will not use it here however
+//JLoader::register('JGroup', dirname(__FILE__).'/helpers/group-joomla.php');
+//JLoader::register('JGroupHelper', dirname(__FILE__).'/helpers/group-joomla-helper.php');
 
 // import joomla controller library
 jimport('joomla.application.component.controller');

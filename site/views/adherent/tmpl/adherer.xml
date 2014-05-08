@@ -2,7 +2,7 @@
 <!--
 	permet d'affficher un nouveau type de lien de menu dans la liste
 
-	le texte est à mettre dans admin/language/fr-FR/fr-FR.com_apl.sys.ini !!
+	le texte est à mettre dans admin/language/fr-FR/fr-FR.com_adh.sys.ini !!
 -->
 <metadata>
 	<layout title="COM_ADH_VIEW_ADHERER_LABEL">
@@ -18,7 +18,7 @@
 				type="chantiers"
 				label="COM_APL_CHANTIERS_FIELD_CHANTIER_LABEL"
 				description="COM_APL_CHANTIERS_FIELD_CHANTIER_DESC"
-			/> < ! - - le contenu de ce champs est défini là ==> /administrator/components/com_apl/models/fields/chantiers.php - - >
+			/> < ! - - le contenu de ce champs est défini là ==> /administrator/components/com_adh/models/fields/chantiers.php - - >
 		</fieldset>
 	</fields>-->
 </metadata>

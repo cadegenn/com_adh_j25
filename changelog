@@ -14,10 +14,26 @@
 	. adhésions: ya pas 2014 pourquoi? -> voir importv2cotisations
 	. view/adhesions: afficher le nombre d'adhésion en fonction du filtre	[OK]
 	site:
-	. inscription: champs ville faire une auto-completion
+	. inscription: champs ville faire une auto-completion	[OK]
 	. inscription: n'ajoute pas la personne dans la base	[OK]
 	. inscription: ajouter une adhésion "non payée"			[OK]
 	. inscription: envoyer des mails aux admins
+
+@version 0.0.22	- @date 2014.05.08
+	admin:
+	. config: normalisation des variables de texte des pages de configuration
+	. config: ajout de la page 'alertes e-mail'
+	. helpers: ajout de l'objet JGroup qui n'existe pas dans Joomla! 2.5.x
+	. helpers: ajout de la class JGroupHelper qui n'existe pas dans Joomla! 2.5.x
+	. helpers: ajout de la class AdhCotiz pour gérer les cotisations
+	. helpers: ajout de la class JContact qui n'existe pas dans Joomla! 2.5.x
+	. adh.php: chargement des helpers JGroup, JGroupHelper, AdhCotiz et JContact
+	. helpers: AdhHelper: ajout de fonctions pour construire un bulletin d'adhésion
+	all:
+	remplacer com_apl -> com_adh
+	site:
+	. adherer: l'adhésion affiche un résumé avec les notifications adéquats et envoie un mail de confirmation
+	. adherer: l'adhésion ne peut pas mettre à jour la cotisation de l'adhérent, seule l'équipe peut le faire (via la partie admin)
 
 @version 0.0.21	- @date 2014.05.03
 	site:

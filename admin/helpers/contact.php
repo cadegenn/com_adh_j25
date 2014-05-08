@@ -1,8 +1,9 @@
 <?php
+
 /**
  * @package		com_adh
- * @subpackage	
- * @brief		com_adh helps you manage the people within an association
+ * @subpackage	contact
+ * @brief		Contact helper class, provides static methods to perform various tasks relevant to the Joomla contact classes
  * @copyright	Copyright (C) 2010 - 2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
  * @license		Affero GNU General Public License version 3 or later; see LICENSE.txt
  * 
@@ -31,24 +32,22 @@
  */
 
 // No direct access to this file
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
  
-// import Joomla controlleradmin library
-jimport('joomla.application.component.controlleradmin');
- 
-/**
- * 1anomalies Controller
- */
-class adhController1anomalies extends JControllerAdmin
-{
+abstract class JContact {
+	
 	/**
-	 * Proxy for getModel.
-	 * @since	2.5
+	 * @brief	getFeatured()	return contact marked as 'featured'
+	 * @return	(array)			array of featured contacts
 	 */
-	public function getModel($name = '1anomalies', $prefix = 'adhModel') 
-	{
-		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
-		return $model;
+	public function getFeatured() {
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(TRUE);
+		$query->select('*')->from('#__contact_details as cd')->where('featured = 1');
+		$db->setQuery($query);
+		$db->execute();
+		
+		return $db->loadObjectList();
+		//return $db->loadAssocList();
 	}
 }
-?>

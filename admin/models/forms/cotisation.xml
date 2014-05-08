@@ -24,11 +24,11 @@
 			label="COM_ADH_MODEPAIEMENT_LABEL"	description="COM_ADH_MODEPAIEMENT_DESC"
 			class="inputbox" default=""
 		>
-			<option value="gratuit">COM_ADH_PAIEMENT_SETTINGS_GRATUIT_LABEL</option>
-			<option value="espèce">COM_ADH_PAIEMENT_SETTINGS_ESPECE_LABEL</option>
-			<option value="chèque">COM_ADH_PAIEMENT_SETTINGS_CHEQUE_LABEL</option>
-			<option value="virement bancaire">COM_ADH_PAIEMENT_SETTINGS_VIREMENT_LABEL</option>
-			<option value="paypal">COM_ADH_PAIEMENT_SETTINGS_PAYPAL_LABEL</option>
+			<option value="gratuit">COM_ADH_SETTINGS_PAIEMENT_GRATUIT_LABEL</option>
+			<option value="espèce">COM_ADH_SETTINGS_PAIEMENT_ESPECE_LABEL</option>
+			<option value="chèque">COM_ADH_SETTINGS_PAIEMENT_CHEQUE_LABEL</option>
+			<option value="virement bancaire">COM_ADH_SETTINGS_PAIEMENT_VIREMENT_LABEL</option>
+			<option value="paypal">COM_ADH_SETTINGS_PAIEMENT_PAYPAL_LABEL</option>
 		</field>
 		<field
 			name="date" type="calendar"

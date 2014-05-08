@@ -65,10 +65,10 @@ class adhViewAdherent extends JView
 		 */
         JToolBarHelper::title($isNew ? JText::_('COM_ADH').' : '.JText::_('COM_ADH_MANAGER_ADHERENT_NEW')
                                      : JText::_('COM_ADH').' : '.JText::_('COM_ADH_MANAGER_ADHERENT_EDIT'));
-        JToolBarHelper::apply('adherent.apply');                                      // --> administrator/components/com_apl/controllers/adherent.php::save();
+        JToolBarHelper::apply('adherent.apply');                                      // --> administrator/components/com_adh/controllers/adherent.php::save();
         JToolBarHelper::save('adherent.save');                                      // --> administrator/components/com_adh/controllers/adherent.php::save();
-        JToolBarHelper::save2new('adherent.save2new');                                      // --> administrator/components/com_apl/controllers/adherent.php::save();
-        JToolBarHelper::save2copy('adherent.save2copy');                                      // --> administrator/components/com_apl/controllers/adherent.php::save();
+        JToolBarHelper::save2new('adherent.save2new');                                      // --> administrator/components/com_adh/controllers/adherent.php::save();
+        JToolBarHelper::save2copy('adherent.save2copy');                                      // --> administrator/components/com_adh/controllers/adherent.php::save();
         JToolBarHelper::cancel('adherent.cancel', $isNew    ? 'JTOOLBAR_CANCEL'     // --> administrator/components/com_adh/controllers/adherent.php::cancel();
                                                             : 'JTOOLBAR_CLOSE');
     }

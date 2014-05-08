@@ -32,19 +32,19 @@
 <div class="tr">
 	<div class="adherer_options">
 		<?php if ($params->getValue('gratuit')) : ?>
-			<input type="radio" class="required" name="jform[mode_paiement]" id="jform_mode_paiement0" value="<?php echo strtolower(JText::_('COM_ADH_PAIEMENT_SETTINGS_GRATUIT_LABEL')); ?>"> <label for="jform_mode_paiement0"><?php echo JText::_('COM_ADH_ADHERER_REGLEMENT_GRATUIT'); ?></label>
+			<input type="radio" class="required" name="jform[mode_paiement]" id="jform_mode_paiement0" value="<?php echo strtolower(JText::_('COM_ADH_SETTINGS_PAIEMENT_GRATUIT_LABEL')); ?>"> <label for="jform_mode_paiement0"><?php echo JText::_('COM_ADH_ADHERER_REGLEMENT_GRATUIT'); ?></label>
 		<?php endif; ?>
 		<?php if ($params->getValue('espece')) : ?>
-			<input type="radio" class="required" name="jform[mode_paiement]" id="jform_mode_paiement1" value="<?php echo strtolower(JText::_('COM_ADH_PAIEMENT_SETTINGS_ESPECE_LABEL')); ?>"> <label for="jform_mode_paiement1"><?php echo JText::_('COM_ADH_ADHERER_REGLEMENT_ESPECE'); ?></label>
+			<input type="radio" class="required" name="jform[mode_paiement]" id="jform_mode_paiement1" value="<?php echo strtolower(JText::_('COM_ADH_SETTINGS_PAIEMENT_ESPECE_LABEL')); ?>"> <label for="jform_mode_paiement1"><?php echo JText::_('COM_ADH_ADHERER_REGLEMENT_ESPECE'); ?></label>
 		<?php endif; ?>
 		<?php if ($params->getValue('cheque')) : ?>
-			<input type="radio" class="required" name="jform[mode_paiement]" id="jform_mode_paiement2" value="<?php echo strtolower(JText::_('COM_ADH_PAIEMENT_SETTINGS_CHEQUE_LABEL')); ?>"> <label for="jform_mode_paiement2"><?php echo JText::_('COM_ADH_ADHERER_REGLEMENT_CHEQUE'); ?></label>
+			<input type="radio" class="required" name="jform[mode_paiement]" id="jform_mode_paiement2" value="<?php echo strtolower(JText::_('COM_ADH_SETTINGS_PAIEMENT_CHEQUE_LABEL')); ?>"> <label for="jform_mode_paiement2"><?php echo JText::_('COM_ADH_ADHERER_REGLEMENT_CHEQUE'); ?></label>
 		<?php endif; ?>
 		<?php if ($params->getValue('virement')) : ?>
-			<input type="radio" class="required" name="jform[mode_paiement]" id="jform_mode_paiement3" value="<?php echo strtolower(JText::_('COM_ADH_PAIEMENT_SETTINGS_VIREMENT_LABEL')); ?>"> <label for="jform_mode_paiement3"><?php echo JText::_('COM_ADH_ADHERER_REGLEMENT_VIREMENT'); ?></label>
+			<input type="radio" class="required" name="jform[mode_paiement]" id="jform_mode_paiement3" value="<?php echo strtolower(JText::_('COM_ADH_SETTINGS_PAIEMENT_VIREMENT_LABEL')); ?>"> <label for="jform_mode_paiement3"><?php echo JText::_('COM_ADH_ADHERER_REGLEMENT_VIREMENT'); ?></label>
 		<?php endif; ?>
 		<?php if ($params->getValue('paypal')) : ?>
-			<input type="radio" class="required" name="jform[mode_paiement]" id="jform_mode_paiement4" value="<?php echo strtolower(JText::_('COM_ADH_PAIEMENT_SETTINGS_PAYPAL_LABEL')); ?>"> <label for="jform_mode_paiement4"><?php echo JText::_('COM_ADH_ADHERER_REGLEMENT_PAYPAL'); ?></label>
+			<input type="radio" class="required" name="jform[mode_paiement]" id="jform_mode_paiement4" value="<?php echo strtolower(JText::_('COM_ADH_SETTINGS_PAIEMENT_PAYPAL_LABEL')); ?>"> <label for="jform_mode_paiement4"><?php echo JText::_('COM_ADH_ADHERER_REGLEMENT_PAYPAL'); ?></label>
 		<?php endif; ?>
 	</div>
 </div>

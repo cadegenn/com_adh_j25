@@ -13,7 +13,7 @@
  *  Copyright (C) 2012-2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
  *  com_adh is a joomla! 2.5 component [http://www.volontairesnature.org]
  *  
- *  This file is part of com_apl.
+ *  This file is part of com_adh.
  * 
  *     com_adh is free software: you can redistribute it and/or modify
  *     it under the terms of the Affero GNU General Public License as published by

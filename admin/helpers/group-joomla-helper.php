@@ -1,13 +1,16 @@
 <?php
+
 /**
  * @package		com_adh
- * @subpackage	
- * @brief		com_adh helps you manage the people within an association
+ * @subpackage	helper
+ * @brief		Authorisation helper class, provides static methods to perform various tasks relevant to the Joomla group and authorisation classes
  * @copyright	Copyright (C) 2010 - 2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
  * @license		Affero GNU General Public License version 3 or later; see LICENSE.txt
  * 
  * @TODO		
  */
+
+defined('JPATH_PLATFORM') or die;
 
 /** 
  *  Copyright (C) 2012-2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
@@ -30,25 +33,27 @@
  * 
  */
 
-// No direct access to this file
-defined('_JEXEC') or die('Restricted access');
- 
-// import Joomla controlleradmin library
-jimport('joomla.application.component.controlleradmin');
- 
-/**
- * 1anomalies Controller
- */
-class adhController1anomalies extends JControllerAdmin
-{
+abstract class JGroupHelper {
 	/**
-	 * Proxy for getModel.
-	 * @since	2.5
+	 * Returns groupid if a group exists
+	 *
+	 * @param   string  $title  The group title to search on.
+	 *
+	 * @return  integer  The group id or 0 if not found.
+	 *
+	 * @since   11.1
 	 */
-	public function getModel($name = '1anomalies', $prefix = 'adhModel') 
+	public static function getGroupId($title)
 	{
-		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
-		return $model;
+		// Initialise some variables
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select($db->quoteName('id'));
+		$query->from($db->quoteName('#__usergroups'));
+		$query->where($db->quoteName('title') . ' = ' . $db->quote($title));
+		$db->setQuery($query, 0, 1);
+		return $db->loadResult();
 	}
+
+	
 }
-?>

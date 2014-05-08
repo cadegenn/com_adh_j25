@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fieldset name="Association" label="COM_ADH_ASSOCIATION_SETTINGS_LABEL" description="COM_ADH_ASSOCIATION_SETTINGS_DESC">
+	<fieldset name="Association" label="COM_ADH_SETTINGS_ASSOCIATION_LABEL" description="COM_ADH_SETTINGS_ASSOCIATION_DESC">
 		<field	name="nom_assoc" type="text"
-				label="COM_ADH_ASSOCIATION_SETTINGS_NOM_LABEL" description="COM_ADH_ASSOCIATION_SETTINGS_NOM_DESC"
+				label="COM_ADH_SETTINGS_ASSOCIATION_NOM_LABEL" description="COM_ADH_SETTINGS_ASSOCIATION_NOM_DESC"
+				size="100"
 		/>
 		<field	name="validite_cotisation" type="radio"
-				label="COM_ADH_ASSOCIATION_SETTINGS_VALIDITECOTISATION_LABEL" description="COM_ADH_ASSOCIATION_SETTINGS_VALIDITECOTISATION_DESC"
+				label="COM_ADH_SETTINGS_ASSOCIATION_VALIDITECOTISATION_LABEL" description="COM_ADH_SETTINGS_ASSOCIATION_VALIDITECOTISATION_DESC"
 		>
-			<option value="0">COM_ADH_ASSOCIATION_SETTINGS_VALIDITECOTISATION_ILLIMITEE_LABEL</option>
-			<option value="1">COM_ADH_ASSOCIATION_SETTINGS_VALIDITECOTISATION_1JANVIER31DECEMBRE_LABEL</option>
-			<option value="2">COM_ADH_ASSOCIATION_SETTINGS_VALIDITECOTISATION_1ANACOMPTERINSCRIPTION_LABEL</option>
+			<option value="0">COM_ADH_SETTINGS_ASSOCIATION_VALIDITECOTISATION_ILLIMITEE_LABEL</option>
+			<option value="1">COM_ADH_SETTINGS_ASSOCIATION_VALIDITECOTISATION_1JANVIER31DECEMBRE_LABEL</option>
+			<option value="2">COM_ADH_SETTINGS_ASSOCIATION_VALIDITECOTISATION_1ANACOMPTERINSCRIPTION_LABEL</option>
 		</field>
 	</fieldset>
-	<fieldset name="mentions_legales" label="COM_ADH_ASSOCIATION_SETTINGS_MENTIONSLEGALES_LABEL" description="COM_ADH_ASSOCIATION_SETTINGS_MENTIONSLEGALES_DESC">
+	<fieldset name="mentions_legales" label="COM_ADH_SETTINGS_ASSOCIATION_MENTIONSLEGALES_LABEL" description="COM_ADH_SETTINGS_ASSOCIATION_MENTIONSLEGALES_DESC">
 		<field	name="mentions_legales" type="editor"
-				label="COM_ADH_ASSOCIATION_SETTINGS_MENTIONSLEGALES_LABEL" description="COM_ADH_ASSOCIATION_SETTINGS_MENTIONSLEGALES_DESC"
+				label="COM_ADH_SETTINGS_ASSOCIATION_MENTIONSLEGALES_LABEL" description="COM_ADH_SETTINGS_ASSOCIATION_MENTIONSLEGALES_DESC"
 				hide="article,pagebreak,readmore" filter="safehtml"
 		/>
 	</fieldset>
-	<fieldset name="paiement" label="COM_ADH_PAIEMENT_SETTINGS_LABEL" description="COM_ADH_PAIEMENT_SETTINGS_DESC">
+	<fieldset name="paiement" label="COM_ADH_SETTINGS_PAIEMENT_LABEL" description="COM_ADH_SETTINGS_PAIEMENT_DESC">
 		<field
 			name="monnaie"
 			type="text"
-			label="COM_ADH_PAIEMENT_SETTINGS_MONNAIE_LABEL"
-			description="COM_ADH_PAIEMENT_SETTINGS_MONNAIE_DESC"
+			label="COM_ADH_SETTINGS_PAIEMENT_MONNAIE_LABEL"
+			description="COM_ADH_SETTINGS_PAIEMENT_MONNAIE_DESC"
 			default="euro"
 		/>
 		<field
 			name="symbol"
 			type="text"
-			label="COM_ADH_PAIEMENT_SETTINGS_SYMBOL_LABEL"
-			description="COM_ADH_PAIEMENT_SETTINGS_SYMBOL_DESC"
+			label="COM_ADH_SETTINGS_PAIEMENT_SYMBOL_LABEL"
+			description="COM_ADH_SETTINGS_PAIEMENT_SYMBOL_DESC"
 			default="€"
 		/>
 		<!-- mode_paiement = 0 -->
 		<field
 			name="gratuit" type="radio"
-			label="COM_ADH_PAIEMENT_SETTINGS_GRATUIT_LABEL"
-			description="COM_ADH_PAIEMENT_SETTINGS_GRATUIT_DESC"
+			label="COM_ADH_SETTINGS_PAIEMENT_GRATUIT_LABEL"
+			description="COM_ADH_SETTINGS_PAIEMENT_GRATUIT_DESC"
 			class="radiobox" default="0"
 		>
 			<option value="0">JNO</option>
@@ -46,8 +47,8 @@
 		<!-- mode_paiement = 1 -->
 		<field
 			name="espece" type="radio"
-			label="COM_ADH_PAIEMENT_SETTINGS_ESPECE_LABEL"
-			description="COM_ADH_PAIEMENT_SETTINGS_ESPECE_DESC"
+			label="COM_ADH_SETTINGS_PAIEMENT_ESPECE_LABEL"
+			description="COM_ADH_SETTINGS_PAIEMENT_ESPECE_DESC"
 			class="radiobox" default="0"
 		>
 			<option value="0">JNO</option>
@@ -56,8 +57,8 @@
 		<!-- mode_paiement = 2 -->
 		<field
 			name="cheque" type="radio"
-			label="COM_ADH_PAIEMENT_SETTINGS_CHEQUE_LABEL"
-			description="COM_ADH_PAIEMENT_SETTINGS_CHEQUE_DESC"
+			label="COM_ADH_SETTINGS_PAIEMENT_CHEQUE_LABEL"
+			description="COM_ADH_SETTINGS_PAIEMENT_CHEQUE_DESC"
 			class="radiobox" default="0"
 		>
 			<option value="0">JNO</option>
@@ -66,8 +67,8 @@
 		<!-- mode_paiement = 3 -->
 		<field
 			name="virement" type="radio"
-			label="COM_ADH_PAIEMENT_SETTINGS_VIREMENT_LABEL"
-			description="COM_ADH_PAIEMENT_SETTINGS_VIREMENT_DESC"
+			label="COM_ADH_SETTINGS_PAIEMENT_VIREMENT_LABEL"
+			description="COM_ADH_SETTINGS_PAIEMENT_VIREMENT_DESC"
 			class="radiobox" default="0"
 		>
 			<option value="0">JNO</option>
@@ -76,61 +77,64 @@
 		<!-- mode_paiement = 4 -->
 		<field
 			name="paypal" type="radio"
-			label="COM_ADH_PAIEMENT_SETTINGS_PAYPAL_LABEL"
-			description="COM_ADH_PAIEMENT_SETTINGS_PAYPAL_DESC"
+			label="COM_ADH_SETTINGS_PAIEMENT_PAYPAL_LABEL"
+			description="COM_ADH_SETTINGS_PAIEMENT_PAYPAL_DESC"
 			class="radiobox" default="0"
 		>
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
 		</field>
 	</fieldset>
-	<fieldset name="map" label="COM_ADH_MAP_SETTINGS_LABEL" description="COM_ADH_MAP_SETTINGS_DESC">
+	<fieldset name="alertes" label="COM_ADH_SETTINGS_ALERTES_LABEL" description="COM_ADH_SETTINGS_ALERTES_DESC">
 		<field
-			name="map_provider"
-			type="list"
-			label="COM_ADH_MAP_PROVIDER_LABEL"
-			description="COM_ADH_MAP_PROVIDER_DESC"
-			class="inputbox"
-			size="1" default="1"
+			name="alert_sendmail_on_inscription_cb" type="radio"
+			label="COM_ADH_SETTINGS_ALERTES_INSCRIPTION_CB_LABEL" description="COM_ADH_SETTINGS_ALERTES_CHECKBOX_DESC"
 		>
-			<option value="googlemap-v3">COM_ADH_MAP_PROVIDER_GOOGLEMAPV3_LABEL</option>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
 		</field>
 		<field
-			name="googlemap_apikey"
-			type="text"
-			label="COM_ADH_MAP_PROVIDER_APIKEY_LABEL"
-			description="COM_ADH_MAP_PROVIDER_APIKEY_DESC"
-			size="100"
-			default=""
+			name="alert_sendmail_on_inscription_dest"	type="usergroup"
+			label="COM_ADH_SETTINGS_ALERTES_DEST_LABEL" description="COM_ADH_SETTINGS_ALERTES_INSCRIPTION_DEST_DESC"
+		/>
+		<!--<field
+			name="alert_sendmail_on_comment_cb"	type="radio"
+			label="COM_ADH_SETTINGS_ALERTES_COMMENTAIRE_LABEL" description="COM_ADH_SETTINGS_ALERTES_CHECKBOX_DESC"
+		/>-->
+	</fieldset>
+	<fieldset name="services" label="COM_ADH_SETTINGS_SERVICES_LABEL" description="COM_ADH_SETTINGS_SERVICES_DESC">
+		<field
+			name="map_provider"	type="list"
+			label="COM_ADH_SETTINGS_MAP_PROVIDER_LABEL" description="COM_ADH_SETTINGS_MAP_PROVIDER_DESC"
+			class="inputbox" size="1" default="1"
+		>
+			<option value="googlemap-v3">COM_ADH_SETTINGS_MAP_PROVIDER_GOOGLEMAPV3_LABEL</option>
+		</field>
+		<field
+			name="googlemap_apikey"	type="text"
+			label="COM_ADH_SETTINGS_GOOGLE_APIKEY_LABEL" description="COM_ADH_SETTINGS_GOOGLE_APIKEY_DESC"
+			size="100" default=""
 		/>
 	</fieldset>
-	<fieldset name="imports" label="COM_ADH_IMPORTTABLES_SETTINGS_LABEL" description="COM_ADH_IMPORTTABLES_SETTINGS_DESC">
+	<fieldset name="imports" label="COM_ADH_SETTINGS_IMPORTTABLES_LABEL" description="COM_ADH_SETTINGS_IMPORTTABLES_DESC">
 		<field
-			name="database"
-			type="text"
-			label="COM_ADH_IMPORTTABLES_SETTINGS_DATABASE_LABEL"
-			description="COM_ADH_IMPORTTABLES_SETTINGS_DATABASE_DESC"
+			name="database" type="text"
+			label="COM_ADH_SETTINGS_IMPORTTABLES_DATABASE_LABEL" description="COM_ADH_SETTINGS_IMPORTTABLES_DATABASE_DESC"
 			default=""
 		/>
 		<field
-			name="db_host"
-			type="text"
-			label="COM_ADH_IMPORTTABLES_SETTINGS_DBHOST_LABEL"
-			description="COM_ADH_IMPORTTABLES_SETTINGS_DBHOST_DESC"
+			name="db_host" type="text"
+			label="COM_ADH_SETTINGS_IMPORTTABLES_DBHOST_LABEL" description="COM_ADH_SETTINGS_IMPORTTABLES_DBHOST_DESC"
 			default=""
 		/>
 		<field
-			name="db_username"
-			type="text"
-			label="COM_ADH_IMPORTTABLES_SETTINGS_DBUSERNAME_LABEL"
-			description="COM_ADH_IMPORTTABLES_SETTINGS_DBUSERNAME_DESC"
+			name="db_username" type="text"
+			label="COM_ADH_SETTINGS_IMPORTTABLES_DBUSERNAME_LABEL" description="COM_ADH_SETTINGS_IMPORTTABLES_DBUSERNAME_DESC"
 			default=""
 		/>
 		<field
-			name="db_passwd"
-			type="password"
-			label="COM_ADH_IMPORTTABLES_SETTINGS_DBPASSWD_LABEL"
-			description="COM_ADH_IMPORTTABLES_SETTINGS_DBPASSWD_DESC"
+			name="db_passwd" type="password"
+			label="COM_ADH_SETTINGS_IMPORTTABLES_DBPASSWD_LABEL" description="COM_ADH_SETTINGS_IMPORTTABLES_DBPASSWD_DESC"
 			default=""
 		/>
 	</fieldset>
