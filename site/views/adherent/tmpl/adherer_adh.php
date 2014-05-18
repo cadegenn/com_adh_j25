@@ -1,6 +1,6 @@
 <div class="tr">
 	<div class="tth"><?php echo $this->form->getField("titre")->label; ?></div>
-	<div class="ttd"><?php echo ADHControls::buildSelectTitres($this->form->getField("titre")->value); ?></div>
+	<div class="ttd"><?php echo $this->form->getField("titre")->input; ?></div>
 	<div class="tth"><?php echo $this->form->getField("personne_morale")->label; ?></div>
 	<div class="ttd"><?php echo html_entity_decode($this->form->getField("personne_morale")->input); ?></div>
 </div>

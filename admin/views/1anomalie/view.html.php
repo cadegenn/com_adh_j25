@@ -35,22 +35,50 @@ defined('_JEXEC') or die('Restricted access');
  
 // import Joomla view library
 jimport('joomla.application.component.view');
- 
+// Import library dependencies
+JLoader::register('AdhToolBarHelper', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/toolbar.php');
+
 /**
- * adherent View
+ * 1anomalie View
  * 
  */
-class adhViewAdherent extends JView
+class adhView1anomalie extends JView
 {
+	/**
+	 * $form1	object	form for user 1
+	 */
+	public $form1 = null;
+	
+	/**
+	 * $form2	object	form for user 2
+	 */
+	public $form2 = null;
+	
+	/**
+	 * $toolbar1	toolbar for user 1
+	 */
+	public $toolbar1 = null;
+	
+	/**
+	 * $toolbar2	toolbar for user 2
+	 */
+	public $toolbar2 = null;
+	
     /**
      * display method of Hello view
      * @return void
      */
     public function display($tpl = null) 
     {
+		//$model = $this->getModel();
+		//$user1id = JRequest::getInt('user1id');
+		//$user2id = JRequest::getInt('user2id');
         // get the Data
-        $form = $this->get('Form');
-        $item = $this->get('Item');
+        $form1 = $this->get('Form1');
+        $form2 = $this->get('Form2');
+		//$form1 = $model->getForm($data, true, $user1Id);
+        //$user1 = $this->get('User1');
+        //$user2 = $this->get('User2');
 
         // Check for errors.
         if (count($errors = $this->get('Errors'))) 
@@ -59,18 +87,22 @@ class adhViewAdherent extends JView
                 return false;
         }
         // Assign the Data
-        $this->form = $form;
-        $this->item = $item;
+        $this->form1 = $form1;
+        $this->form2 = $form2;
+        //$this->user1 = $form->data[0];
+        //$this->user2 = $form->data[1];
 
         // Set the toolbar
         $this->addToolBar();
+		$this->toolbar1 = $this->addUserToolbar('user1');
+		$this->toolbar2 = $this->addUserToolbar('user2');
         // Load styleSheet
         $this->addDocStyle();
 		// Load scripts
 		$this->addScripts();
 
 		// Ajouter le sous menu
-		ADHHelper::addSubmenu('adherents');	// => admin/helpers/adh.php
+		ADHHelper::addSubmenu('anomalies');	// => admin/helpers/adh.php
 		
         // Display the template
         parent::display($tpl);		// -> ./tmpl/edit.php
@@ -83,7 +115,7 @@ class adhViewAdherent extends JView
     {
         $input = JFactory::getApplication()->input;
         $input->set('hidemainmenu', true);
-        $isNew = ($this->item->id == 0);
+        //$isNew = ($this->item->id == 0);
 		
 		// si JCE est présent, on ajoute un bouton JCE Browser
 		/*if (is_dir(JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_jce')) {
@@ -94,15 +126,23 @@ class adhViewAdherent extends JView
 		}
 		 * 
 		 */
-        JToolBarHelper::title($isNew ? JText::_('COM_ADH').' : '.JText::_('COM_ADH_MANAGER_ADHERENT_NEW')
-                                     : JText::_('COM_ADH').' : '.JText::_('COM_ADH_MANAGER_ADHERENT_EDIT'));
-        JToolBarHelper::apply('adherent.apply');                                      // --> administrator/components/com_adh/controllers/adherent.php::save();
-        JToolBarHelper::save('adherent.save');                                      // --> administrator/components/com_adh/controllers/adherent.php::save();
-        JToolBarHelper::save2new('adherent.save2new');                                      // --> administrator/components/com_adh/controllers/adherent.php::save();
-        JToolBarHelper::save2copy('adherent.save2copy');                                      // --> administrator/components/com_adh/controllers/adherent.php::save();
-        JToolBarHelper::cancel('adherent.cancel', $isNew    ? 'JTOOLBAR_CANCEL'     // --> administrator/components/com_adh/controllers/adherent.php::cancel();
-                                                            : 'JTOOLBAR_CLOSE');
+        JToolBarHelper::title(JText::_('COM_ADH').' : '.JText::_('COM_ADH_MANAGER_ANOMALIES_ADHERENTS'));
+        //                             : JText::_('COM_ADH').' : '.JText::_('COM_ADH_MANAGER_ADHERENT_EDIT'));
+        //JToolBarHelper::apply('1anomalie.apply');                                   // --> administrator/components/com_adh/controllers/1anomalie.php::save();
+        //JToolBarHelper::save('1anomalie.save');                                     // --> administrator/components/com_adh/controllers/1anomalie.php::save();
+        //JToolBarHelper::save2new('1anomalie.save2new');								// --> administrator/components/com_adh/controllers/1anomalie.php::save();
+        //JToolBarHelper::save2copy('1anomalie.save2copy');                           // --> administrator/components/com_adh/controllers/1anomalie.php::save();
+        JToolBarHelper::cancel('1anomalie.cancel', 'JTOOLBAR_CLOSE');				// --> administrator/components/com_adh/controllers/1anomalie.php::cancel();
     }
+	
+	/**
+	 * @brief	addUserToolbar()	create another toolbar for one side
+	 */
+	public function addUserToolbar($name = "") {
+		//$toolbar = new JToolBar($name);
+		AdhToolBarHelper::apply('1anomalie.apply', 'JAPPLY', 'toolbar-'.$name, 'adminForm'.  ucwords($name));
+		//return $toolbar;
+	}
 
     /**
      * Add the stylesheet to the document.

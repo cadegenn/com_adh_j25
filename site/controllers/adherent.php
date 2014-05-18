@@ -101,10 +101,7 @@ class adhControllerAdherent extends JControllerForm
 		// check if ok and display appropriate message.  This can also have a redirect if desired.
 		if ($userId) {
 			$app->enqueueMessage(JText::_('COM_ADH_ADHERENT_SAVED'));
-			if ((int)$params->get('alert_sendmail_on_inscription_cb') == 1) {
-				$body = ADHHelper::buildBulletinAdhesionUser($userId);
-				//$app->enqueueMessage('<pre>'.var_dump($body).'</pre>', 'Notice');
-			}
+			$body = ADHHelper::buildBulletinAdhesionUser($userId);
 		} else {
 			$app->enqueueMessage(JText::_('COM_ADH_ADHERENT_NOT_SAVED'), 'Error');
 			//JError::raiseError( 4711, JText::_('COM_ADH_ADHERENT_NOT_SAVED') );
@@ -115,14 +112,15 @@ class adhControllerAdherent extends JControllerForm
 		// check if ok and display appropriate message.  This can also have a redirect if desired.
 		if ($cotizId) {
 			$app->enqueueMessage(JText::_('COM_ADH_COTISATION_SAVED'));
-			if ((int)$params->get('alert_sendmail_on_inscription_cb') == 1) {
-				$body .= ADHHelper::buildBulletinAdhesionCotiz($cotizId);
-				//$app->enqueueMessage('<pre>'.var_dump($body).'</pre>', 'Notice');
-			}
+			$body .= ADHHelper::buildBulletinAdhesionCotiz($cotizId);
 		} else {
 			$app->enqueueMessage(JText::_('COM_ADH_COTISATION_NOT_SAVED'), 'Error');
 			//JError::raiseError( 4711, JText::_('COM_ADH_COTISATION_NOT_SAVED') );
 		}
+
+		// @TODO	route to display summary to let user print it
+		// workaround: display it here: it is the mail's body
+		echo $body;
 
 		if ((int)$params->get('alert_sendmail_on_inscription_cb') == 1) {
 			$mailer->setSubject(JText::sprintf('COM_ADH_ADHERER_MAIL_SUBJECT', JURI::base(), strtoupper($data['nom']), $data['prenom']));
@@ -136,9 +134,7 @@ class adhControllerAdherent extends JControllerForm
 				$app->enqueueMessage(JText::_('COM_ADH_ADHERER_MAIL_SENT'));
 			}
 		}
-		echo $body;
 		
-		// @TODO	route to display summary to let user print it
 		
 		return true;
 	}

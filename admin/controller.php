@@ -34,7 +34,7 @@ class adhController extends JController
 	 * @return	(array)					json-encoded array of users's ids members of the groupId
 	 * @deprecated since version 0.0.22
 	 */
-	public function getUsersFromGroup($groupId = 0) {
+	/*public function getUsersFromGroup($groupId = 0) {
 		// pour debug, on prend d'abord la valeur via la méthode 'get', puis on surcharge par une éventuelle donnée dans le 'post'
 		//$groupId = intval(JRequest::getVar('groupid', 0, 'get', 'int'));		
 		$groupId = JRequest::getVar('groupid', $groupId, 'post', 'int');		
@@ -42,7 +42,7 @@ class adhController extends JController
 		$users = $group->getUsers();
 		
 		echo json_encode($users);
-	}
+	}*/
 }
 
 ?>

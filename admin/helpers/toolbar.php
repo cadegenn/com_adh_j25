@@ -41,7 +41,7 @@ jimport('joomla.html.toolbar');
  * @package		Joomla.Administrator
  * @subpackage	Application
  */
-class myJToolBarHelper extends JToolBarHelper {
+class AdhToolBarHelper extends JToolBarHelper {
 	/**
 	 * @brief	link()	Writes a custom button link 
 	 * @param	string	$alt	Alternative text.
@@ -55,6 +55,40 @@ class myJToolBarHelper extends JToolBarHelper {
 		$bar->appendButton('Link', $id, $alt, $href);
 	}
 
+	/**
+	 * @brief	mergeList()	Write a button to merge 2 items
+	 * @param	string	$task	An override for the task.
+	 * @param	string	$alt	An override for the alt text.
+	 * @since	0.0.23
+	 */
+	public static function mergeList($task = 'merge', $alt = 'JTOOLBAR_MERGE')
+	{
+		$bar = JToolBar::getInstance('toolbar');
+		// add path to our button
+		$bar->addButtonPath(JPATH_COMPONENT_ADMINISTRATOR . "/libraries/html/toolbar/button");
+		// Add an edit button.
+		$bar->appendButton('Merge', 'merge', $alt, $task, true);
+	}
+
+	/**
+	 * Writes a save button for a given option.
+	 * Apply operation leads to a save action only (does not leave edit mode).
+	 *
+	 * @param	string	$task	An override for the task.
+	 * @param	string	$alt	An override for the alt text.
+	 * @param	string	$formId	id of the form to submit
+	 * @since	1.0
+	 */
+	public static function apply($task = 'apply', $alt = 'JTOOLBAR_APPLY', $toolbar = 'toolbar', $formId = 'adminForm')
+	{
+		$bar = JToolBar::getInstance($toolbar);
+		// add path to our button
+		$bar->addButtonPath(JPATH_COMPONENT_ADMINISTRATOR . "/libraries/html/toolbar/button");
+		// Add an apply button
+		$bar->appendButton('submitForm', 'apply', $alt, $task, false, $formId);
+	}
+
+	
 }
 
 ?>

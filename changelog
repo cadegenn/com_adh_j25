@@ -17,7 +17,16 @@
 	. inscription: champs ville faire une auto-completion	[OK]
 	. inscription: n'ajoute pas la personne dans la base	[OK]
 	. inscription: ajouter une adhésion "non payée"			[OK]
-	. inscription: envoyer des mails aux admins
+	. inscription: envoyer des mails aux admins				[OK]
+
+@version 0.0.23 - @date 2014.05.18
+	admin:
+	. 1anomalies: ajout d'un select pour afficher différents types d'anomalies concernant les adhérents
+	. libraries: ajout d'un dossier "libraries" contenant pour l'instant le bouton type "merge"
+	. controls: ADHHelpers::buildSelectTitres() est obsolète. Utiliser $this->form->getField("titre")->input à la place
+	. 1anomalie: édition simultanée de 2 fiches adhérents fonctionnelle. @TODO: améliorer en ajoutant des boutons de recopie user1 <=> user2 générique (toolbar) et à côté de chaque input
+	site:
+	. adherer: afficher le résumer de l'inscription, même si les alertes e-mail ne sont pas configurées
 
 @version 0.0.22	- @date 2014.05.08
 	admin:

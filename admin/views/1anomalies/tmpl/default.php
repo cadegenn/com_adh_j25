@@ -67,6 +67,10 @@ $listDirn       = $this->escape($this->state->get('list.direction'));
 		</div><br />
 	</fieldset>
 	<fieldset id="filter-bar">
+		<div class="anomalie-type-select fltlft">
+			<label class="pays-search-lbl" for="anomalie_type"><?php echo JText::_('COM_ADH_ANOMALIE_TYPE_LABEL'); ?>&nbsp;</label>
+			<?php echo ADHcontrols::buildSelectTypesAnomalies(); ?>
+		</div>
 		<div class="pays-select fltrt">
 			<label class="pays-search-lbl" for="pays_search"><?php echo JText::_('COM_ADH_PAYS_LABEL'); ?>&nbsp;</label>
 			<?php echo ADHcontrols::selectColumnFromTable("#__adh_adherents", "pays", "ASC", $this->state->get('pays.search')); ?>
@@ -103,11 +107,11 @@ $listDirn       = $this->escape($this->state->get('list.direction'));
 			</th>
 			<th>
 				<?php //echo JText::_('COM_ADH_VILLE_LABEL'); ?>
-				<?php echo JHtml::_('grid.sort', 'COM_ADH_VILLE_LABEL', 'LOWER(ville)', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort', 'COM_ADH_VILLE_LABEL', 'LOWER(a.ville)', $listDirn, $listOrder); ?>
 			</th>
 			<th>
 				<?php //echo JText::_('COM_ADH_PAYS_LABEL'); ?>
-				<?php echo JHtml::_('grid.sort', 'COM_ADH_PAYS_LABEL', 'LOWER(pays)', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort', 'COM_ADH_PAYS_LABEL', 'LOWER(a.pays)', $listDirn, $listOrder); ?>
 			</th>
 			<th>
 				<?php //echo JText::_('COM_ADH_STATUS_LABEL'); ?>

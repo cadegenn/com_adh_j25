@@ -37,7 +37,7 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.view');
  
 // Import library dependencies
-JLoader::register('myJToolBarHelper', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/toolbar.php');
+JLoader::register('AdhToolBarHelper', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/toolbar.php');
 
 /**
  * adh View
@@ -92,9 +92,9 @@ class adhViewadh extends JView
 	{
 		// voir d'autres boutons dans /administrator/includes/toolbar.php
 		JToolBarHelper::title(JText::_('COM_ADH'), 'adh');
-		myJToolBarHelper::link('adherent-add', JText::_('COM_ADH_MANAGER_ADHERENT_NEW'), 'index.php?option=com_adh&view=adherent&layout=edit');
-		myJToolBarHelper::link('group-add', JText::_('COM_ADH_MANAGER_GROUPE_NEW'), 'index.php?option=com_adh&view=groupe&layout=edit');
-		myJToolBarHelper::link('cotisation-add', JText::_('COM_ADH_MANAGER_COTISATION_NEW'), 'index.php?option=com_adh&view=cotisation&layout=edit');
+		AdhToolBarHelper::link('adherent-add', JText::_('COM_ADH_MANAGER_ADHERENT_NEW'), 'index.php?option=com_adh&view=adherent&layout=edit');
+		AdhToolBarHelper::link('group-add', JText::_('COM_ADH_MANAGER_GROUPE_NEW'), 'index.php?option=com_adh&view=groupe&layout=edit');
+		AdhToolBarHelper::link('cotisation-add', JText::_('COM_ADH_MANAGER_COTISATION_NEW'), 'index.php?option=com_adh&view=cotisation&layout=edit');
 		JToolBarHelper::divider();
 		JToolBarHelper::preferences('com_adh');
 	}

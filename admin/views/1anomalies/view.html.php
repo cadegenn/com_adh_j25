@@ -4,6 +4,8 @@ defined('_JEXEC') or die('Restricted access');
  
 // import Joomla view library
 jimport('joomla.application.component.view');
+// Import library dependencies
+JLoader::register('AdhToolBarHelper', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/toolbar.php');
  
 /**
  * adh View
@@ -52,11 +54,12 @@ class adhView1anomalies extends JView
 	{
 		// voir d'autres boutons dans /administrator/includes/toolbar.php
 		JToolBarHelper::title(JText::_('COM_ADH').' : '.JText::_('COM_ADH_SUBMENU_ANOMALIES'), 'adh');
-		JToolBarHelper::editListX('adherent.edit');
+		//JToolBarHelper::editListX('adherent.edit');
+		AdhToolBarHelper::mergeList('1anomalie.merge');
 		JToolBarHelper::divider();
-		JToolBarHelper::publishList('adherents.publish');
-		JToolBarHelper::unpublishList('adherents.unpublish');
-		JToolBarHelper::divider();
+		//JToolBarHelper::publishList('adherents.publish');
+		//JToolBarHelper::unpublishList('adherents.unpublish');
+		//JToolBarHelper::divider();
 		JToolBarHelper::archiveList('adherents.archive');
 		JToolBarHelper::deleteListX(JText::_('COM_ADH_AREYOUSURE'),'adherents.delete');
 		JToolBarHelper::divider();

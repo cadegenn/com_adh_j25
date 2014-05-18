@@ -610,7 +610,7 @@ class AdhUser extends JObject
 			}
 
 			// Get the old user
-			$oldUser = new JUser($this->id);
+			$oldUser = new AdhUser($this->id);
 
 			//
 			// Access Checks
@@ -666,7 +666,7 @@ class AdhUser extends JObject
 			}
 
 			// Fire the onUserBeforeSave event.
-			JPluginHelper::importPlugin('user');
+			/*JPluginHelper::importPlugin('user');
 			$dispatcher = JDispatcher::getInstance();
 
 			$result = $dispatcher->trigger('onUserBeforeSave', array($oldUser->getProperties(), $isNew, $this->getProperties()));
@@ -674,7 +674,7 @@ class AdhUser extends JObject
 			{
 				// Plugin will have to raise its own error or throw an exception.
 				return false;
-			}
+			}*/
 
 			// Store the user data in the database
 			if (!($result = $table->store()))
@@ -696,7 +696,7 @@ class AdhUser extends JObject
 			}
 
 			// Fire the onUserAfterSave event
-			$dispatcher->trigger('onUserAfterSave', array($this->getProperties(), $isNew, $result, $this->getError()));
+			//$dispatcher->trigger('onUserAfterSave', array($this->getProperties(), $isNew, $result, $this->getError()));
 		}
 		catch (Exception $e)
 		{

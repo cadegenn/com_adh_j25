@@ -1,4 +1,35 @@
 <?php
+/**
+ * @package		com_adh
+ * @subpackage	
+ * @brief		com_adh helps you manage the people within an association
+ * @copyright	Copyright (C) 2010 - 2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
+ * @license		Affero GNU General Public License version 3 or later; see LICENSE.txt
+ * 
+ * @TODO		use cotiz helper to display cotisations's pane
+ */
+
+/** 
+ *  Copyright (C) 2012-2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
+ *  com_adh is a joomla! 2.5 component [http://www.volontairesnature.org]
+ *  
+ *  This file is part of com_adh.
+ * 
+ *     com_adh is free software: you can redistribute it and/or modify
+ *     it under the terms of the Affero GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * 
+ *     com_adh is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     Affero GNU General Public License for more details.
+ * 
+ *     You should have received a copy of the Affero GNU General Public License
+ *     along with com_adh.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 // No direct access
 defined('_JEXEC') or die('Restricted access');
 JHtml::_('behavior.tooltip');
@@ -20,7 +51,7 @@ $params = JComponentHelper::getParams('com_adh');
 			<legend><?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS' ); ?> <small>(<?php echo $this->item->id; ?>)</small></legend>
 			<div class="tr">
 				<div class="tth"><?php echo $this->form->getField("titre")->label; ?></div>
-				<div class="ttd"><?php echo ADHControls::buildSelectTitres($this->form->getField("titre")->value); ?></div>
+				<div class="ttd"><?php echo $this->form->getField("titre")->input; ?></div>
 				<div class="tth"><?php echo $this->form->getField("personne_morale")->label; ?></div>
 				<div class="ttd"><?php echo html_entity_decode($this->form->getField("personne_morale")->input); ?></div>
 			</div>

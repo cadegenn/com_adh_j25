@@ -1,5 +1,35 @@
-
 <?php
+/**
+ * @package		com_adh
+ * @subpackage	
+ * @brief		com_adh helps you manage the people within an association
+ * @copyright	Copyright (C) 2010 - 2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
+ * @license		Affero GNU General Public License version 3 or later; see LICENSE.txt
+ * 
+ * @TODO		
+ */
+
+/** 
+ *  Copyright (C) 2012-2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
+ *  com_adh is a joomla! 2.5 component [http://www.volontairesnature.org]
+ *  
+ *  This file is part of com_adh.
+ * 
+ *     com_adh is free software: you can redistribute it and/or modify
+ *     it under the terms of the Affero GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * 
+ *     com_adh is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     Affero GNU General Public License for more details.
+ * 
+ *     You should have received a copy of the Affero GNU General Public License
+ *     along with com_adh.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 // import the Joomla modellist library
@@ -26,8 +56,8 @@ class adhModel1anomalies extends JModelList
 				'prenom', 'a.prenom', 'LOWER(a.prenom)',
 				'LOWER(a.nom), LOWER(a.prenom)',
 				'email', 'a.email',
-				'ville', 'a.ville', 'LOWER(ville)',
-				'pays', 'a.pays', 'LOWER(pays)',
+				'ville', 'a.ville', 'LOWER(a.ville)',
+				'pays', 'a.pays', 'LOWER(a.pays)',
 				'published', 'a.published'
 			);
 		}
@@ -48,7 +78,25 @@ class adhModel1anomalies extends JModelList
 		// Select some fields
 		//$query->select('id, nom, lieu, pays, catid, status')->leftJoin('adherents_categories ON adherents_categories.id = adherents.catid');;
 		$query->select('a.*');
-		$query->from('#__adh_adherents AS a')->where("LOWER(a.nom) = LOWER(a.prenom)")->where("a.personne_morale = ''");
+		$query->from('#__adh_adherents AS a');
+		
+		$anomalies = $this->getState('anomalies.search');
+		if (!empty($anomalies)) {
+			switch ($anomalies) {
+				case 1 :	$query->where("LOWER(a.nom) = LOWER(a.prenom)")->where("a.personne_morale = ''");
+							break;
+				case 2 :	$query->join('INNER', "#__adh_adherents AS b ON b.email = a.email")->where('a.email <> ""')->where('a.id <> b.id');
+							$query->order('LOWER(a.email)');
+							//SELECT a.*, b.* FROM c0arp_adh_adherents AS a INNER JOIN c0arp_adh_adherents AS b ON b.email = a.email WHERE a.email <> '' AND a.id <> b.id ORDER BY LOWER(a.email) asc, LOWER(a.nom) asc,LOWER(a.prenom) asc
+							break;
+				case 3 :	$query->join('INNER', "#__adh_adherents AS b ON LOWER(a.nom) = LOWER(b.nom) AND LOWER(a.prenom) = LOWER(b.prenom)")->where('a.nom <> "" AND a.prenom <> ""')->where('a.id <> b.id');
+							//$query->order('LOWER(a.email)');
+							break;
+			}
+		} else {
+			// do not display anything until we choose a type of abnormalities
+			$query->where("0 = 1");
+		}
 
 		// filter by first letter
 		$letter = $this->getState('letter.search');
@@ -90,7 +138,7 @@ class adhModel1anomalies extends JModelList
 		}
 				
 		// Add the list ordering clause.
-		$orderCol	= $this->state->get('list.ordering', 'LOWER(nom)');
+		$orderCol	= $this->state->get('list.ordering', 'LOWER(a.nom)');
 		$orderDirn	= $this->state->get('list.direction', 'asc');
 		$query->order($db->escape($orderCol.' '.$orderDirn));
 		//$query->order('catid');
@@ -98,8 +146,8 @@ class adhModel1anomalies extends JModelList
 		/*$query->order('LOWER(nom)');*/
 		
 		// quelque soit l'ordre demandé, on ajoute le classement par NOM et prénom
-		$query->order('LOWER(nom) '.$orderDirn);
-		$query->order('LOWER(prenom) '.$orderDirn);
+		$query->order('LOWER(a.nom) '.$orderDirn);
+		$query->order('LOWER(a.prenom) '.$orderDirn);
 
 		return $query;
 	}
@@ -146,6 +194,12 @@ class adhModel1anomalies extends JModelList
 		   $this->setState('pays.search', $search);
 		   $state = $this->getUserStateFromRequest($this->context.'.pays.state', 'pays_state', '', 'string');
 		   $this->setState('pays.state', $state);
+
+		   // Load the filter state.
+		   $search = $this->getUserStateFromRequest($this->context.'.anomalies.search', 'anomalies_search');
+		   $this->setState('anomalies.search', $search);
+		   $state = $this->getUserStateFromRequest($this->context.'.anomalies.state', 'anomalies_state', '', 'string');
+		   $this->setState('anomalies.state', $state);
 
 		   // List state information.
 		   parent::populateState('a.nom, a.prenom', 'asc');
