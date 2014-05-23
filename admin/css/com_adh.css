@@ -47,9 +47,6 @@ root {
 .icon-32-cotisation-add {
   background-image: url(../images/ico-32x32/coin-add-icon.png);
 }
-.icon-32-merge {
-  background-image: url(../images/ico-32x32/merge.png);
-}
 .icon-user {
   background-repeat: no-repeat;
   padding-left: 20px;
@@ -107,4 +104,10 @@ root {
 }
 .clrlft {
   clear: left;
+}
+table.dashboard {
+  width: 100%;
+}
+table.dashboard tbody {
+  vertical-align: top;
 }

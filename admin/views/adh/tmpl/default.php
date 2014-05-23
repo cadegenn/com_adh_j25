@@ -57,7 +57,7 @@ JHtml::_('behavior.tooltip');
       }
 </script>
 
-<table style="width: 100%;">
+<table class="dashboard"">
 	<thead>	<th style="width: 50%;"><?php echo JText::_('COM_ADH_LAST_REGISTERED_USERS'); ?></th>
 			<th><?php echo JText::_('COM_ADH_PENDING_PAYMENTS'); ?></th></thead>
 	<tr><td><ul>
