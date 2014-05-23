@@ -8,12 +8,16 @@
 			size="10" default="0"
 			readonly="true" />
 
-		<field
-			name="titre" type="text"
-			label="COM_ADH_TITRE_LABEL"
-			description="COM_ADH_TITRE_DESC"
-			class="inputbox" default=""
-		/>
+		<field	name="titre" type="list"
+				label="COM_ADH_TITRE_LABEL" description="COM_ADH_TITRE_DESC"
+				class="inputbox" default="M."
+		>
+			<!-- @TODO remplacer les valeurs par une variable de texte -->
+			<option value="Mme">Mme</option>
+			<option value="M.">M.</option>
+			<option value="Association">Association</option>
+			<option value="Société">Société</option>
+		</field>
 		<field
 			name="personne_morale" type="text"
 			label="COM_ADH_PERS_MORALE_LABEL"
