@@ -25,6 +25,7 @@ admin:
 * adherent: create a button "reset password and send to user"
 * adhérent: use filter tel for phone numbers
 * préférences: choose wich fields are displayed during registration and which are mandatory
+
 site:
 * create a login page
 
