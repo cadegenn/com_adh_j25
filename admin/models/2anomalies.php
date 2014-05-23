@@ -35,9 +35,9 @@ defined('_JEXEC') or die('Restricted access');
 // import the Joomla modellist library
 jimport('joomla.application.component.modellist');
 /**
- * adhModelCotisations List Model
+ * adhModel2anomalies List Model
  */
-class adhModelCotisations extends JModelList
+class adhModel2anomalies extends JModelList
 {
 	/**
 	 * Constructor.
@@ -51,13 +51,15 @@ class adhModelCotisations extends JModelList
 		if (empty($config['filter_fields'])) {
 			$config['filter_fields'] = array(
 				'id', 'c.id',
-				'personne_morale', 'a.personne_morale',
-				'nom', 'a.nom', 'LOWER(a.nom)',
-				'prenom', 'a.prenom', 'LOWER(a.prenom)',
-				'date_debut_cotiz', 'c.date_debut_cotiz',
+				'adherent_id', 'c.adherent_id',
+				'tarif_id', 'c.tarif_id',
 				'montant', 'c.montant',
-				'mode_paiement', 'c.mode_paiement',
-				'payee', 'c.payee'
+				'LOWER(mode_paiement), LOWER(c.mode_paiement)',
+				'date', 'c.date', 'date_debut_cotiz', 'c.date_debut_cotiz', 'date_fin_cotiz', 'c.date_fin_cotiz',
+				'payee', 'c.payee',
+				'creation_date', 'c.creation_date',
+				'modification_date', 'c.modification_date',
+				'modified_by', 'c.modified_by'
 			);
 		}
 
@@ -75,40 +77,33 @@ class adhModelCotisations extends JModelList
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
 		// Select some fields
-		$query->select('c.*, a.personne_morale AS personne_morale, a.nom AS nom, a.prenom AS prenom');
-		$query->from('#__adh_cotisations AS c, #__adh_adherents AS a');
-		$query->where('c.adherent_id = a.id');
+		//, a.personne_morale AS personne_morale, a.nom AS nom, a.prenom AS prenom');
+		//$query->from('#__adh_cotisations AS c, #__adh_adherents AS a');
+		//$query->where('c.adherent_id = a.id');
 		
-		$letter = $this->getState('letter.search');
-		if (!empty($letter)) {
-			// case sensitive
-			//$query->where('(cotisations.nom LIKE "%'.$search.'%")', 'OR')->where('(cotisations.prenom LIKE "%'.$search.'%")');
-			// case insensitive
-			$query->where('(nom COLLATE utf8_unicode_ci LIKE "'.$letter.'%" OR personne_morale COLLATE utf8_unicode_ci LIKE "'.$letter.'%")');
+		$anomalies = $this->getState('anomalies.search');
+		if (!empty($anomalies)) {
+			switch ($anomalies) {
+				case 1 :	$query->select('c.*')->from('#__adh_cotisations AS c');
+							$query->where("c.adherent_id NOT IN (SELECT id from #__adh_adherents AS a)");
+							break;
+				//case 3 :	$query->select('a.')
+			}
+		} else {
+			// do not display anything until we choose a type of abnormalities
+			$query->where("0 = 1");
 		}
-		
+
 		$year = $this->getState('year.search');
 		if (!empty($year)) {
 			$query->where('YEAR(date_debut_cotiz) = '.$year);
 		}
 				
-		// Filter (http://docs.joomla.org/How_to_add_custom_filters_to_component_admin)
-		$search = $this->getState('filter.search');
-		if (!empty($search)) {
-			// case sensitive
-			//$query->where('(cotisations.nom LIKE "%'.$search.'%")', 'OR')->where('(cotisations.prenom LIKE "%'.$search.'%")');
-			// case insensitive
-			//$query->where('(#__adh_cotisations.nom COLLATE utf8_unicode_ci LIKE "%'.$search.'%")', 'OR')->where('(#__adh_cotisations.prenom COLLATE utf8_unicode_ci LIKE "%'.$search.'%")');
-			$query->where('(nom COLLATE utf8_unicode_ci LIKE "%'.$search.'%" OR prenom COLLATE utf8_unicode_ci LIKE "%'.$search.'%" OR personne_morale COLLATE utf8_unicode_ci LIKE "%'.$search.'%")');
-		}
-				
 		// Add the list ordering clause.
-		$orderCol	= $this->state->get('list.ordering', 'c.date_debut_cotiz');
+		$orderCol	= $this->state->get('list.ordering', 'c.id');
 		$orderDirn	= $this->state->get('list.direction', 'asc');
 		$query->order($db->escape($orderCol.' '.$orderDirn));
-		// whatever order user choose, we order 1st with his choice, and then with this
-		$query->order('date_debut_cotiz DESC, nom ASC, prenom ASC');
-
+		
 		return $query;
 	}
 
@@ -125,26 +120,20 @@ class adhModelCotisations extends JModelList
 		   // Initialise variables.
 		   $app = JFactory::getApplication('administrator');
 
-		   // Load the filter state.
-		   $search = $this->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
-		   $this->setState('filter.search', $search);
-		   $state = $this->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
-		   $this->setState('filter.state', $state);
-
 		   // Load the year state.
 		   $search = $this->getUserStateFromRequest($this->context.'.year.search', 'year_search');
 		   $this->setState('year.search', $search);
 		   $state = $this->getUserStateFromRequest($this->context.'.year.state', 'year_state', '', 'string');
 		   $this->setState('year.state', $state);
 
-		   // Load the letter state.
-		   $search = $this->getUserStateFromRequest($this->context.'.letter.search', 'letter_search');
-		   $this->setState('letter.search', $search);
-		   $state = $this->getUserStateFromRequest($this->context.'.letter.state', 'letter_state', '', 'string');
-		   $this->setState('letter.state', $state);
+		   // Load the filter state.
+		   $search = $this->getUserStateFromRequest($this->context.'.anomalies.search', 'anomalies_search');
+		   $this->setState('anomalies.search', $search);
+		   $state = $this->getUserStateFromRequest($this->context.'.anomalies.state', 'anomalies_state', '', 'string');
+		   $this->setState('anomalies.state', $state);
 
 		   // List state information.
-		   parent::populateState('c.date_debut_cotiz', 'asc');
+		   parent::populateState('c.id', 'asc');
 	}
 
 

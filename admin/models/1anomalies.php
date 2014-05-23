@@ -92,6 +92,8 @@ class adhModel1anomalies extends JModelList
 				case 3 :	$query->join('INNER', "#__adh_adherents AS b ON LOWER(a.nom) = LOWER(b.nom) AND LOWER(a.prenom) = LOWER(b.prenom)")->where('a.nom <> "" AND a.prenom <> ""')->where('a.id <> b.id');
 							//$query->order('LOWER(a.email)');
 							break;
+				case 4 :	$query->where('a.id NOT IN (SELECT c.adherent_id FROM #__adh_cotisations AS c)');
+							break;
 			}
 		} else {
 			// do not display anything until we choose a type of abnormalities

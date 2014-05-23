@@ -46,18 +46,29 @@ abstract class ADHcontrols {
 	 */
 
 	/**
-	 * @brief	buildSelectTypesAnomalies()		build a 'select' DOM control to list types of abnormalitites in database
+	 * @brief	buildSelectCotizTypesAnomalies()		build a 'select' DOM control to list types of abnormalitites in database
 	 * @return	(string)		DOM control
 	 */
-	public function buildSelectTypesAnomalies() {
+	public function buildSelectCotizTypesAnomalies() {
 		$control = "<select id='anomalies_search' name='anomalies_search' onchange='this.form.submit();'>";
 		$control .= "<option value='0'>-- ".JText::_('COM_ADH_ANOMALIE_SELECT_LABEL')." --</option>";
-		for ($i = 1; $i <= 3; $i++) {
-			$control .= "<option value='".$i."' ".($i == $this->state->get('anomalies.search') ? "selected" : "").">".JText::_('COM_ADH_ANOMALIE_SELECT_OPTION'.$i)."</option>";
+		for ($i = 1; $i <= 2; $i++) {
+			$control .= "<option value='".$i."' ".($i == $this->state->get('anomalies.search') ? "selected" : "").">".JText::_('COM_ADH_2ANOMALIE_SELECT_OPTION'.$i)."</option>";
 		}
-		/*$control .= "<option value='1'>".JText::_('COM_ADH_ANOMALIE_SELECT_NOM_PRENOM')."</option>";
-		$control .= "<option value='2'>".JText::_('COM_ADH_ANOMALIE_SELECT_EMAIL')."</option>";
-		$control .= "<option value='3'>".JText::_('COM_ADH_ANOMALIE_SELECT_HOMONYMES')."</option>";*/
+		$control .= "</select>";
+		return $control;
+	}
+	
+	/**
+	 * @brief	buildSelectAdhTypesAnomalies()		build a 'select' DOM control to list types of abnormalitites in database
+	 * @return	(string)		DOM control
+	 */
+	public function buildSelectAdhTypesAnomalies() {
+		$control = "<select id='anomalies_search' name='anomalies_search' onchange='this.form.submit();'>";
+		$control .= "<option value='0'>-- ".JText::_('COM_ADH_ANOMALIE_SELECT_LABEL')." --</option>";
+		for ($i = 1; $i <= 4; $i++) {
+			$control .= "<option value='".$i."' ".($i == $this->state->get('anomalies.search') ? "selected" : "").">".JText::_('COM_ADH_1ANOMALIE_SELECT_OPTION'.$i)."</option>";
+		}
 		$control .= "</select>";
 		return $control;
 	}

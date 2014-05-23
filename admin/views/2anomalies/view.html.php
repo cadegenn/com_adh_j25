@@ -41,7 +41,7 @@ JLoader::register('AdhToolBarHelper', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/
 /**
  * adh View
  */
-class adhView1anomalies extends JView
+class adhView2anomalies extends JView
 {
 	/**
 	 * adherents view display method
@@ -50,7 +50,7 @@ class adhView1anomalies extends JView
 	function display($tpl = null) 
 	{
 		// Get data from the model
-		$items = $this->get('Items');			// => admin/models/1anomalies.php
+		$items = $this->get('Items');			// => admin/models/2anomalies.php
 		$total = $this->get('Total');			// JModelList::getTotal()
 		$pagination = $this->get('Pagination');
  
@@ -88,7 +88,7 @@ class adhView1anomalies extends JView
 		// voir d'autres boutons dans /administrator/includes/toolbar.php
 		JToolBarHelper::title(JText::_('COM_ADH').' : '.JText::_('COM_ADH_SUBMENU_ANOMALIES'), 'adh');
 		//JToolBarHelper::editListX('adherent.edit');
-		AdhToolBarHelper::mergeList('1anomalie.merge');
+		AdhToolBarHelper::mergeList('2anomalie.merge');
 		JToolBarHelper::divider();
 		//JToolBarHelper::publishList('adherents.publish');
 		//JToolBarHelper::unpublishList('adherents.unpublish');
