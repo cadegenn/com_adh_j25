@@ -41,9 +41,8 @@
 		<!-- input field to host autocomplete of google place's API -->
 		<field
 			name="adresseAC" type="text"
-			label="COM_ADH_ADRESSE_LABEL"
-			description="COM_ADH_ADRESSE_DESC"
-			class="inputbox required" default="" required="true"
+			label="COM_ADH_ADRESSE_LABEL" description="COM_ADH_ADRESSE_DESC"
+			class="inputbox required" default="" required="true" placeholder="COM_ADH_ADRESSE_TIP"
 		/>
 		<field
 			name="adresse" type="hidden"
@@ -61,16 +60,24 @@
 			description="COM_ADH_CP_DESC"
 			class="inputbox required" default="" required="true"
 		/>
+		<!-- input field to host autocomplete of google place's API -->
 		<field
-			name="ville" type="text"
-			label="COM_ADH_VILLE_LABEL"
-			description="COM_ADH_VILLE_DESC"
-			class="inputbox required" default="" required="true"
+			name="villeAC" type="text"
+			label="COM_ADH_VILLE_LABEL"	description="COM_ADH_VILLE_DESC"
+			class="inputbox required" default="" required="true" placeholder="COM_ADH_VILLE_DESC"
 		/>
 		<field
-			name="pays" type="text"
-			label="COM_ADH_PAYS_LABEL"
-			description="COM_ADH_PAYS_DESC"
+			name="ville" type="hidden"
+			class="inputbox required" default="" required="true"
+		/>
+		<!-- input field to host autocomplete of google place's API -->
+		<field
+			name="paysAC" type="text"
+			label="COM_ADH_PAYS_LABEL" description="COM_ADH_PAYS_DESC"
+			class="inputbox required" default="" required="true" placeholder="COM_ADH_PAYS_DESC"
+		/>
+		<field
+			name="pays" type="hidden"
 			class="inputbox required" default="" required="true"
 		/>
 		<field

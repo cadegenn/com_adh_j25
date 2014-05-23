@@ -1,0 +1,18 @@
+REUNION du 14/05/2014
+=====================
+-> code postale -> code postal [OK]
+-> adhérer -> faire l'auto-complétion sur le champs ville et le champs pays
+-> changer "Devenir écovolontaire" en "Adhérer"		[OK]
+
+REUNION du 16/04/2014
+=====================
+admin:
+. view/adherents: afficher le code postale	[OK]
+. adhésions: ya pas 2014 pourquoi? -> voir importv2cotisations
+. view/adhesions: afficher le nombre d'adhésion en fonction du filtre	[OK]
+site:
+. inscription: champs ville faire une auto-completion	[OK]
+. inscription: n'ajoute pas la personne dans la base	[OK]
+. inscription: ajouter une adhésion "non payée"			[OK]
+. inscription: envoyer des mails aux admins				[OK]
+

@@ -45,22 +45,32 @@ $API_KEY=$params->get("googlemap_apikey");
 
 <script type="text/javascript">
 
-var autocomplete;
+// autocomplete for Adresse field
+var autocompleteA;
+// autocomplete for Ville field
+var autocompleteV;
+// autocomplete for Pays field
+var automcompleteP;
 
 /**
  * @brief	addEvent()	add custom actions when document finishes loading
- * @deprecated	0.0.21	Too much automated by google. Use Autocompleteservice instead
  */
 window.addEvent('domready',function(){
 	var adresse = document.getElementById('jform_adresseAC');
+	adresse.placeholder = "<?php echo JText::_('COM_ADH_ADRESSE_TIP'); ?>";
 	//var cp = document.getElementById('jform_cp');
-	//var ville = document.getElementById('jform_ville');
-	//var pays = document.getElementById('jform_pays');
-	autocomplete = new google.maps.places.Autocomplete(adresse, { types: ['geocode'] });
-	google.maps.event.addListener(autocomplete, 'place_changed', function() { fillInAddress(); });
-	//var autocompleteCP = new google.maps.places.Autocomplete(cp, { types: ['(regions)'] });
-	//var autocompleteVILLE = new google.maps.places.Autocomplete(ville, { types: ['(cities)'] });
-	//var autocompletePAYS = new google.maps.places.Autocomplete(pays, { types: ['(regions)'] });
+	var ville = document.getElementById('jform_villeAC');
+	ville.placeholder = "<?php echo JText::_('COM_ADH_VILLE_DESC'); ?>";
+	var pays = document.getElementById('jform_paysAC');
+	pays.placeholder = "<?php echo JText::_('COM_ADH_VILLE_DESC'); ?>";
+	
+	autocompleteA = new google.maps.places.Autocomplete(adresse, { types: ['geocode'] });
+	google.maps.event.addListener(autocompleteA, 'place_changed', function() { fillInAddress('jform_adresseAC'); });
+	//autocompleteCP = new google.maps.places.Autocomplete(cp, { types: ['(regions)'] });
+	autocompleteV = new google.maps.places.Autocomplete(ville, { types: ['(cities)'] });
+	google.maps.event.addListener(autocompleteV, 'place_changed', function() { fillInAddress('jform_villeAC'); });
+	autocompleteP = new google.maps.places.Autocomplete(pays, { types: ['(regions)'] });
+	google.maps.event.addListener(autocompleteP, 'place_changed', function() { fillInAddress('jform_paysAC'); });
 	//$('jform_ville').addEvent('change', getVilles());
 });
 
@@ -69,7 +79,8 @@ window.addEvent('domready',function(){
  * @url		https://developers.google.com/maps/documentation/javascript/places-autocomplete#address_forms
  * @url		https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
  */
-function fillInAddress() {
+function fillInAddress(from) {
+	var place = null;
 	// correspondance adressType => form fields's id
 	var idForm = {
 		postal_code: 'jform_cp',
@@ -86,7 +97,15 @@ function fillInAddress() {
 		postal_code: 'short_name'
 	};
 	// Get the place details from the autocomplete object.
-	var place = autocomplete.getPlace();
+	switch (from) {
+		case 'jform_adresseAC' :	place = autocompleteA.getPlace();
+									break;
+		case 'jform_villeAC' :		place = autocompleteV.getPlace();
+									break;
+		case 'jform_paysAC' :		place = autocompleteP.getPlace();
+									break;
+	}
+	//var place = autocompleteA.getPlace();
 	console.log("%o", place);
 	/*for (var component in componentForm) {
 		document.getElementById(component).value = '';
@@ -101,6 +120,7 @@ function fillInAddress() {
 		if (idForm[addressType]) {
 			var val = place.address_components[i][componentForm[addressType]];
 			document.getElementById(componentId).value = val;
+			document.getElementById(componentId+'AC').value = val;
 		}
 	}
 	// put default value on field 'adresse'

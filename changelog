@@ -3,21 +3,14 @@
 	. importV2adherents: créer une cotisation non payée pour les nouveaux
 	. adherent: créer une bouton "réinitialiser mot de passe et envoyer"
 	. préférences: choisir finement quels champs doivent apparaitre sur la page d'inscription
-	. adh: créer une page qui recence les anomalies (NOM = PRENOM, adresse douteuse, etc...)
 	. adhérent: utiliser le filter "TEL" pour les numéros de tel/portable
 	site:
 	. créer une page de login
 	
-	REUNION du 16/04/2014
-	admin:
-	. view/adherents: afficher le code postale	[OK]
-	. adhésions: ya pas 2014 pourquoi? -> voir importv2cotisations
-	. view/adhesions: afficher le nombre d'adhésion en fonction du filtre	[OK]
+@version 0.0.24 - @date	2014.05.23
 	site:
-	. inscription: champs ville faire une auto-completion	[OK]
-	. inscription: n'ajoute pas la personne dans la base	[OK]
-	. inscription: ajouter une adhésion "non payée"			[OK]
-	. inscription: envoyer des mails aux admins				[OK]
+	. changer "code postalE" en "code postal"
+	. adhérer: les champs "ville" et "pays" sont maintenant de type "autocomplete" via l'API google places.
 
 @version 0.0.23 - @date 2014.05.18
 	admin:
