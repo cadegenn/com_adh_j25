@@ -20,6 +20,7 @@ class adhView1anomalies extends JView
 	{
 		// Get data from the model
 		$items = $this->get('Items');			// => admin/models/1anomalies.php
+		$total = $this->get('Total');			// JModelList::getTotal()
 		$pagination = $this->get('Pagination');
  
 		// Check for errors.
@@ -30,6 +31,7 @@ class adhView1anomalies extends JView
 		}
 		// Assign data to the view
 		$this->items = $items;
+		$this->total = $total;
 		$this->pagination = $pagination;
  
 		// Set the toolbar
