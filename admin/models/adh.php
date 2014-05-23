@@ -124,7 +124,8 @@ class adhModelAdh extends JModelAdmin
 	public function getOnlineRegistrations() {
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		$query->select('a.*')->from('#__adh_adherents AS a')->where('a.published = 0')->order('a.creation_date DESC');
+		//$query->select('a.*')->from('#__adh_adherents AS a')->where('a.published = 0')->order('a.creation_date DESC');
+		$query->select('a.*')->from('#__adh_adherents AS a')->order('a.creation_date DESC LIMIT 10');
 		$db->setQuery($query);
 		
 		return $db->loadObjectList();
@@ -133,7 +134,7 @@ class adhModelAdh extends JModelAdmin
 	public function getPendingPayments() {
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		$query->select('c.*')->from('#__adh_cotisations AS c')->where('c.payee = 0')->order('c.date_debut_cotiz DESC');
+		$query->select('c.*')->from('#__adh_cotisations AS c')->where('c.payee = 0')->order('c.date_debut_cotiz DESC LIMIT 10');
 		$query->select('a.personne_morale, a.nom, a.prenom')->leftjoin('#__adh_adherents AS a ON (c.adherent_id = a.id)');
 		$db->setQuery($query);
 		

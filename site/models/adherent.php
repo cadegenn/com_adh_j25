@@ -98,6 +98,7 @@ class adhModelAdherent extends JModelForm
 	 * @return type			id de l'adhérent on success, false otherwise
 	 */
 	public function adherer($data) {
+		$date   = JFactory::getDate();
 		// set the data into a query to update the record
 		$db = $this->getDbo();
 		$query  = $db->getQuery(true);
@@ -122,7 +123,6 @@ class adhModelAdherent extends JModelForm
 		$adherent->cp = $data['cp'];
 		$adherent->ville = $data['ville'];
 		$adherent->pays = $data['pays'];
-		$adherent->creation_date = date("Y-m-d");
 		$adherent->published = 0;
 		$adherent->origine_id = $data['origine_id'];
 		$adherent->origine_text = $data['origine_text'];
@@ -141,10 +141,12 @@ class adhModelAdherent extends JModelForm
 		
 		if ($adherent->id == 0) {	// insert new record into database
 			//echo("<pre>insert : "); var_dump($adherent); echo("</pre>"); die();
+			$adherent->creation_date = date("Y-m-d H:i:s");
 			$saved = $db->insertObject('#__adh_adherents', $adherent);
 			if ($saved) return $db->insertid();
 		} else {						// update existing record into database
 			//echo("<pre>update : "); var_dump($adherent); echo("</pre>"); die();
+			$adherent->modification_date = date("Y-m-d H:i:s");
 			$saved = $db->updateObject('#__adh_adherents', $adherent, 'id');
 			if ($saved) return $adherent->id;
 		}
