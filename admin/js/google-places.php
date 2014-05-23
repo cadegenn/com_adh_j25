@@ -62,7 +62,7 @@ window.addEvent('domready',function(){
 	var ville = document.getElementById('jform_villeAC');
 	ville.placeholder = "<?php echo JText::_('COM_ADH_VILLE_DESC'); ?>";
 	var pays = document.getElementById('jform_paysAC');
-	pays.placeholder = "<?php echo JText::_('COM_ADH_VILLE_DESC'); ?>";
+	pays.placeholder = "<?php echo JText::_('COM_ADH_PAYS_DESC'); ?>";
 	
 	autocompleteA = new google.maps.places.Autocomplete(adresse, { types: ['geocode'] });
 	google.maps.event.addListener(autocompleteA, 'place_changed', function() { fillInAddress('jform_adresseAC'); });
