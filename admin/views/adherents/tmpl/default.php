@@ -88,7 +88,7 @@ $listDirn       = $this->escape($this->state->get('list.direction'));
 			</select>
 		</div>
 		<div class="fltlft">
-			<span class="bold"><?php echo(number_format($this->total, 0, ".", " ")); ?></span> <?php echo JText::_('COM_ADH_ADHERENTS_FOUND_TXT'); ?> 
+			<label><span class="bold"><?php echo(number_format($this->total, 0, ".", " ")); ?></span> <?php echo JText::_('COM_ADH_ADHERENTS_FOUND_TXT'); ?> </label>
 		</div>
 	</fieldset>
 	<table class="adminlist">

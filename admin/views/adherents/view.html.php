@@ -49,7 +49,7 @@ class adhViewAdherents extends JView
 	{
 		// Get data from the model
 		$items = $this->get('Items');			// => admin/models/adherents.php
-		$total = $this->get('Total');
+		$total = $this->get('Total');			// JModelList::getTotal()
 		$pagination = $this->get('Pagination');
  
 		// Check for errors.
