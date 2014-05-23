@@ -6,7 +6,11 @@
 	. adhérent: utiliser le filter "TEL" pour les numéros de tel/portable
 	site:
 	. créer une page de login
-	
+
+@version 0.0.25 - @date	
+	site:
+	. adherer: remplir la date de naissance au format dd/mm/yyyy
+
 @version 0.0.24 - @date	2014.05.23
 	site:
 	. changer "code postalE" en "code postal"

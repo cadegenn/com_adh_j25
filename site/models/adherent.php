@@ -110,7 +110,9 @@ class adhModelAdherent extends JModelForm
 		$adherent->personne_morale = $data['personne_morale'];
 		$adherent->nom = strtoupper($data['nom']);
 		$adherent->prenom = ucwords($data['prenom']);
-		$adherent->date_naissance = $data['date_naissance'];
+		//$adherent->date_naissance = $data['date_naissance'];
+		$myDateTime = DateTime::createFromFormat('d/m/Y', $data['date_naissance']);
+		$adherent->date_naissance = $myDateTime->format('Y-m-d');
 		$adherent->profession_id = $data['profession_id'];
 		$adherent->email = $data['email'];
 		$adherent->telephone = $data['telephone'];
