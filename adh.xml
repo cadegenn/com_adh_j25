@@ -45,9 +45,9 @@
 		<folder>views</folder>
 	</files>
 	
-	<languages folder="language">
-		<language tag="en-GB">en-GB/en-GB.com_adh.ini</language>
-		<language tag="fr-FR">fr-FR/fr-FR.com_adh.ini</language>
+	<languages folder="site">
+		<language tag="en-GB">language/en-GB/en-GB.com_adh.ini</language>
+		<language tag="fr-FR">language/fr-FR/fr-FR.com_adh.ini</language>
 	</languages>
 	
 	<!--<media destination="com_adh" folder="media">
