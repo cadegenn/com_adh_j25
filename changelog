@@ -1,6 +1,7 @@
 @version 0.0.26 - @date	
 	admin:
 	. 2anomalies: création de page d'anomalies des cotisations
+	. adherents: l'ordre alphabétique par NOM et PRENOM est maintenant correct, même en cas d'accent
 
 @version 0.0.25 - @date	2014.05.23
 	admin:

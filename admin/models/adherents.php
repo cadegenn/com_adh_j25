@@ -128,8 +128,9 @@ class adhModelAdherents extends JModelList
 		/*$query->order('LOWER(nom)');*/
 		
 		// quelque soit l'ordre demandé, on ajoute le classement par NOM et prénom
-		$query->order('LOWER(nom) '.$orderDirn);
-		$query->order('LOWER(prenom) '.$orderDirn);
+		// le COLLATE 'utf8_general_ci' permet de spécifier que ÉÊÈ = E c'est à dire que l'ordre sera correct quelque soit les accents
+		$query->order("LOWER(nom) COLLATE 'utf8_general_ci' ".$orderDirn);
+		$query->order("LOWER(prenom) COLLATE 'utf8_general_ci' ".$orderDirn);
 
 		return $query;
 	}
