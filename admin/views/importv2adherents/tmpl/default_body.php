@@ -12,6 +12,11 @@ $userId         = $user->get('id');
 ?>
 
 <?php foreach($this->items as $i => $item):
+	$found = false;
+	//echo ("<pre>"); var_dump($this->imported); echo ("</pre>");
+	foreach ($this->imported as $j => $imported) {
+		if ($item->id == $imported->id) { $found = true; break; }
+	}
 	$item->max_ordering = 0; //??
 	/*//$ordering       = ($listOrder == 'a.ordering');
 	$canCreate      = $user->authorise('core.create',		'com_adh.category.'.$item->categorie);
@@ -25,6 +30,9 @@ $userId         = $user->get('id');
 	<tr class="row<?php echo $i % 2; ?>">
         <td>
 			<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+		</td>
+		<td class="center">
+			<?php echo JHtml::_('jgrid.published', $found, $i, 'chantiers.', 0, 'cb', '', ''); ?>
 		</td>
 		<td>
 			<span class='blue'><?php echo stripslashes($item->nom." ".$item->prenom); ?></span>

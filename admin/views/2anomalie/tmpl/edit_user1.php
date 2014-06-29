@@ -173,10 +173,10 @@ $params = JComponentHelper::getParams('com_adh');
         <?php JFactory::getApplication()->setUserState('com_adh.edit.1anomalie.user1.id', (int) $this->form1->getField('id')->value); ?>
 		<?php echo JHtml::_('form.token'); ?>
 		
-		<pre><?php var_dump($bar1); ?></pre>
+		<pre><?php //var_dump($bar1); ?></pre>
 		<?php $session = JFactory::getSession();
 		$registry = $session->get('registry');?>
-		<pre><?php var_dump($registry->get('com_adh.edit.1anomalie.user1.id')); ?></pre>
+		<pre><?php //var_dump($registry->get('com_adh.edit.1anomalie.user1.id')); ?></pre>
 	</div>
 </form>
 

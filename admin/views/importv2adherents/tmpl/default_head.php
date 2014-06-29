@@ -7,6 +7,9 @@ defined('_JEXEC') or die('Restricted Access');
 		<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($this->items); ?>);" />
 	</th>			
 	<th>
+		<?php echo JText::_('COM_ADH_IMPORTED_LABEL'); ?>
+	</th>
+	<th>
 		<?php echo JText::_('COM_ADH_NOM_LABEL'); ?> <?php echo JText::_('COM_ADH_PRENOM_LABEL'); ?>
 	</th>
 	<th>

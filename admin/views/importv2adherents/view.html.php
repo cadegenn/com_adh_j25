@@ -26,7 +26,8 @@ class adhViewImportV2Adherents extends JView
 			$items = "";
 		} else {
 			$items = $this->get('Items');			// => admin/models/importV2Adherents.php
-
+			$imported = $this->get('Imported');
+			
 			// Check for errors.
 			if (count($errors = $this->get('Errors'))) 
 			{
@@ -39,6 +40,7 @@ class adhViewImportV2Adherents extends JView
 		
 		// Assign data to the view
 		$this->items = $items;
+		$this->imported = $imported;
 		$this->pagination = $pagination;
 		//Add the state... (http://docs.joomla.org/How_to_add_custom_filters_to_component_admin)
 		$this->state = $this->get('State');

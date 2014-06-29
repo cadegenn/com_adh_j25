@@ -249,9 +249,25 @@ class adhModelImportV2Adherents extends JModelList
 		return true;
 	}
 	
-	/*public function getPagination() {
-		$pagination = parent::getPagination();
-		$pagination->set("_viewall", true);
-	}*/
+    /**
+     * getImported()		get the already imported objects
+     *
+     * @return	(array)		array of objects
+     */
+    public function getImported()
+    {
+		$db = JFactory::getDbo();
+		
+		$query = $db->getQuery(true);
+		$query->select('a.id');
+		$query->from('#__adh_adherents AS a');
+		$query->order('nom');
+		$query->order('prenom');
+		$db->setQuery($query);
+		$db->execute();
+		
+		return $db->loadObjectList();
+    }
+
 }
 ?>
