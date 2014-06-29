@@ -148,8 +148,8 @@ class adhModel1anomalies extends JModelList
 		/*$query->order('LOWER(nom)');*/
 		
 		// quelque soit l'ordre demandé, on ajoute le classement par NOM et prénom
-		$query->order("LOWER(nom) COLLATE 'utf8_general_ci' ".$orderDirn);
-		$query->order("LOWER(prenom) COLLATE 'utf8_general_ci' ".$orderDirn);
+		$query->order("LOWER(a.nom) COLLATE 'utf8_general_ci' ".$orderDirn);
+		$query->order("LOWER(a.prenom) COLLATE 'utf8_general_ci' ".$orderDirn);
 
 		return $query;
 	}
