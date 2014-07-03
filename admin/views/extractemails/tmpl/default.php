@@ -22,7 +22,7 @@ JLoader::register('ADHControls', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/contr
 			<?php for ($i = 01; $i < 100; $i++) : ?>
 				<?php if (strlen((string)$i) < 2) { $dep = '0'.(string)$i; } else { $dep = (string)$i; } ?>
 				<option value="<?php echo $dep; ?>" <?php echo ($dep == $this->state->get('cp.search') ? "selected" : ""); ?>><?php echo $dep; ?></option>
-			<? endfor; ?>
+			<?php endfor; ?>
 			</select>
 		</div>
 	</fieldset>

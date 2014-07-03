@@ -61,7 +61,7 @@ $listDirn       = $this->escape($this->state->get('list.direction'));
 			$alphabet = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
 			foreach ($alphabet as $letter) : ?>
 				<li><a <?php echo(($this->escape($this->state->get('letter.search')) == $letter ? "class='selected'" : ""));?> href="javascript:document.id('letter_search').value='<?php echo $letter; ?>';document.id('adminForm').submit();"><?php echo $letter; ?></a></li>
-			<? endforeach; ?>
+			<?php endforeach; ?>
 			</ul>
 			<button style="float: right;" type="button" onclick="document.id('letter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 		</div><br />
@@ -88,7 +88,7 @@ $listDirn       = $this->escape($this->state->get('list.direction'));
 			<?php for ($i = 01; $i < 100; $i++) : ?>
 				<?php if (strlen((string)$i) < 2) { $dep = '0'.(string)$i; } else { $dep = (string)$i; } ?>
 				<option value="<?php echo $dep; ?>" <?php echo ($dep == $this->state->get('cp.search') ? "selected" : ""); ?>><?php echo $dep; ?></option>
-			<? endfor; ?>
+			<?php endfor; ?>
 			</select>
 		</div>
 		<div class="fltlft">
