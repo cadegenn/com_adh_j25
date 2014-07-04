@@ -76,11 +76,11 @@ class adhModelCotisation extends JModelAdmin
 	 * @param type $cid		array	array of ID to update
 	 * @param type $value	int		value
 	 */
-	function publish($cid, $value){
+	public function publish(&$pks, $value = 1){
 		$db = &JFactory::getDBO();
 		$query = $db->getQuery(true);
 		$query->update('#__adh_cotisations')->set('payee = '.$value);
-		foreach ($cid as $id) {
+		foreach ($pks as $id) {
 			$query->where('id='.$id,'OR');
 		}
 		$db->setQuery($query);
@@ -91,7 +91,7 @@ class adhModelCotisation extends JModelAdmin
 	 * @param type $cid		array	array of ID to update
 	 * @param type $value	int		value
 	 */
-	function unpublish($cid, $value){
+	/*public function unpublish($cid, $value){
 		$db = &JFactory::getDBO();
 		$query = $db->getQuery(true);
 		$query->update('#__adh_cotisations')->set('payee = '.$value);
@@ -100,5 +100,6 @@ class adhModelCotisation extends JModelAdmin
 		}
 		$db->setQuery($query);
 		return $db->query();
-	} 
+	}
+	 */
 }

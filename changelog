@@ -5,6 +5,12 @@
 	. 1anomalies: l'ordre alphabétique par NOM et PRENOM est maintenant correct, même en cas d'accent
 	. importV2adherents: on voit maintenant ceux qui ont déjà importés et ceux qui ne l'ont pas encore été
 
+@version 0.0.27 - @date
+	admin:
+	. suppression de tous les short tags <? qui donnent une erreur "unexpected end of file "
+	. helpers/controls: ne pas utiliser $this dans ces contextes
+	. cotisation: fix php warning sur une déclaration de méthode
+
 @version 0.0.25 - @date	2014.05.23
 	admin:
 	. dashboard: limiter les listes en haut à 10 entrées
