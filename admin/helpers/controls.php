@@ -49,11 +49,11 @@ abstract class ADHcontrols {
 	 * @brief	buildSelectCotizTypesAnomalies()		build a 'select' DOM control to list types of abnormalitites in database
 	 * @return	(string)		DOM control
 	 */
-	static public function buildSelectCotizTypesAnomalies() {
+	static public function buildSelectCotizTypesAnomalies($state = 1) {
 		$control = "<select id='anomalies_search' name='anomalies_search' onchange='this.form.submit();'>";
 		$control .= "<option value='0'>-- ".JText::_('COM_ADH_ANOMALIE_SELECT_LABEL')." --</option>";
 		for ($i = 1; $i <= 2; $i++) {
-			$control .= "<option value='".$i."' ".($i == $this->state->get('anomalies.search') ? "selected" : "").">".JText::_('COM_ADH_2ANOMALIE_SELECT_OPTION'.$i)."</option>";
+			$control .= "<option value='".$i."' ".($i == $state ? "selected" : "").">".JText::_('COM_ADH_2ANOMALIE_SELECT_OPTION'.$i)."</option>";
 		}
 		$control .= "</select>";
 		return $control;

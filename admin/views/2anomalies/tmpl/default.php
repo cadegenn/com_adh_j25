@@ -57,7 +57,7 @@ $listDirn       = $this->escape($this->state->get('list.direction'));
 	<fieldset id="filter-bar">
 		<div class="anomalie-type-select fltlft">
 			<label class="pays-search-lbl" for="anomalie_type"><?php echo JText::_('COM_ADH_ANOMALIE_TYPE_LABEL'); ?>&nbsp;</label>
-			<?php echo ADHcontrols::buildSelectCotizTypesAnomalies(); ?>
+			<?php echo ADHcontrols::buildSelectCotizTypesAnomalies($this->state->get('anomalies.search')); ?>
 		</div>
 		<div class="fltlft">
 			<label><span class="bold"><?php echo(number_format($this->total, 0, ".", " ")); ?></span> <?php echo JText::_('COM_ADH_ANOMALIES_FOUND_TXT'); ?> </label>
