@@ -49,7 +49,7 @@ abstract class ADHcontrols {
 	 * @brief	buildSelectCotizTypesAnomalies()		build a 'select' DOM control to list types of abnormalitites in database
 	 * @return	(string)		DOM control
 	 */
-	public function buildSelectCotizTypesAnomalies() {
+	static public function buildSelectCotizTypesAnomalies() {
 		$control = "<select id='anomalies_search' name='anomalies_search' onchange='this.form.submit();'>";
 		$control .= "<option value='0'>-- ".JText::_('COM_ADH_ANOMALIE_SELECT_LABEL')." --</option>";
 		for ($i = 1; $i <= 2; $i++) {
@@ -63,11 +63,11 @@ abstract class ADHcontrols {
 	 * @brief	buildSelectAdhTypesAnomalies()		build a 'select' DOM control to list types of abnormalitites in database
 	 * @return	(string)		DOM control
 	 */
-	public function buildSelectAdhTypesAnomalies() {
+	static public function buildSelectAdhTypesAnomalies($state = 1) {
 		$control = "<select id='anomalies_search' name='anomalies_search' onchange='this.form.submit();'>";
 		$control .= "<option value='0'>-- ".JText::_('COM_ADH_ANOMALIE_SELECT_LABEL')." --</option>";
 		for ($i = 1; $i <= 4; $i++) {
-			$control .= "<option value='".$i."' ".($i == $this->state->get('anomalies.search') ? "selected" : "").">".JText::_('COM_ADH_1ANOMALIE_SELECT_OPTION'.$i)."</option>";
+			$control .= "<option value='".$i."' ".($i == $state ? "selected" : "").">".JText::_('COM_ADH_1ANOMALIE_SELECT_OPTION'.$i)."</option>";
 		}
 		$control .= "</select>";
 		return $control;
@@ -76,7 +76,7 @@ abstract class ADHcontrols {
 	/**
 	 * extract categories of sites
 	 */
-	function selectChantiersCategories($select = 0) {
+	static public function selectChantiersCategories($select = 0) {
 		$db = JFactory::getDbo();
 		//$query = $db->getQuery(true);
 		$query = "SELECT * FROM `#__adh_chantiers_categories` WHERE published = 1 ORDER BY id";
@@ -100,7 +100,7 @@ abstract class ADHcontrols {
 	 * @return	control		le control complet
 	 * @deprecated since version 0.0.23 use field definition instead : $this->form->getField("titre")->input
 	 */
-	function buildSelectTitres($select = "M.") {
+	static public function buildSelectTitres($select = "M.") {
 		$control = "<select id='jform_titre' name='jform[titre]'>";
 		$titres = array('Mme', 'M.', 'Association', 'Société');
 		foreach ($titres as $titre) {
@@ -120,7 +120,7 @@ abstract class ADHcontrols {
 	 * @param	string [optional] control	set control to be updated on calue change
 	 * @return	select object
 	 */
-	function selectYearsFromTable($table, $column, $order = "DESC", $selected/*, $control*/) {
+	static public function selectYearsFromTable($table, $column, $order = "DESC", $selected/*, $control*/) {
 		$db = JFactory::getDbo();
 		$query = "SELECT YEAR(".$column.") as year FROM ".$table." GROUP BY year ORDER BY year ".$order;
 		$db->setQuery($query);
@@ -144,7 +144,7 @@ abstract class ADHcontrols {
 	 * @param	string [optional] control	set control to be updated on calue change
 	 * @return	select object
 	 */
-	function selectColumnFromTable($table, $column, $order = "DESC", $selected/*, $control*/) {
+	static public function selectColumnFromTable($table, $column, $order = "DESC", $selected/*, $control*/) {
 		$db = JFactory::getDbo();
 		$query = "SELECT ".$column." FROM ".$table." AS t GROUP BY LOWER(".$column.") ORDER BY LOWER(".$column.") ".$order;
 		$db->setQuery($query);
