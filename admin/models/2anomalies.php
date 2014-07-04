@@ -77,15 +77,14 @@ class adhModel2anomalies extends JModelList
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
 		// Select some fields
-		//, a.personne_morale AS personne_morale, a.nom AS nom, a.prenom AS prenom');
+		$query->select('c.*')->from('#__adh_cotisations AS c');//, a.personne_morale AS personne_morale, a.nom AS nom, a.prenom AS prenom');
 		//$query->from('#__adh_cotisations AS c, #__adh_adherents AS a');
 		//$query->where('c.adherent_id = a.id');
 		
 		$anomalies = $this->getState('anomalies.search');
 		if (!empty($anomalies)) {
 			switch ($anomalies) {
-				case 1 :	$query->select('c.*')->from('#__adh_cotisations AS c');
-							$query->where("c.adherent_id NOT IN (SELECT id from #__adh_adherents AS a)");
+				case 1 :	$query->where("c.adherent_id NOT IN (SELECT id from #__adh_adherents AS a)");
 							break;
 				//case 3 :	$query->select('a.')
 			}
@@ -115,25 +114,24 @@ class adhModel2anomalies extends JModelList
 	 * @since		1.6
 	 * @see			http://docs.joomla.org/How_to_add_custom_filters_to_component_admin
 	*/
-	protected function populateState($ordering = null, $direction = null)
-	{
-		   // Initialise variables.
-		   $app = JFactory::getApplication('administrator');
+	protected function populateState($ordering = null, $direction = null) {
+		// Initialise variables.
+		$app = JFactory::getApplication('administrator');
 
-		   // Load the year state.
-		   $search = $this->getUserStateFromRequest($this->context.'.year.search', 'year_search');
-		   $this->setState('year.search', $search);
-		   $state = $this->getUserStateFromRequest($this->context.'.year.state', 'year_state', '', 'string');
-		   $this->setState('year.state', $state);
+		// Load the year state.
+		$search = $this->getUserStateFromRequest($this->context.'.year.search', 'year_search');
+		$this->setState('year.search', $search);
+		$state = $this->getUserStateFromRequest($this->context.'.year.state', 'year_state', '', 'string');
+		$this->setState('year.state', $state);
 
-		   // Load the filter state.
-		   $search = $this->getUserStateFromRequest($this->context.'.anomalies.search', 'anomalies_search');
-		   $this->setState('anomalies.search', $search);
-		   $state = $this->getUserStateFromRequest($this->context.'.anomalies.state', 'anomalies_state', '', 'string');
-		   $this->setState('anomalies.state', $state);
+		// Load the filter state.
+		$search = $this->getUserStateFromRequest($this->context.'.anomalies.search', 'anomalies_search');
+		$this->setState('anomalies.search', $search);
+		$state = $this->getUserStateFromRequest($this->context.'.anomalies.state', 'anomalies_state', '', 'string');
+		$this->setState('anomalies.state', $state);
 
-		   // List state information.
-		   parent::populateState('c.id', 'asc');
+		// List state information.
+		parent::populateState('c.id', 'asc');
 	}
 
 

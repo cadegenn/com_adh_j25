@@ -3,36 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/1anomalies/tmpl/default.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/models/adherent.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/site/controllers/adherent.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/libraries/html/toolbar/button/submitform.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/1anomalie/view.html.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/helpers/adh.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/helpers/toolbar.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/language/fr-FR/fr-FR.com_adh.ini</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/adh.xml</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/models/1anomalie.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/helpers/controls.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/controllers/1anomalie.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/controllers/configorigine.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/controllers/1anomalies.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/helpers/user-adh.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/adh.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/controller.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/site/views/adherent/tmpl/adherer.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/1anomalie/tmpl/edit.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/1anomalie/index.html</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/1anomalie/tmpl/edit_user2.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/libraries/html/toolbar/button/merge.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/1anomalie/tmpl/edit_user1.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/controllers/adherent.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/tables/adherent.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/adherent/tmpl/edit.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/models/1anomalies.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/changelog</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/1anomalies/view.html.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/adherent/view.html.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/models/2anomalies.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/adherents/tmpl/default.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/adherents/tmpl/default_body.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/adherents/tmpl/default_foot.php</file>
         </group>
     </open-files>
 </project-private>

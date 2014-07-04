@@ -3,7 +3,7 @@
 /**
  * @package		com_adh
  * @subpackage	helper
- * @brief		Authorisation helper class, provides static methods to perform various tasks relevant to the Joomla user and authorisation classes
+ * @brief		Authorisation helper class, provides static methods to perform various tasks relevant to the Adh user and authorisation classes
  * @copyright	Copyright (C) 2010 - 2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
  * @license		Affero GNU General Public License version 3 or later; see LICENSE.txt
  * @since		0.0.20

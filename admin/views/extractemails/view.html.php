@@ -18,7 +18,6 @@ class adhViewExtractEmails extends JView
 	{
 		// Get data from the model
 		$items = $this->get('Items');			// => admin/models/ExtractEmails.php
-		$pagination = $this->get('Pagination');
  
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) 
@@ -26,6 +25,7 @@ class adhViewExtractEmails extends JView
 			JError::raiseError(500, implode('<br />', $errors));
 			return false;
 		}
+		$pagination = $this->get('Pagination');
 		// Assign data to the view
 		$this->items = $items;
 		$this->pagination = $pagination;

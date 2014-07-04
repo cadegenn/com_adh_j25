@@ -15,15 +15,14 @@ class adhController extends JController
 	 *
 	 * @return void
 	 */
-	function display($cachable = false) 
-	{
+	function display($cachable = false, $urlparams = false) {
 		// set default view if not set
 		//JRequest::setVar('view', JRequest::getCmd('view', 'apl'));
 		$input = JFactory::getApplication()->input;
 		$input->set('i', $input->getCmd('view', 'adh'));
  
 		// call parent behavior
-		parent::display($cachable);
+		parent::display($cachable, $urlparams);
 		
 		//aplHelper::addSubmenu('chantiers');	// => admin/helpers/chantiers.php
 	}
