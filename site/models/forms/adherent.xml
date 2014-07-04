@@ -100,7 +100,7 @@
 			name="email" type="email"
 			label="COM_ADH_EMAIL_LABEL"
 			description="COM_ADH_EMAIL_DESC"
-			class="inputbox" default=""
+			class="inputbox required" default="" required="true"
 		/>
 		<field
 			name="password" type="password"

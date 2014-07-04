@@ -1,7 +1,7 @@
 REUNION du 01/07/2014
 =====================
 -> adhérer: bug sur la ville / cp / pays
--> adhérer: e-mail obligatoire
+-> adhérer: e-mail obligatoire	-> OK
 -> extraire e-mail / adresse postale: case à cocher "adhésion payée ou non"
 -> cotiz: quand on paye une cotiz, modifier publishup / publishdown de l'adhérent
 -> fusionner: faire les contrôles pour passer les infos d'un côté à l'autre
