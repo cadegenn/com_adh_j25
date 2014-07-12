@@ -132,7 +132,7 @@ class adhModelAdherent extends JModelForm
 
 		// check if adherent already exist into database
 		$query->clear();
-		$query->select('id')->from('#__adh_adherents')->where('UPPER(nom) = UPPER("'.$adherent->nom.'") AND UPPER(prenom) = UPPER("'.$adherent->prenom.'") AND UPPER(email) = UPPER("'.$adherent->email.'") AND date_naissance = "'.$adherent->date_naissance.'"');
+		$query->select('id')->from('#__adh_adherents')->where('UPPER(nom) = UPPER("'.$adherent->nom.'") AND UPPER(prenom) = UPPER("'.$adherent->prenom.'") AND UPPER(email) = UPPER("'.$adherent->email.'")');// AND date_naissance = "'.$adherent->date_naissance.'"');
 		$db->setQuery($query->__toString(), 0, 1);		// $query, $offset, $limit
 		if ($db->query()) {
 			$adh_record = $db->loadObject();
