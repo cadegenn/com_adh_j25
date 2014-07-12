@@ -5,7 +5,11 @@
 	. 1anomalies: l'ordre alphabétique par NOM et PRENOM est maintenant correct, même en cas d'accent
 	. importV2adherents: on voit maintenant ceux qui ont déjà importés et ceux qui ne l'ont pas encore été
 
-@version 0.0.27 - @date
+@version 0.0.28 - @date
+	site:
+	. adhérer: envoyer le mail d'adhésion aussi à l'adhérent pour confirmation
+
+@version 0.0.27 - @date 2014.07.04
 	admin:
 	. suppression de tous les short tags <? qui donnent une erreur "unexpected end of file "
 	. helpers/controls: ne pas utiliser $this dans ces contextes

@@ -86,7 +86,10 @@ class adhControllerAdherent extends JControllerForm
 			foreach ($users as $uid) {
 				$user = JFactory::getUser($uid);
 				$recipient = $user->email;
-				$mailer->addRecipient($recipient);
+				// hide VPN users from recipient's list
+				//$mailer->addRecipient($recipient);
+				$mailer->addBCC($recipient);
+				$mailer->addReplyTo($recipient);
 			}
 			$mailer->isHTML(true);
 			$mailer->Encoding = 'base64';
@@ -101,6 +104,8 @@ class adhControllerAdherent extends JControllerForm
 		// check if ok and display appropriate message.  This can also have a redirect if desired.
 		if ($userId) {
 			$app->enqueueMessage(JText::_('COM_ADH_ADHERENT_SAVED'));
+			// add the new user to recipient of confirmation email
+			$mailer->addRecipient($data['email']);
 			$body = ADHHelper::buildBulletinAdhesionUser($userId);
 		} else {
 			$app->enqueueMessage(JText::_('COM_ADH_ADHERENT_NOT_SAVED'), 'Error');

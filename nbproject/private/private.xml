@@ -3,10 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/models/2anomalies.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/REUNIONS</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/controllers/importv2adherents.php</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/adherents/tmpl/default.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/adherents/tmpl/default_body.php</file>
-            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/adherents/tmpl/default_foot.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/extractaddresses/tmpl/default.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/1anomalies/tmpl/default.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/models/extractemails.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/adh.xml</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/helpers/controls.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/2anomalies/tmpl/default.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/extractemails/tmpl/default.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/models/1anomalie.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/models/cotisation.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/controllers/cotisation.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/changelog</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/site/models/forms/adherent.xml</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/cotisations/tmpl/default.php</file>
         </group>
     </open-files>
 </project-private>
