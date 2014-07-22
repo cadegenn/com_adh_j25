@@ -45,44 +45,46 @@
 		<!-- input field to host autocomplete of google place's API -->
 		<field
 			name="adresseAC" type="text"
-			label="COM_ADH_ADRESSE_LABEL" description="COM_ADH_ADRESSE_DESC"
+			label="COM_ADH_ADRESSEAC_LABEL" description="COM_ADH_ADRESSEAC_DESC"
 			class="inputbox required" default="" required="true" placeholder="COM_ADH_ADRESSE_TIP"
 		/>
 		<field
-			name="adresse" type="hidden"
-			class="inputbox required" default="" required="true"
+			name="adresse" type="text"
+			label="COM_ADH_ADRESSE_LABEL" description="COM_ADH_ADRESSE_DESC"
+			class="inputbox required readonly" default="" required="true" readonly="true" disabled="disabled"
 		/>
 		<field
 			name="adresse2" type="text"
-			label="COM_ADH_ADRESSE2_LABEL"
-			description="COM_ADH_ADRESSE2_DESC"
+			label="COM_ADH_ADRESSE2_LABEL" description="COM_ADH_ADRESSE2_DESC"
 			class="inputbox" default=""
 		/>
 		<field
 			name="cp" type="text"
 			label="COM_ADH_CP_LABEL"
 			description="COM_ADH_CP_DESC"
-			class="inputbox required" default="" required="true"
+			class="inputbox required readonly" default="" required="true" readonly="true" disabled="disabled"
 		/>
 		<!-- input field to host autocomplete of google place's API -->
-		<field
+		<!--<field
 			name="villeAC" type="text"
 			label="COM_ADH_VILLE_LABEL"	description="COM_ADH_VILLE_DESC"
 			class="inputbox required" default="" required="true" placeholder="COM_ADH_VILLE_DESC"
-		/>
+		/>-->
 		<field
-			name="ville" type="hidden"
-			class="inputbox required" default="" required="true"
+			name="ville" type="text"
+			label="COM_ADH_VILLE_LABEL"	description="COM_ADH_VILLE_DESC"
+			class="inputbox required readonly" default="" required="true" readonly="true" disabled="disabled"
 		/>
 		<!-- input field to host autocomplete of google place's API -->
-		<field
+		<!--<field
 			name="paysAC" type="text"
 			label="COM_ADH_PAYS_LABEL" description="COM_ADH_PAYS_DESC"
 			class="inputbox required" default="" required="true" placeholder="COM_ADH_PAYS_DESC"
-		/>
+		/>-->
 		<field
-			name="pays" type="hidden"
-			class="inputbox required" default="" required="true"
+			name="pays" type="text"
+			label="COM_ADH_PAYS_LABEL" description="COM_ADH_PAYS_DESC"
+			class="inputbox required readonly" default="" required="true" readonly="true" disabled="disabled"
 		/>
 		<field
 			name="telephone" type="tel"

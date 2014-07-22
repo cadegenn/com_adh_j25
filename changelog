@@ -5,9 +5,10 @@
 	. 1anomalies: l'ordre alphabétique par NOM et PRENOM est maintenant correct, même en cas d'accent
 	. importV2adherents: on voit maintenant ceux qui ont déjà importés et ceux qui ne l'ont pas encore été
 
-@version 0.0.28 - @date
+@version 0.0.28 - @date 2014.07.22
 	site:
 	. adhérer: envoyer le mail d'adhésion aussi à l'adhérent pour confirmation
+	. adhérer: lors de l'autocomplétion Google, si l'utilisateur appuie sur ENTREE, les champs sont correctement remplis
 
 @version 0.0.27 - @date 2014.07.04
 	admin:

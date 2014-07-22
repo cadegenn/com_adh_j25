@@ -4,6 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/REUNIONS</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/site/language/fr-FR/fr-FR.com_adh.ini</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/controllers/importv2adherents.php</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/adherents/tmpl/default.php</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/extractaddresses/tmpl/default.php</file>
@@ -17,6 +18,7 @@
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/models/cotisation.php</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/controllers/cotisation.php</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/changelog</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/js/google-places.php</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/site/models/forms/adherent.xml</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/cotisations/tmpl/default.php</file>
         </group>

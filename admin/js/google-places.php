@@ -59,43 +59,72 @@ window.addEvent('domready',function(){
 	var adresse = document.getElementById('jform_adresseAC');
 	adresse.placeholder = "<?php echo JText::_('COM_ADH_ADRESSE_TIP'); ?>";
 	//var cp = document.getElementById('jform_cp');
-	var ville = document.getElementById('jform_villeAC');
-	ville.placeholder = "<?php echo JText::_('COM_ADH_VILLE_DESC'); ?>";
-	var pays = document.getElementById('jform_paysAC');
-	pays.placeholder = "<?php echo JText::_('COM_ADH_PAYS_DESC'); ?>";
+	//var ville = document.getElementById('jform_villeAC');
+	//ville.placeholder = "<?php echo JText::_('COM_ADH_VILLE_DESC'); ?>";
+	//var pays = document.getElementById('jform_paysAC');
+	//pays.placeholder = "<?php echo JText::_('COM_ADH_PAYS_DESC'); ?>";
 	
-	autocompleteA = new google.maps.places.Autocomplete(adresse, { types: ['geocode'] });
-	google.maps.event.addListener(autocompleteA, 'place_changed', function() { fillInAddress('jform_adresseAC'); });
+	// using autocomplete object
+	autocompleteA = new google.maps.places.Autocomplete(adresse, { types: ['geocode'] });		
+	google.maps.event.addListener(autocompleteA, 'place_changed', function() { getAddressResult('jform_adresseAC'); }); // jform_adresseAC: input to get value from, fillInAddress: callback function
+	// using searchbox object
+	//var autocompleteA = new google.maps.places.SearchBox(adresse);
+	//google.maps.event.addListener(searchBox, 'places_changed', function() { fillInAddress('jform_adresseAC'); });
+	//google.maps.event.addListener(autocompleteA, 'places_changed', function() { fillInAddress('jform_adresseAC'); });
 	//autocompleteCP = new google.maps.places.Autocomplete(cp, { types: ['(regions)'] });
-	autocompleteV = new google.maps.places.Autocomplete(ville, { types: ['(cities)'] });
-	google.maps.event.addListener(autocompleteV, 'place_changed', function() { fillInAddress('jform_villeAC'); });
-	autocompleteP = new google.maps.places.Autocomplete(pays, { types: ['(regions)'] });
-	google.maps.event.addListener(autocompleteP, 'place_changed', function() { fillInAddress('jform_paysAC'); });
+	//autocompleteV = new google.maps.places.Autocomplete(ville, { types: ['(cities)'] });
+	//google.maps.event.addListener(autocompleteV, 'place_changed', function() { fillInAddress('jform_villeAC'); });
+	//autocompleteP = new google.maps.places.Autocomplete(pays, { types: ['(regions)'] });
+	//google.maps.event.addListener(autocompleteP, 'place_changed', function() { fillInAddress('jform_paysAC'); });
 	//$('jform_ville').addEvent('change', getVilles());
 });
 
 /**
- * @brief	fillInAddress()		fill all fields with proper address chunks
- * @url		https://developers.google.com/maps/documentation/javascript/places-autocomplete#address_forms
- * @url		https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
+ * @brief	getAddressResult()	get the result object from an autocomplete object
+ * @param	(string)			id of source object 
+ * @url							https://developers.google.com/maps/documentation/javascript/reference#PlaceResult
  */
-function fillInAddress(from) {
+function getAddressResult(from) {
+	/**
+	 * @brief	fillInAddress()		fill all fields with proper address chunks
+	 * @param	{object}			a 'PlaceResult' object
+	 * @url		https://developers.google.com/maps/documentation/javascript/places-autocomplete#address_forms
+	 * @url		https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
+	 */
+	function fillInAddress(place) {
+	//var fillInAddress = function(place) {
+		// correspondance adressType => form fields's id
+		var idForm = {
+			postal_code: 'jform_cp',
+			locality: 'jform_ville',
+			country: 'jform_pays'
+		};
+		// name of chunks in google response
+		var componentForm = {
+			street_number: 'short_name',
+			route: 'long_name',
+			locality: 'long_name',
+			administrative_area_level_1: 'short_name',
+			country: 'long_name',
+			postal_code: 'short_name'
+		};
+		// Get each component of the address from the place details
+		// and fill the corresponding field on the form.
+		for (var i = 0; i < place.address_components.length; i++) {
+			var addressType = place.address_components[i].types[0];
+			var componentId = idForm[addressType];
+			if (idForm[addressType]) {
+				var val = place.address_components[i][componentForm[addressType]];
+				document.getElementById(componentId).value = val;
+				document.getElementById(componentId).readOnly = false;
+				//document.getElementById(componentId+'AC').value = val;
+			}
+		}
+		$('jform_adresse').value = place.formatted_address.split(",")[0];
+		$('jform_adresse').readOnly = false;
+	}
+
 	var place = null;
-	// correspondance adressType => form fields's id
-	var idForm = {
-		postal_code: 'jform_cp',
-		locality: 'jform_ville',
-		country: 'jform_pays'
-	};
-	// name of chunks in google response
-	var componentForm = {
-		street_number: 'short_name',
-		route: 'long_name',
-		locality: 'long_name',
-		administrative_area_level_1: 'short_name',
-		country: 'long_name',
-		postal_code: 'short_name'
-	};
 	// Get the place details from the autocomplete object.
 	switch (from) {
 		case 'jform_adresseAC' :	place = autocompleteA.getPlace();
@@ -107,27 +136,28 @@ function fillInAddress(from) {
 	}
 	//var place = autocompleteA.getPlace();
 	console.log("%o", place);
-	/*for (var component in componentForm) {
-		document.getElementById(component).value = '';
-		document.getElementById(component).disabled = false;
-	}*/
-
-	// Get each component of the address from the place details
-	// and fill the corresponding field on the form.
-	for (var i = 0; i < place.address_components.length; i++) {
-		var addressType = place.address_components[i].types[0];
-		var componentId = idForm[addressType];
-		if (idForm[addressType]) {
-			var val = place.address_components[i][componentForm[addressType]];
-			document.getElementById(componentId).value = val;
-			document.getElementById(componentId+'AC').value = val;
-		}
+	// pressing enter does not create the object with all datas, user must select first occurence with mouse
+	// will still get the name, so we will try to geocode it @see http://stackoverflow.com/questions/14601655/google-places-autocomplete-pick-first-result-on-enter-key
+	if (!place.hasOwnProperty("address_components")) {
+		var geocoder = new google.maps.Geocoder();
+		geocoder.geocode({"address":place.name }, function(results, status) {
+			if (status === google.maps.GeocoderStatus.OK) {
+				console.log("%o", results);
+				place = results[0];
+				fillInAddress(place);
+				/*var lat = results[0].geometry.location.lat();
+				var lng = results[0].geometry.location.lng();
+				var placeName = results[0].address_components[0].long_name;
+				var latlng = new google.maps.LatLng(lat, lng);
+				$("jform_adresseAC").val(firstResult);
+				*/	
+			} else {
+				console.log("%o", status);
+			}
+		});   
+	} else {
+		fillInAddress(place);
 	}
-	// put default value on field 'adresse'
-	//console.log("place.name = %s", place.name);
-	//$('jform_adresse').blur();
-	$('jform_adresse').value = place.name;
-	//document.getElementById('jform_adresse').value = place.name;
 }
 
 /**

@@ -38,10 +38,10 @@
 	<div class="ttd"><?php echo html_entity_decode($this->form->getField("cp")->input); ?></div>
 </div>
 <div class="tr">
-	<div class="tth"><?php echo $this->form->getField("villeAC")->label; ?></div>
-	<div class="ttd"><?php echo html_entity_decode($this->form->getField("villeAC")->input); ?>
+	<div class="tth"><?php echo $this->form->getField("ville")->label; ?></div>
+	<div class="ttd"><?php //echo html_entity_decode($this->form->getField("villeAC")->input); ?>
 					 <?php echo html_entity_decode($this->form->getField("ville")->input); ?></div>
-	<div class="tth"><?php echo $this->form->getField("paysAC")->label; ?></div>
-	<div class="ttd"><?php echo html_entity_decode($this->form->getField("paysAC")->input); ?>
+	<div class="tth"><?php echo $this->form->getField("pays")->label; ?></div>
+	<div class="ttd"><?php //echo html_entity_decode($this->form->getField("paysAC")->input); ?>
 					 <?php echo html_entity_decode($this->form->getField("pays")->input); ?></div>
 </div>
