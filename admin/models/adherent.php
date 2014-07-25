@@ -4,7 +4,9 @@ defined('_JEXEC') or die('Restricted access');
  
 // import Joomla modelform library
 jimport('joomla.application.component.modeladmin');
- 
+
+JLoader::register('AdhUser', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/user-adh.php');
+
 /**
  * adherent Model
  */
@@ -60,14 +62,19 @@ class adhModelAdherent extends JModelAdmin
 	}
 
 	/**
-	 * Surcharge de la méthode save
-	 * essentiellement pour formater correctement les données
-	 * avant injection dans MySQL
+	 * Method to get a single record.
+	 *
+	 * @param   integer  $pk  The id of the primary key.
+	 *
+	 * @return  mixed	Object on success, false on failure.
+	 *
+	 * @since   0.0.30
 	 */
-	/*public function save($data) {
-		echo("<pre>".var_dump($data)."</pre>");
-		$data->nom = htmlentities($data->nom, ENT_QUOTES, 'UTF-8');
-		echo("<pre>".var_dump($data)."</pre>");
-		die();
-	}*/
+	public function getItem($pk = null)	{
+		// first fetch result from JModelAdmin to get the id
+		$result = parent::getItem($pk);
+		// then fetch the entire object from the helper class AdhUser
+		return new AdhUser($result->id);
+	}
+
 }
