@@ -94,6 +94,12 @@ class AdhUser extends JObject
 	public $cotiz;
 	
 	/**
+	 * @var    array  JUser instances container.
+	 * @since  11.3
+	 */
+	protected static $instances = array();
+
+	/**
 	 * Constructor activating the default information of the language
 	 *
 	 * @param   integer  $identifier  The primary key of the user to load (optional).
@@ -436,4 +442,42 @@ class AdhUser extends JObject
 		return $db->loadObjectList();
 	}
 	
+	/**
+	 * Method to bind an associative array of data to a user object
+	 *
+	 * @param   array  &$array  The associative array to bind to the object
+	 *
+	 * @return  boolean  True on success
+	 *
+	 * @since   0.0.30
+	 */
+	public function bind(&$array)
+	{
+		// me
+		$my = JFactory::getUser();
+		// Let's check to see if the user is new or not
+		if (empty($this->id))
+		{
+			$this->set('creation_date', JFactory::getDate()->toSql());
+			$this->set('created_by', $my->get('id'));
+		}
+		else
+		{
+			$this->set('modification_date', JFactory::getDate()->toSql());
+			$this->set('modified_by', $my->id);
+		}
+
+		// Bind the array
+		if (!$this->setProperties($array))
+		{
+			$this->setError(JText::_('JLIB_USER_ERROR_BIND_ARRAY'));
+			return false;
+		}
+
+		// Make sure its an integer
+		$this->id = (int) $this->id;
+
+		return true;
+	}
+
 }

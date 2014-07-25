@@ -77,4 +77,41 @@ class adhModelAdherent extends JModelAdmin
 		return new AdhUser($result->id);
 	}
 
+	/**
+	 * Method to save the form data.
+	 *
+	 * @param   array  $data  The form data.
+	 *
+	 * @return  boolean  True on success.
+	 *
+	 * @from	UsersModelUser
+	 * @since   0.0.30
+	 */
+	public function save($data)
+	{
+		// Initialise variables;
+		$pk			= (!empty($data['id'])) ? $data['id'] : (int) $this->getState('user.id');
+		$user		= AdhUser::getInstance($pk);
+
+		// Bind the data.
+		if (!$user->bind($data))
+		{
+			$this->setError($user->getError());
+
+			return false;
+		}
+
+		// Store the data.
+		if (!$user->save())
+		{
+			$this->setError($user->getError());
+
+			return false;
+		}
+
+		$this->setState('user.id', $user->id);
+
+		return true;
+	}
+
 }
