@@ -49,8 +49,8 @@ class adhViewAdherent extends JView
     public function display($tpl = null) 
     {
         // get the Data
-        $form = $this->get('Form');
-        $item = $this->get('Item');
+        $this->form = $this->get('Form');
+        $this->item = $this->get('Item');
 
         // Check for errors.
         if (count($errors = $this->get('Errors'))) 
@@ -58,9 +58,6 @@ class adhViewAdherent extends JView
                 JError::raiseError(500, implode('<br />', $errors));
                 return false;
         }
-        // Assign the Data
-        $this->form = $form;
-        $this->item = $item;
 
         // Set the toolbar
         $this->addToolBar();
