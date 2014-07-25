@@ -118,14 +118,10 @@ $params = JComponentHelper::getParams('com_adh');
 			<?php echo JHtml::_('sliders.panel', JText::_('COM_ADH_OPTIONS'), 'meta-options'); ?>
 				<fieldset class="panelform">
 					<ul class="adminformlist">
-						<li><?php echo $this->form->getLabel('imposable'); ?>
-						<?php echo $this->form->getInput('imposable'); ?></li>
-						
-						<li><?php echo $this->form->getLabel('recv_newsletter'); ?>
-						<?php echo $this->form->getInput('recv_newsletter'); ?></li>
-						
-						<li><?php echo $this->form->getLabel('recv_infos'); ?>
-						<?php echo $this->form->getInput('recv_infos'); ?></li>
+						<?php foreach($this->form->getFieldset('user_options') as $field) :?>
+							<li><?php echo $field->label; ?>
+							<?php echo $field->input; ?></li>
+						<?php endforeach; ?>
 					</ul>
 				</fieldset>
 		<?php echo JHtml::_('sliders.end'); ?>

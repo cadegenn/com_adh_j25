@@ -128,6 +128,8 @@
 			description="COM_ADH_ORIGINE_TEXT_DESC"
 			class="inputbox" default=""
 		/>
+	</fieldset>
+	<fieldset name="user_options">
 		<field
 			name="imposable" type="radio"
 			label="COM_ADH_IMPOSABLE_LABEL"
