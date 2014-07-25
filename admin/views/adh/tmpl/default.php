@@ -62,7 +62,7 @@ JHtml::_('behavior.tooltip');
 			<th><?php echo JText::_('COM_ADH_PENDING_PAYMENTS'); ?></th></thead>
 	<tr><td><ul>
 		<?php foreach ($this->online_registrations as $i => $adherent) : ?>
-		<li><a href='index.php?option=<?php echo JRequest::getVar('option', '0', 'get', 'string'); ?>&view=adherent&layout=edit&id=<?php echo $adherent->id; ?>'><?php echo($adherent->nom." ".$adherent->prenom);?></a> <?php echo(JText::_('COM_ADH_REGISTERED_DATE_LABEL')." ".$adherent->creation_date); ?></li>
+				<li><a href='index.php?option=<?php echo JRequest::getVar('option', '0', 'get', 'string'); ?>&view=adherent&layout=edit&id=<?php echo $adherent->id; ?>' title="id: <?php echo $adherent->id; ?>"><?php echo($adherent->nom." ".$adherent->prenom);?></a> <?php echo(JText::_('COM_ADH_REGISTERED_DATE_LABEL')." ".$adherent->creation_date); ?></li>
 		<?php endforeach; ?>
 		</ul>
 	</td><td><ul>
