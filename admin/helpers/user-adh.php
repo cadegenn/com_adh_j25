@@ -566,7 +566,7 @@ class AdhUser extends JObject
 	}
 
 	/**
-	 * Method to save the JUser object to the database
+	 * Method to save the AdhUser object to the database
 	 *
 	 * @param   boolean  $updateOnly  Save the object only if not a new user
 	 *                                Currently only used in the user reset password method.

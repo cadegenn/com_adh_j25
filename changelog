@@ -5,6 +5,10 @@
 	. 1anomalies: l'ordre alphabétique par NOM et PRENOM est maintenant correct, même en cas d'accent
 	. importV2adherents: on voit maintenant ceux qui ont déjà importés et ceux qui ne l'ont pas encore été
 
+@version 0.0.29 - @date 2014.07.25
+	site:
+	. language: Quelques précisions supplémentaires
+
 @version 0.0.28 - @date 2014.07.22
 	site:
 	. adhérer: envoyer le mail d'adhésion aussi à l'adhérent pour confirmation
