@@ -141,28 +141,24 @@ $params = JComponentHelper::getParams('com_adh');
 			<?php echo JHtml::_('sliders.panel', JText::_('COM_ADH_FIELDSET_COTISATIONS'), 'meta-options'); ?>
 				<fieldset class="panelform">
 					<label><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=0&adherent_id='.$this->form->getField("id")->value); ?>'><?php echo JText::_('COM_ADH_FIELDSET_COTISATIONS_NEW'); ?></a></label>
-					<!--<ul class="adminformlist">-->
+					<ul class="adminformlist">
 						<?php 
-							if ($this->item->id != 0) : 
-								$db = JFactory::getDbo();
-								$query = $db->getQuery(true);
-								$query->select('#__adh_cotisations.*, #__adh_tarifs.label as tarif')->from('#__adh_cotisations');
-								$query->leftJoin('#__adh_tarifs ON (#__adh_cotisations.tarif_id = #__adh_tarifs.id)');
-								$query->where('adherent_id = "'.$this->form->getField("id")->value.'"');
-								$query->order('creation_date DESC');
-								$db->setQuery($query);
-								$db->execute();
-								$rows = $db->loadObjectList();
-								foreach ($rows as $row) : ?>
+							foreach ($this->item->cotiz as $cotiz) : ?>
 							<li>
-								<label class='cotiz_date hastip' title='<?php echo $row->date_debut_cotiz; ?>'><?php if (!$row->payee) : ?><img src='<?php echo JURI::base(); ?>/components/com_adh/images/ico-16x16/error.png' alt='error.png' style='margin: 0 5px 0 0;' /><?php endif; ?> <?php echo date('Y',strtotime($row->date_debut_cotiz)); ?></label>
-								<input class='readonly prix hastip' readonly='readonly' value="<?php echo($row->montant." ".$params->getValue('symbol')); ?>" title="<?php echo($row->tarif); ?>"/>
+								<label class='cotiz_date hastip' title='<?php echo $cotiz->date_debut_cotiz; ?>'>
+									<?php if (!$cotiz->payee) : ?>
+										<img src='<?php echo JURI::base(); ?>/components/com_adh/images/ico-16x16/error.png' alt='error.png' style='margin: 0 5px 0 0;' />
+									<?php else : ?>
+										<img src='<?php echo JURI::base(); ?>/components/com_adh/images/ico-16x16/accept.png' alt='accept.png' style='margin: 0 5px 0 0;' />
+									<?php endif; ?>
+									&nbsp;<?php echo date('Y',strtotime($cotiz->date_debut_cotiz)); ?>
+								</label>
+								<input class='readonly prix hastip' readonly='readonly' value="<?php echo($cotiz->montant." ".$params->getValue('symbol')); ?>" title="<?php echo($cotiz->tarif); ?>"/>
 								<span><?php echo JText::_('COM_ADH_FIELDSET_COTISATIONS_PAR'); ?></span>
-								<input class='readonly right' readonly='readonly' value='<?php echo($row->mode_paiement); ?>' size='10' />
-								<span><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=' . $row->id); ?>'><?php echo JText::_('JACTION_EDIT'); ?></a></span>
+								<input class='readonly right' readonly='readonly' value='<?php echo($cotiz->mode_paiement); ?>' size='10' />
+								<span><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=' . $cotiz->id); ?>'><?php echo JText::_('JACTION_EDIT'); ?></a></span>
 							</li>
 							<?php endforeach; ?>
-						<?php endif; ?>
 					</ul>
 				</fieldset>
 		<?php echo JHtml::_('sliders.end'); ?>
@@ -175,6 +171,8 @@ $params = JComponentHelper::getParams('com_adh');
 	</div>
 </form>
 
-<!--<pre>
-    <?php //echo var_dump($this); ?>
-</pre>-->
+<?php if (JDEBUG): ?>
+<pre style="clear: both;">
+    <?php var_dump($this); ?>
+</pre>
+<?php endif; ?>
