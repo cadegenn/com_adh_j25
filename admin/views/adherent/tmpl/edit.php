@@ -106,17 +106,10 @@ $params = JComponentHelper::getParams('com_adh');
 			<?php echo JHtml::_('sliders.panel', JText::_('COM_ADH_FIELDSET_PUBLISHING'), 'meta-options'); ?>
 				<fieldset class="panelform">
 					<ul class="adminformlist">
-						<li><?php echo $this->form->getLabel('creation_date'); ?>
-						<?php echo $this->form->getInput('creation_date'); ?></li>
-						
-						<li><?php echo $this->form->getLabel('published'); ?>
-						<?php echo $this->form->getInput('published'); ?></li>
-						
-						<li><?php echo $this->form->getLabel('modified_by'); ?>
-						<?php echo $this->form->getInput('modified_by'); ?></li>
-						
-						<li><?php echo $this->form->getLabel('modification_date'); ?>
-						<?php echo $this->form->getInput('modification_date'); ?></li>
+						<?php foreach($this->form->getFieldset('user_publish_options') as $field) :?>
+							<li><?php echo $field->label; ?>
+							<?php echo $field->input; ?></li>
+						<?php endforeach; ?>
 					</ul>
 				</fieldset>
 		<?php echo JHtml::_('sliders.end'); ?>

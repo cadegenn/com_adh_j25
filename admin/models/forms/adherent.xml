@@ -155,6 +155,8 @@
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
 		</field>
+	</fieldset>
+	<fieldset name="user_publish_options">
 		<field name="published" type="list" label="JSTATUS"
 				description="JFIELD_PUBLISHED_DESC" class="inputbox"
 				filter="intval" size="1" default="1"
@@ -169,6 +171,12 @@
 			label="JGLOBAL_CREATED_DATE"
 			description="JGLOBAL_FIELD_CREATED_DESC"
 			size="40" class="date" default=""
+		/>
+		<field
+			name="created_by" type="user"
+			label="JGLOBAL_FIELD_CREATED_BY_LABEL"
+			description="JGLOBAL_FIELD_CREATED_BY_DESC"
+			class="readonly" readonly="true"
 		/>
 		<field
 			name="modification_date" type="calendar"
