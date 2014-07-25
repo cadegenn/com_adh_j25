@@ -54,7 +54,7 @@ class AdhCotiz extends JObject
 	 * Unique id
 	 *
 	 * @var    integer
-	 * @since  11.1
+	 * @since  0.0.30
 	 */
 	public $id = null;
 
@@ -63,7 +63,7 @@ class AdhCotiz extends JObject
 	 *
 	 * @param   integer  $identifier  The primary key of the user to load (optional).
 	 *
-	 * @since   11.1
+	 * @since   0.0.30
 	 */
 	public function __construct($identifier = 0)
 	{
@@ -91,7 +91,7 @@ class AdhCotiz extends JObject
 	 *
 	 * @return  object  The user table object
 	 *
-	 * @since   11.1
+	 * @since   0.0.30
 	 */
 	public static function getTable($type = null, $prefix = 'adhTable')
 	{
@@ -116,16 +116,15 @@ class AdhCotiz extends JObject
 	}
 
 	/**
-	 * Method to load a JUser object by user id number
+	 * Method to load a AdhCotiz object by cotiz id number
 	 *
 	 * @param   mixed  $id  The user id of the user to load
 	 *
 	 * @return  boolean  True on success
 	 *
-	 * @since   11.1
+	 * @since   0.0.30
 	 */
-	public function load($id)
-	{
+	public function load($id) {
 		// Create the user table object
 		$table = $this->getTable();
 
@@ -140,5 +139,36 @@ class AdhCotiz extends JObject
 		$this->setProperties($table->getProperties());
 
 		return true;
+	}
+	
+	/**
+	 * Method to delete the AdhCotiz object from the database
+	 *
+	 * @return  boolean  True on success
+	 *
+	 * @since   0.0.30
+	 */
+	public function delete() {
+		// Create the user table object
+		$table = $this->getTable();
+
+		$result = false;
+		if (!$result = $table->delete($this->id))
+		{
+			$this->setError($table->getError());
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Method to cash the money
+	 * 
+	 * @return bool true on success
+	 * 
+	 * @since	0.0.30
+	 */
+	public function encaisser() {
+		$this->payee = 1;
 	}
 }
