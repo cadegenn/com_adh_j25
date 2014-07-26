@@ -39,61 +39,35 @@ jimport('joomla.application.component.controllerform');
 /**
  * adherent Controller
  */
-class adhControllerAdherent extends JControllerForm
-{
-	/*
-	 * @brief	__construct()	constructor of object
-	 * @why?	because this controller can be called not only by the default view_list, so we need to known to wich view we have to return to
-	 */
-	function __construct($config = array()) {
-		$calling_view = JRequest::getVar('calling_view', null, 'get', 'string');
-		if (!is_null($calling_view)) $this->view_list = $calling_view;
-		parent::__construct($config);
-    }
-	
-    /*
-     * Save datas
-     */
-    /*public function save(){
-        echo("<pre>_GET : ".var_dump($_GET)."</pre>");
-        echo("<pre>_POST : ".var_dump($_POST)."</pre>");
-        echo("<pre>this : ".var_dump($this)."</pre>");
-        echo("<pre>getFieldset(): ".var_dump($this->form->getFieldset())."</pre>");
-        //die();
-        foreach ($this->form->getFieldset() as $field) {
-            
-        }
-    }*/
-
+class adhControllerAdherent extends JControllerForm{
 	/**
-	 * Get the return URL.
+	 * Overrides parent save method to set id state
 	 *
-	 * If a "return" variable has been passed in the request
-	 * in a custom function, call $this->setRedirect($this->getReturnPage());
+	 * @param   string  $key     The name of the primary key of the URL variable.
+	 * @param   string  $urlVar  The name of the URL variable if different from the primary key (sometimes required to avoid router collisions).
 	 *
-	 * @return	string	The return URL.
-	 * @since	0.0.20
+	 * @return  boolean  True if successful, false otherwise.
+	 *
+	 * @since   0.0.30
 	 */
-	protected function getReturnPage()
+	public function save($key = null, $urlVar = null)
 	{
-		$return = JRequest::getVar('return', null, 'get', 'base64');
-		if (is_null($return)) return false;
-		if (empty($return) || !JUri::isInternal(base64_decode($return))) {
-			return JURI::base()."/index.php?option=".$this->option."&view=".$this->view_list;
-		}
-		else {
-			return base64_decode($return);
-		}
-	}
+		/*var_dump($_POST);
+		echo("<br />");
+		var_dump(JRequest::getVar('jform', array(), 'post', null));
+		die();*/
+		/*
+		$id = JRequest::getVar(id, int, 'get', 0);
+		$model = $this->getModel();
+		$model->setState($this->context . '.id', $id);
+		// @TODO: find why the context is not correct
+		// we need this for the page to reload when clicking 'Apply'
+		// because the context in the ControllerForm is 'user.id' instead of adherent.id
+		// don't know why...
+		$model->setState('user.id', $id);
+		 * 
+		 */
 
-	/*
-	 * @brief	edit()		override only to return into another view after process if needed
-	 * @since	0.0.20
-	 */
-	public function edit($key = null, $urlVar = null) {
-		parent::edit($key, $urlVar);
-		$return = $this->getReturnPage();
-		if ($return != false) $this->setRedirect($return);
+		return parent::save();
 	}
-	
 }

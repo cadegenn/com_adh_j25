@@ -42,6 +42,16 @@
 defined('JPATH_PLATFORM') or die;
 
 /**
+ * define some constants
+ */
+// endless validity cotisation
+define(COTISATION_VALIDITY_ENDLESS, 0);
+// cotisation validity from 01 january to 21 decembre of the current year
+define(COTISATION_VALIDITY_FROM0101TO3112, 1);
+// cotisation validity from the day of registration to 365 days later
+define(COTISATION_VALIDITY_1YEARFROMREGISTRATIONDATE, 2);
+
+/**
  * User class.  Handles all application interaction with a user
  *
  * @package     com_adh
@@ -101,6 +111,74 @@ class AdhCotiz extends JObject
 			$this->id = 0;
 			$this->tarif = new stdClass();
 		}
+	}
+
+	/**
+	 * Returns the global AdhCotiz object, only creating it if it
+	 * doesn't already exist.
+	 *
+	 * @param   integer  $identifier  The cotiz to load
+	 *
+	 * @return  AdhCotiz  The cotiz object.
+	 *
+	 * @since   0.0.30
+	 */
+	public static function getInstance($identifier = 0)
+	{
+		// Find the user id
+		if (!is_numeric($identifier))
+		{
+			JError::raiseWarning('SOME_ERROR_CODE', JText::sprintf('JLIB_USER_ERROR_ID_NOT_EXISTS', $identifier));
+			return false;
+		} else {
+			$id = $identifier;
+		}
+
+		if (empty(self::$instances[$id]))
+		{
+			$cotiz = new AdhCotiz($id);
+			self::$instances[$id] = $cotiz;
+		}
+
+		return self::$instances[$id];
+	}
+
+	/**
+	 * Method to bind an associative array of data to a user object
+	 *
+	 * @param   array  &$array  The associative array to bind to the object
+	 *
+	 * @return  boolean  True on success
+	 *
+	 * @since   0.0.30
+	 */
+	public function bind(&$array)
+	{
+		// me
+		$my = JFactory::getUser();
+		// Let's check to see if the cotiz is new or not
+		if (empty($this->id))
+		{
+			$this->set('creation_date', JFactory::getDate()->toSql());
+			$this->set('created_by', $my->id);
+		}
+		else
+		{
+			$this->set('modification_date', JFactory::getDate()->toSql());
+			$this->set('modified_by', $my->id);
+		}
+
+		// Bind the array
+		if (!$this->setProperties($array))
+		{
+			$this->setError(JText::_('JLIB_USER_ERROR_BIND_ARRAY'));
+			return false;
+		}
+
+		// Make sure its an integer
+		$this->id = (int) $this->id;
+
+		return true;
 	}
 
 	/**
@@ -165,6 +243,52 @@ class AdhCotiz extends JObject
 		return true;
 	}
 	
+	/**
+	 * Method to save the AdhCotiz object to the database
+	 *
+	 * @param   boolean  $updateOnly  Save the object only if not a new user
+	 *                                Currently only used in the user reset password method.
+	 *
+	 * @return  boolean  True on success
+	 *
+	 * @since   0.0.30
+	 * @throws  exception
+	 */
+	public function save($updateOnly = false)
+	{
+		// Create the user table object
+		$table = $this->getTable();
+		$table->bind($this->getProperties());
+
+
+		// Allow an exception to be thrown.
+		try	{
+			// Check and store the object.
+			if (!$table->check())
+			{
+				$this->setError($table->getError());
+				return false;
+			}
+
+			// Store the user data in the database
+			if (!($result = $table->store()))
+			{
+				throw new Exception($table->getError());
+			}
+
+			// Set the id for the AdhCotiz object in case we created a new user.
+			if (empty($this->id))
+			{
+				$this->id = $table->get('id');
+			}
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
+			return false;
+		}
+
+		return $result;
+	}
+
 	/**
 	 * Method to delete the AdhCotiz object from the database
 	 *

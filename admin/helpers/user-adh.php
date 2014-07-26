@@ -377,7 +377,7 @@ class AdhUser extends JObject
 		if (empty($this->id))
 		{
 			$this->set('creation_date', JFactory::getDate()->toSql());
-			$this->set('created_by', $my->get('id'));
+			$this->set('created_by', $my->id);
 		}
 		else
 		{
