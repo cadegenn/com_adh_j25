@@ -42,7 +42,7 @@
 defined('JPATH_PLATFORM') or die;
 
 //JLoader::register('AdhUserHelper', dirname(__FILE__) . '/user-adh-helper.php');
-JLoader::register('AdhCotiz', dirname(__FILE__) . '/cotiz.php');
+JLoader::register('AdhCotiz', dirname(__FILE__) . DS . 'cotiz.php');
 
 /**
  * User class.  Handles all application interaction with a user
@@ -94,7 +94,7 @@ class AdhUser extends JObject
 	public $cotiz;
 	
 	/**
-	 * @var    array  JUser instances container.
+	 * @var    array  AdhUser instances container.
 	 * @since  11.3
 	 */
 	protected static $instances = array();
@@ -216,101 +216,17 @@ class AdhUser extends JObject
 	{
 		// Create the user table object
 		$table = $this->getTable();
-		$this->params = (string) $this->_params;
 		$table->bind($this->getProperties());
 
 
 		// Allow an exception to be thrown.
-		try
-		{
+		try	{
 			// Check and store the object.
 			if (!$table->check())
 			{
 				$this->setError($table->getError());
 				return false;
 			}
-
-			// If user is made a Super Admin group and user is NOT a Super Admin
-			//
-			// @todo ACL - this needs to be acl checked
-			//
-			$my = JFactory::getUser();
-
-			//are we creating a new user
-			$isNew = empty($this->id);
-
-			// If we aren't allowed to create new users return
-			if ($isNew && $updateOnly)
-			{
-				return true;
-			}
-
-			// Get the old user
-			$oldUser = new AdhUser($this->id);
-
-			//
-			// Access Checks
-			//
-
-			// The only mandatory check is that only Super Admins can operate on other Super Admin accounts.
-			// To add additional business rules, use a user plugin and throw an Exception with onUserBeforeSave.
-
-			// Check if I am a Super Admin
-			$iAmSuperAdmin = $my->authorise('core.admin');
-
-			$iAmRehashingSuperadmin = false;
-
-			if (($my->id == 0 && !$isNew) && $this->id == $oldUser->id && $oldUser->authorise('core.admin') && $oldUser->password != $this->password)
-			{
-				$iAmRehashingSuperadmin = true;
-			}
-
-			// We are only worried about edits to this account if I am not a Super Admin.
-			if ($iAmSuperAdmin != true && $iAmRehashingSuperadmin != true)
-			{
-				if ($isNew)
-				{
-					// Check if the new user is being put into a Super Admin group.
-					foreach ($this->groups as $groupId)
-					{
-						if (JAccess::checkGroup($groupId, 'core.admin'))
-						{
-							throw new Exception(JText::_('JLIB_USER_ERROR_NOT_SUPERADMIN'));
-						}
-					}
-				}
-				else
-				{
-					// I am not a Super Admin, and this one is, so fail.
-					if (JAccess::check($this->id, 'core.admin'))
-					{
-						throw new Exception(JText::_('JLIB_USER_ERROR_NOT_SUPERADMIN'));
-					}
-
-					if ($this->groups != null)
-					{
-						// I am not a Super Admin and I'm trying to make one.
-						foreach ($this->groups as $groupId)
-						{
-							if (JAccess::checkGroup($groupId, 'core.admin'))
-							{
-								throw new Exception(JText::_('JLIB_USER_ERROR_NOT_SUPERADMIN'));
-							}
-						}
-					}
-				}
-			}
-
-			// Fire the onUserBeforeSave event.
-			/*JPluginHelper::importPlugin('user');
-			$dispatcher = JDispatcher::getInstance();
-
-			$result = $dispatcher->trigger('onUserBeforeSave', array($oldUser->getProperties(), $isNew, $this->getProperties()));
-			if (in_array(false, $result, true))
-			{
-				// Plugin will have to raise its own error or throw an exception.
-				return false;
-			}*/
 
 			// Store the user data in the database
 			if (!($result = $table->store()))
@@ -323,21 +239,8 @@ class AdhUser extends JObject
 			{
 				$this->id = $table->get('id');
 			}
-
-			if ($my->id == $table->id)
-			{
-				$registry = new JRegistry;
-				$registry->loadString($table->params);
-				$my->setParameters($registry);
-			}
-
-			// Fire the onUserAfterSave event
-			//$dispatcher->trigger('onUserAfterSave', array($this->getProperties(), $isNew, $result, $this->getError()));
-		}
-		catch (Exception $e)
-		{
+		} catch (Exception $e) {
 			$this->setError($e->getMessage());
-
 			return false;
 		}
 
@@ -412,8 +315,11 @@ class AdhUser extends JObject
 		$query = $db->getQuery(true);
 		$query->select('*')->from('#__adh_professions as p')->where('p.id = '.$this->profession_id);
 		$db->setQuery($query, 0, 1);
-		$db->execute();
-		return $db->loadObject();
+		if ($db->execute()) {
+			return $db->loadObject();
+		} else {
+			return false;
+		}
 	}
 	
 	/**
@@ -425,21 +331,33 @@ class AdhUser extends JObject
 		$query = $db->getQuery(true);
 		$query->select('*')->from('#__adh_origines as o')->where('o.id = '.$this->origine_id);
 		$db->setQuery($query, 0, 1);
-		$db->execute();
-		return $db->loadObject();
+		if ($db->execute()) {
+			return $db->loadObject();
+		} else {
+			return false;
+		}
 	}
 	
 	/**
-	 * @brief	getOrigine()		set value of $origine
+	 * @brief	getCotiz()		set value of $origine
 	 * 
 	 */
 	public function getCotiz() {
+		$array = array();
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		$query->select('*')->from('#__adh_cotisations as c')->where('c.adherent_id = '.$this->id);
+		$query->select('id, date_debut_cotiz')->from('#__adh_cotisations as c')->where('c.adherent_id = '.$this->id)->order('YEAR(date_debut_cotiz) DESC');
 		$db->setQuery($query, 0, 0);
 		$db->execute();
-		return $db->loadObjectList();
+		if ($db->execute()) {
+			$cotiz_list = $db->loadObjectList();
+			foreach ($cotiz_list as $cotiz) {
+				$array[] = new AdhCotiz($cotiz->id);
+			}
+			return $array;
+		} else {
+			return false;
+		}
 	}
 	
 	/**

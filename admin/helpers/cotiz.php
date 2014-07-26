@@ -59,6 +59,28 @@ class AdhCotiz extends JObject
 	public $id = null;
 
 	/**
+	 * tarif_id
+	 * 
+	 * @int
+	 * @since	0.0.30
+	 */
+	public $tarif_id = 0;
+	
+	/**
+	 * tarif
+	 * 
+	 * @object
+	 * @since	0.0.30
+	 */
+	public $tarif;
+	
+	/**
+	 * @var    array  AdhCotiz instances container.
+	 * @since  11.3
+	 */
+	protected static $instances = array();
+
+	/**
 	 * Constructor activating the default information of the language
 	 *
 	 * @param   integer  $identifier  The primary key of the user to load (optional).
@@ -71,11 +93,13 @@ class AdhCotiz extends JObject
 		if (!empty($identifier))
 		{
 			$this->load($identifier);
+			$this->tarif = $this->getTarif();
 		}
 		else
 		{
 			//initialise
 			$this->id = 0;
+			$this->tarif = new stdClass();
 		}
 	}
 
@@ -171,4 +195,24 @@ class AdhCotiz extends JObject
 	public function encaisser() {
 		$this->payee = 1;
 	}
+
+	/**
+	 * @brief	getTarif()		set value of $origine
+	 * @return	mixed			tarif object on success, false otherwise	
+	 * 
+	 */
+	public function getTarif() {
+		if ($this->tarif_id == 0) { return false; }
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select('*')->from('#__adh_tarifs as t')->where('t.id = '.$this->tarif_id);
+		$db->setQuery($query, 0, 1);
+		if ($db->execute()) {
+			return $db->loadObject();
+		} else {
+			return false;
+		}
+	}
+	
+	
 }
