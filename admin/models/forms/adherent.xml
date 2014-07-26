@@ -172,7 +172,6 @@
 			name="creation_date" type="calendar"
 			label="JGLOBAL_CREATED_DATE"
 			description="JGLOBAL_FIELD_CREATED_DESC"
-			size="40" class="date" default=""
 			class="readonly" readonly="true"
 		/>
 		<field
