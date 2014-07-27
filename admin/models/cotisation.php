@@ -4,7 +4,8 @@ defined('_JEXEC') or die('Restricted access');
  
 // import Joomla modelform library
 jimport('joomla.application.component.modeladmin');
- 
+JLoader::register('AdhCotiz', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/cotiz.php');
+
 /**
  * cotisation Model
  */
@@ -60,16 +61,57 @@ class adhModelCotisation extends JModelAdmin
 	}
 
 	/**
-	 * Surcharge de la méthode save
-	 * essentiellement pour formater correctement les données
-	 * avant injection dans MySQL
+	 * Method to get a single record.
+	 *
+	 * @param   integer  $pk  The id of the primary key.
+	 *
+	 * @return  mixed	Object on success, false on failure.
+	 *
+	 * @since   0.0.30
 	 */
-	/*public function save($data) {
-		echo("<pre>".var_dump($data)."</pre>");
-		$data->nom = htmlentities($data->nom, ENT_QUOTES, 'UTF-8');
-		echo("<pre>".var_dump($data)."</pre>");
-		die();
-	}*/
+	public function getItem($pk = null)	{
+		// first fetch result from JModelAdmin to get the id
+		$result = parent::getItem($pk);
+		// then fetch the entire object from the helper class AdhCotiz
+		return new AdhCotiz($result->id);
+	}
+
+	/**
+	 * Method to save the form data.
+	 *
+	 * @param   array  $data  The form data.
+	 *
+	 * @return  boolean  True on success.
+	 *
+	 * @from	UsersModelUser
+	 * @since   0.0.30
+	 */
+	public function save($data)
+	{
+		// Initialise variables;
+		$pk			= (!empty($data['id'])) ? $data['id'] : (int) $this->getState('cotiz.id');
+		$cotiz		= AdhCotiz::getInstance($pk);
+
+		// Bind the data.
+		if (!$cotiz->bind($data))
+		{
+			$this->setError($cotiz->getError());
+
+			return false;
+		}
+
+		// Store the data.
+		if (!$cotiz->save())
+		{
+			$this->setError($cotiz->getError());
+
+			return false;
+		}
+
+		$this->setState('cotiz.id', $cotiz->id);
+
+		return true;
+	}
 
 	/**
 	 * 
