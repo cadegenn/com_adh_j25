@@ -45,11 +45,11 @@ defined('JPATH_PLATFORM') or die;
  * define some constants
  */
 // endless validity cotisation
-define(COTISATION_VALIDITY_ENDLESS, 0);
+define("COTISATION_VALIDITY_ENDLESS", 0);
 // cotisation validity from 01 january to 21 decembre of the current year
-define(COTISATION_VALIDITY_FROM0101TO3112, 1);
+define("COTISATION_VALIDITY_FROM0101TO3112", 1);
 // cotisation validity from the day of registration to 365 days later
-define(COTISATION_VALIDITY_1YEARFROMREGISTRATIONDATE, 2);
+define("COTISATION_VALIDITY_1YEARFROMREGISTRATIONDATE", 2);
 
 /**
  * User class.  Handles all application interaction with a user
