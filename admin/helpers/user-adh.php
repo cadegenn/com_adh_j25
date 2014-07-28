@@ -371,7 +371,7 @@ class AdhUser extends JObject
 	 */
 	public function bind(&$array)
 	{
-		// me
+		/*// me
 		$my = JFactory::getUser();
 		// Let's check to see if the user is new or not
 		if (empty($this->id))
@@ -384,7 +384,7 @@ class AdhUser extends JObject
 			$this->set('modification_date', JFactory::getDate()->toSql());
 			$this->set('modified_by', $my->id);
 		}
-
+		*/
 		// Bind the array
 		if (!$this->setProperties($array))
 		{

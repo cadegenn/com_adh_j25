@@ -1,8 +1,13 @@
+@version 0.0.31 - @date 2014.07.27
+	admin:
+	. cotisation: utilise le helper cotiz.php pour charger et enregistrer les données de la cotisation
+	. user-adh: le helper ne s'occupe plus de fixer les dates de création/modification, ni les utilisateurs créateur/modificateur, c'est la classe table adherent.php qui s'en occupe
+
 @version 0.0.30 - @date 2014.07.26
 	admin:
-	. helpers: réécrire complètement le AdhHelper, inspiré du JHelper
+	. helpers: réécrire complètement le AdhHelper, inspiré du JHelper (work in progress)
 		méthodes load(), save(), bind() et d'autres fonctionnent correctement
-	. helpers: réécrire complètement le CotizHelper, inspiré du JHelper
+	. helpers: réécrire complètement le CotizHelper, inspiré du JHelper (work in progress)
 		méthodes load(), save(), bind() et d'autres fonctionnent correctement
 	. adherent: utilise le helper user-adh.php pour charger et enregistrer les données de l'adhérent
 
