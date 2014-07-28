@@ -130,7 +130,7 @@ $params = JComponentHelper::getParams('com_adh');
 			<?php echo JHtml::_('sliders.panel', JText::_('COM_ADH_FIELDSET_COTISATIONS'), 'meta-options'); ?>
 				<fieldset class="panelform">
 					<label><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=0&adherent_id='.$this->form->getField("id")->value); ?>'><?php echo JText::_('COM_ADH_FIELDSET_COTISATIONS_NEW'); ?></a></label>
-					<ul class="adminformlist">
+					<ul id="ul_cotiz" class="adminformlist">
 						<?php 
 							foreach ($this->item->cotiz as $cotiz) : ?>
 							<li>
