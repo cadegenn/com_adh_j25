@@ -34,6 +34,8 @@
 defined('_JEXEC') or die('Restricted access');
 // import the Joomla modellist library
 jimport('joomla.application.component.modellist');
+JLoader::register('AdhCotiz', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/cotiz.php');
+
 /**
  * adhModelAdherents List Model
  */
@@ -72,13 +74,20 @@ class adhModelAdherents extends JModelList
 	 */
 	protected function getListQuery()
 	{
-		// Create a new query object.		
+		// Create a new query object.
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
 		// Select some fields
 		//$query->select('id, nom, lieu, pays, catid, status')->leftJoin('adherents_categories ON adherents_categories.id = adherents.catid');;
 		$query->select('a.*');
 		$query->from('#__adh_adherents AS a');
+		/*
+		 * too slow
+		// add some cotisation informations
+		$query->select('c.date_debut_cotiz, c.date_fin_cotiz, c.payee');
+		$query->leftjoin('#__adh_cotisations AS c ON (c.adherent_id = a.id)');
+		$query->where('c.date_debut_cotiz = (SELECT MAX(date_debut_cotiz) FROM #__adh_cotisations AS c2 WHERE c2.adherent_id = a.id)');
+		*/
 
 		// filter by first letter
 		$letter = $this->getState('letter.search');
@@ -181,7 +190,6 @@ class adhModelAdherents extends JModelList
 		   // List state information.
 		   parent::populateState('a.nom, a.prenom', 'asc');
 	}
-
 
 }
 ?>

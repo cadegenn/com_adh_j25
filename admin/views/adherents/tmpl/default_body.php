@@ -32,6 +32,7 @@
 
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
+JLoader::register('AGrid', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/html/agrid.php');
 
 $user           = JFactory::getUser();
 $userId         = $user->get('id');
@@ -92,6 +93,11 @@ $userId         = $user->get('id');
 			<?php //		+-> /libraries/joomla/html/html/jgrid.php : published() ?>
 			<?php //		+-> controllers/adherents.php : published() ?>
 		</td>
+		<!--<td class="center">
+			<?php //echo JHtml::_('jgrid.published', $item->payee, $i, 'adherents.', $canChange, 'cb', $item->date_debut_cotiz, $item->date_fin_cotiz); ?>
+			<?php //		+-> /libraries/joomla/html/html/jgrid.php : published() ?>
+			<?php //		+-> controllers/adherents.php : published() ?>
+		</td>-->
 		<td class="right">
 			<?php echo $item->id; ?>
 		</td>

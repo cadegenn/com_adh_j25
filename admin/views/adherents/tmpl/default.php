@@ -114,6 +114,9 @@ $listDirn       = $this->escape($this->state->get('list.direction'));
 			<th>
 				<?php echo JHtml::_('grid.sort', 'COM_ADH_STATUS_LABEL', 'a.published', $listDirn, $listOrder); ?>
 			</th>
+			<!--<th>
+				<?php //echo JHtml::_('grid.sort', 'COM_ADH_PAYEE_LABEL', 'a.payee', $listDirn, $listOrder); ?>
+			</th>-->
 			<th>
 				<?php echo JHtml::_('grid.sort', 'COM_ADH_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
 			</th>
