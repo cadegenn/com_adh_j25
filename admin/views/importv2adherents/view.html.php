@@ -22,19 +22,20 @@ class adhViewImportV2Adherents extends JView
 		echo ("<pre></pre>");
 		echo var_dump($this->_models['importv2adherents']->_db->getErrorNum());
 		die();*/
-		if ($this->_models['importv2adherents']->_db->getErrorNum() > 0) { 
+		/*if ($this->_models['importv2adherents']->_db->getErrorNum() > 0) { 
 			$items = "";
 		} else {
-			$items = $this->get('Items');			// => admin/models/importV2Adherents.php
-			$imported = $this->get('Imported');
-			
-			// Check for errors.
-			if (count($errors = $this->get('Errors'))) 
-			{
-				JError::raiseError(500, implode('<br />', $errors));
-				return false;
-			}
+		*/
+		$items = $this->get('Items');			// => admin/models/importV2Adherents.php
+		$imported = $this->get('Imported');
+
+		// Check for errors.
+		if (count($errors = $this->get('Errors'))) 
+		{
+			JError::raiseError(500, implode('<br />', $errors));
+			return false;
 		}
+		//}
 
 		$pagination = $this->get('Pagination');
 		
