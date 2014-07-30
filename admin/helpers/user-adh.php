@@ -263,7 +263,9 @@ class AdhUser extends JObject
 		//$dispatcher->trigger('onUserBeforeDelete', array($this->getProperties()));
 		
 		// @TODO: delete all the cotisations of this user
-
+		foreach ($this->cotiz as $cotiz) {
+			$cotiz->delete();
+		}
 		// Create the user table object
 		$table = $this->getTable();
 
