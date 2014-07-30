@@ -32,7 +32,12 @@ class adhModelImportV2Adherents extends JModelList
 	/*
 	 * database object
 	 */
-	public $_db=null;
+	protected $_db = null;
+	
+	/*
+	 * existing 'adherents' from database (merely already imported ones)
+	 */
+	public $imported = array();
 
 	public function __construct($config = array()) {
 		parent::__construct($config);
@@ -55,6 +60,8 @@ class adhModelImportV2Adherents extends JModelList
 		$this->_db = JDatabaseMySQL::getInstance($options);
 		
 		if ($this->_db->getErrorNum()>0) { JFactory::getApplication()->enqueueMessage(JText::_('COM_ADH_IMPORT_DATABASE_CONNEXION_ERROR'), 'error'); }
+		
+		$this->imported = $this->setImported();
 	}
 
 	protected function _getList($query, $limitstart = 0, $limit = 0)
@@ -100,6 +107,23 @@ class adhModelImportV2Adherents extends JModelList
 			// case insensitive
 			//$query->where('(adherents.nom COLLATE utf8_unicode_ci LIKE "%'.$search.'%")', 'OR')->where('(adherents.prenom COLLATE utf8_unicode_ci LIKE "%'.$search.'%")');
 			$query->where('(adherents.nom COLLATE utf8_unicode_ci LIKE "%'.$search.'%" OR adherents.prenom COLLATE utf8_unicode_ci LIKE "%'.$search.'%")');
+		}
+		
+		// Filters already imported objects
+		/* @note	code is simpler in newer version of php, so let's use it.
+		 * unfortunately, OVH runs php 5.3 (5.4 is available, but since it is the production site, I will not test it yet)
+		 */
+		$notimported = $this->getState('notimported.search');
+		if (!empty($notimported)) {
+			if (PHP_VERSION_ID > 505000) {
+				// php version > 5.5.0 -> we can use array_column() function
+				$already_imported_id = implode("', '", array_column($this->imported, 'id'));
+			} else {
+				$already_imported_id = implode("', '", array_map(function ($entry) {
+					return $entry->id;
+				}, $this->imported));
+			}
+			$query->where("adherents.id NOT IN ('" . $already_imported_id . "')");
 		}
 		
 		return $query;
@@ -301,11 +325,11 @@ class adhModelImportV2Adherents extends JModelList
 	}
 	
     /**
-     * getImported()		get the already imported objects
+     * setImported()		set the already imported objects
      *
      * @return	(array)		array of objects
      */
-    public function getImported()
+    private function setImported()
     {
 		$db = JFactory::getDbo();
 		
@@ -319,6 +343,15 @@ class adhModelImportV2Adherents extends JModelList
 		
 		return $db->loadObjectList();
     }
+	
+	/**
+	 * getImported()		get the already imported objects
+	 * 
+	 * @return	(array)		array of objects
+	 */
+	public function getImported() {
+		return $this->imported;
+	}
 
 }
 ?>
