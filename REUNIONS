@@ -3,7 +3,7 @@ REUNION du 01/07/2014
 -> adhérer: bug sur la ville / cp / pays
 -> adhérer: e-mail obligatoire	-> OK
 -> extraire e-mail / adresse postale: case à cocher "adhésion payée ou non"
--> cotiz: quand on paye une cotiz, modifier publishup / publishdown de l'adhérent
+-> cotiz: quand on paye une cotiz, modifier publishup / publishdown de l'adhérent -> non
 -> fusionner: faire les contrôles pour passer les infos d'un côté à l'autre
 -> cotisations: si config >> association >> validité de la cotisation = du 01/01 au 31/12, alors fin de cotiz = 31/12 de l'année en cours
 

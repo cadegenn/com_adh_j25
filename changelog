@@ -1,6 +1,21 @@
 @TODO
+	admin:
+	. adherents: utiliser le helper class AdhUser pour archiver/(dé)publier un(des) adhérent(s)
+	. cotisations: utiliser le helper class AdhCotiz pour supprimer/archiver/(dé)publier une(des) cotisation(s)
+	. user-adh: pouvoir transférer les cotiz d'un adhérent vers un autre adhérent (pour supprimer les doublons) ?
+	. *anomalies: utiliser les helpers classes AdhUser et AdhCotiz pour modifier les adhérents en doublon
+	. 1anomalies: fusionner: faire les contrôles pour passer les infos d'un côté à l'autre
 	site:
 	. adherer: utiliser les helpers classes AdhUser et AdhCotiz pour enregistrer les nouveaux adhérents.
+
+@version 0.0.33 - @date 2014.07.30
+	sql:
+	. #__adh_cotisations: ajout du champs 'created_by'
+	admin:
+	. adherent(s): la méthode delete() utilise le helper class AdhUser
+	. AdhUser: la méthode delete() supprime d'abords les cotisations associées à cet adhérent
+	. 1anomalie: utiliser les helpers classes AdhUser et AdhCotiz pour save() et delete()
+	. user-adh: avant suppression d'un adhérent, supprimer d'abords toutes les cotiz attachées pour ne pas créer de bordel dans la BDD
 
 @version 0.0.32 - @date 2014.07.30
 	admin:
