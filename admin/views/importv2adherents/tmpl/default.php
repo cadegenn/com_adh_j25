@@ -23,7 +23,7 @@ JHtml::_('behavior.tooltip');
 
 			<button type="submit" class="btn"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
-			<input type="checkbox" name="cb_show_not_imported" onclick="this.form.submit();" /> <label for="cb_show_not_imported"><?php echo JText::_('COM_ADH_SHOW_NOT_IMPORTED'); ?></label>
+			<input type="checkbox" id="cb_notimported_search" name="notimported_search" onclick="this.form.submit();" <?php echo $this->escape($this->state->get('notimported.search')); ?> /> <label for="cb_notimported_search"><?php echo JText::_('COM_ADH_SHOW_NOT_IMPORTED'); ?></label>
 		</div>
 		<div class="filter-select fltrt">
 			<input type ="hidden" name="letter_search" id="letter_search" value="<?php echo $this->escape($this->state->get('letter.search')); ?>" />
@@ -48,8 +48,10 @@ JHtml::_('behavior.tooltip');
 	</div>
 </form>
 
-<pre>
-    <?php //echo var_dump($_POST); ?>
-    <?php //echo var_dump($_GET); ?>
-    <?php //echo var_dump($this); ?>
-</pre>
+<?php if (DEBUG): ?>
+<pre>POST<br /><?php var_dump($_POST); ?></pre>
+<pre>GET<br /><?php var_dump($_GET); ?></pre>
+<pre>REQUEST<br /><?php var_dump($_REQUEST); ?></pre>
+<pre>notimported_search<br /><?php echo JRequest::getVar("notimported_search", null, 'default', 'string'); ?></pre>
+<pre>THIS<br /><?php var_dump($this); ?></pre>
+<?php endif; ?>
