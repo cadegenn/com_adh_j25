@@ -56,7 +56,7 @@ class adhController1anomalie extends JControllerForm {
 		// Check for request forgeries.
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 		
-		echo("<pre>"); var_dump($_POST); echo("</pre>");
+		//echo("<pre>"); var_dump($_POST); echo("</pre>");
 		//echo("<pre>"); var_dump($_GET); echo("</pre>");
 		//die();
 		
@@ -88,8 +88,8 @@ class adhController1anomalie extends JControllerForm {
 			$context .= ".user2";
 		}
 
-		echo("<pre>"); var_dump($urlVar); echo("</pre>");
-		echo("<pre>"); var_dump($data); echo("</pre>");
+		//echo("<pre>"); var_dump($urlVar); echo("</pre>");
+		//echo("<pre>"); var_dump($data); echo("</pre>");
 		//die();
 
 		// Determine the name of the primary key for the data.
