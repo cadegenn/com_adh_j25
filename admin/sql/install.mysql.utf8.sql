@@ -133,6 +133,7 @@ CREATE TABLE IF NOT EXISTS `#__adh_cotisations` (
   `payee` TINYINT( 1 ) UNSIGNED NULL DEFAULT 0,
   `commentaire` varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'on peut y mettre le numéro de chèque, ou un numéro de transaction',
   `creation_date` datetime NULL DEFAULT NULL,
+  `created_by` double unsigned DEFAULT NULL COMMENT 'joomla -> #__users.id',
   `modification_date` datetime NULL DEFAULT NULL,
   `modified_by` double unsigned NULL COMMENT 'joomla -> #__users.id',
   PRIMARY KEY (`id`)
