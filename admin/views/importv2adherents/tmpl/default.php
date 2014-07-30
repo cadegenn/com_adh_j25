@@ -48,7 +48,7 @@ JHtml::_('behavior.tooltip');
 	</div>
 </form>
 
-<?php if (DEBUG): ?>
+<?php if (JDEBUG): ?>
 <pre>POST<br /><?php var_dump($_POST); ?></pre>
 <pre>GET<br /><?php var_dump($_GET); ?></pre>
 <pre>REQUEST<br /><?php var_dump($_REQUEST); ?></pre>
