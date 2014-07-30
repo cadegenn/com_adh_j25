@@ -1,3 +1,11 @@
+@TODO
+	site:
+	. adherer: utiliser les helpers classes AdhUser et AdhCotiz pour enregistrer les nouveaux adhérents.
+
+@version 0.0.32 - @date 2014.07.30
+	admin:
+	. importV2adherents: on peut afficher uniquement les adhérents non importés
+
 @version 0.0.31 - @date 2014.07.27
 	admin:
 	. cotisation: utilise le helper cotiz.php pour charger et enregistrer les données de la cotisation
