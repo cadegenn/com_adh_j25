@@ -115,25 +115,76 @@ class adhModelImportV2Adherents extends JModelList
 	*/
 	protected function populateState($ordering = null, $direction = null)
 	{
-		   // Initialise variables.
-		   $app = JFactory::getApplication('administrator');
+			// Initialise variables.
+			$app = JFactory::getApplication('administrator');
 
-		   // Load the filter state.
-		   $search = $this->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
-		   $this->setState('filter.search', $search);
+			// Load the filter state.
+			$search = $this->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
+			$this->setState('filter.search', $search);
+			$state = $this->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
+			$this->setState('filter.state', $state);
 
-		   $state = $this->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
-		   $this->setState('filter.state', $state);
+			// Load the filter state.
+			$search = $this->getUserStateFromRequest($this->context.'.letter.search', 'letter_search');
+			$this->setState('letter.search', $search);
+			$state = $this->getUserStateFromRequest($this->context.'.letter.state', 'letter_state', '', 'string');
+			$this->setState('letter.state', $state);
 
-		   // Load the filter state.
-		   $search = $this->getUserStateFromRequest($this->context.'.letter.search', 'letter_search');
-		   $this->setState('letter.search', $search);
+			// Load the filter state.
+			$search = $this->getUserStateFromRequest($this->context.'.notimported.search', 'notimported_search', '', 'string');
+			switch ($search) {	// browsers sets checkbox values differently... try to guess the real value
+				case "on" :	$search = "checked";
+							break;
+				default :	$search = "";
+							break;
+			}
+			$this->setState('notimported.search', $search);
+			$state = $this->getUserStateFromRequest($this->context.'.notimported.state', 'notimported_state', '', 'string');
+			switch ($state) {	// browsers sets checkbox values differently... try to guess the real value
+				case "on" :	$state = "checked";
+							break;
+				default :	$state = "";
+							break;
+			}
+			$this->setState('notimported.state', $state);
 
-		   $state = $this->getUserStateFromRequest($this->context.'.letter.state', 'letter_state', '', 'string');
-		   $this->setState('letter.state', $state);
+			// List state information.
+			parent::populateState('adherents.nom', 'asc');
+	}
 
-		   // List state information.
-		   parent::populateState('adherents.nom', 'asc');
+	/**
+	 * Gets the value of a user state variable and sets it in the session
+	 *
+	 * This is the same as the method in JApplication except that this also can optionally
+	 * force you back to the first page when a filter has changed
+	 *
+	 * @param   string   $key        The key of the user state variable.
+	 * @param   string   $request    The name of the variable passed in a request.
+	 * @param   string   $default    The default value for the variable if not found. Optional.
+	 * @param   string   $type       Filter for the variable, for valid values see {@link JFilterInput::clean()}. Optional.
+	 * @param   boolean  $resetPage  If true, the limitstart in request is set to zero
+	 *
+	 * @return  The request user state.
+	 *
+	 * @since   0.0.32
+	 * @override	because the original function return old_state if new_state is null. We need here to handle null value
+	 */
+	public function getUserStateFromRequest($key, $request, $default = null, $type = 'none', $resetPage = true)
+	{
+		$app = JFactory::getApplication();
+		$old_state = $app->getUserState($key);
+		$cur_state = (!is_null($old_state)) ? $old_state : $default;
+		$new_state = JRequest::getVar($request, null, 'default', $type);
+
+		if (($cur_state != $new_state) && ($resetPage))
+		{
+			JRequest::setVar('limitstart', 0);
+		}
+
+		// Save the new value only if it is set in this request.
+		$app->setUserState($key, $new_state);
+
+		return $new_state;
 	}
 
 	/*
