@@ -114,4 +114,70 @@ class adhModelAdherent extends JModelAdmin
 		return true;
 	}
 
+	/**
+	 * Method to delete one or more records.
+	 *
+	 * @param   array  &$pks  An array of record primary keys.
+	 *
+	 * @return  boolean  True if successful, false if an error occurs.
+	 *
+	 * @since   0.0.33
+	 */
+	public function delete(&$pks)
+	{
+		// Initialise variables.
+		$dispatcher = JDispatcher::getInstance();
+		$pks = (array) $pks;
+		$table = $this->getTable();
+
+		// Include the content plugins for the on delete events.
+		JPluginHelper::importPlugin('content');
+
+		// Iterate the items to delete each one.
+		foreach ($pks as $i => $pk)
+		{
+
+			if ($table->load($pk))
+			{
+
+				if ($this->canDelete($table))
+				{
+					$user = AdhUser::getInstance($pk); 
+					if (!$user->delete()) {
+						$this->setError($table->getError());
+						return false;
+					}
+				}
+				else
+				{
+
+					// Prune items that you can't change.
+					unset($pks[$i]);
+					$error = $this->getError();
+					if ($error)
+					{
+						JError::raiseWarning(500, $error);
+						return false;
+					}
+					else
+					{
+						JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_DELETE_NOT_PERMITTED'));
+						return false;
+					}
+				}
+
+			}
+			else
+			{
+				$this->setError($table->getError());
+				return false;
+			}
+		}
+
+		// Clear the component's cache
+		$this->cleanCache();
+
+		return true;
+	}
+
 }
