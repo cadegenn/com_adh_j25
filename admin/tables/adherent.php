@@ -47,6 +47,7 @@ class adhTableAdherent extends JTable
 		
 		// crypt password if set
 		if (isset($this->password) && (!empty($this->password))) {
+			$salt = JUserHelper::getSalt('crypt-md5');
 			$crypted_password = JUserHelper::getCryptedPassword($this->password, $salt);
 			$this->password = $crypted_password;
 		}
