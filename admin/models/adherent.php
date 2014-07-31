@@ -109,7 +109,7 @@ class adhModelAdherent extends JModelAdmin
 			return false;
 		}
 
-		$this->setState('user.id', $user->id);
+		$this->setState('adherent.id', $user->id);
 
 		return true;
 	}
