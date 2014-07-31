@@ -214,6 +214,20 @@ class adhModel1anomalie extends JModelAdmin
 	}
 
 	/**
+	 * Method to get a single record.
+	 *
+	 * @param   integer  $pk  The id of the primary key.
+	 *
+	 * @return  mixed	Object on success, false on failure.
+	 *
+	 * @since   0.0.30
+	 */
+	public function getItem($pk = null)	{
+		// fetch the entire object from the helper class AdhUser
+		return new AdhUser($pk);
+	}
+
+	/**
 	 * Surcharge de la méthode save
 	 * essentiellement pour formater correctement les données
 	 * avant injection dans MySQL
