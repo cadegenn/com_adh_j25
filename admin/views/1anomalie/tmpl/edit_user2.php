@@ -44,7 +44,7 @@ $params = JComponentHelper::getParams('com_adh');
 ?>
 <!--<pre><?php //var_dump($params); ?></pre>-->
 
-<form action="<?php echo JRoute::_('index.php?option=com_adh&layout=edit&id='.(int) $this->form2->getField('id')->value.'&user1id='.(int) $this->form1->getField('id')->value.'&user2id='.(int) $this->form2->getField('id')->value); ?>"
+<form action="<?php echo JRoute::_('index.php?option=com_adh&layout=edit&id='.(int) $this->user2->id.'&user1id='.(int) $this->form1->getField('id')->value.'&user2id='.(int) $this->user2->id); ?>"
       method="post" name="adminForm" id="adminFormUser2">
 	<div class='width-50 fltrt'>
 		<?php	$bar1 = JToolBar::getInstance('toolbar-user2');
@@ -52,7 +52,7 @@ $params = JComponentHelper::getParams('com_adh');
 		?>
 		<div class="clr"></div>
 		<fieldset class="adminform">
-			<legend><?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS' ); ?> <small>(<?php echo (int) $this->form2->getField('id')->value; ?>)</small></legend>
+			<legend><?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS' ); ?> <small>(<?php echo (int) $this->user2->id; ?>)</small></legend>
 			<div class="tr">
 				<div class="tth"><?php echo $this->form2->getField("titre")->label; ?></div>
 				<div class="ttd"><?php echo $this->form2->getField("titre")->input; ?></div>
@@ -105,7 +105,7 @@ $params = JComponentHelper::getParams('com_adh');
 			</div>
 		</fieldset>
 
-		<?php echo JHtml::_('sliders.start', 'content-sliders-'.(int) $this->form2->getField('id')->value, array('useCookie'=>1)); ?>
+		<?php echo JHtml::_('sliders.start', 'content-sliders-'.(int) $this->user2->id, array('useCookie'=>1)); ?>
 			<?php echo JHtml::_('sliders.panel', JText::_('COM_ADH_FIELDSET_PUBLISHING'), 'meta-options'); ?>
 				<fieldset class="panelform">
 					<ul class="adminformlist">
@@ -124,7 +124,7 @@ $params = JComponentHelper::getParams('com_adh');
 				</fieldset>
 		<?php echo JHtml::_('sliders.end'); ?>
 
-		<?php echo JHtml::_('sliders.start', 'content-sliders-'.(int) $this->form2->getField('id')->value, array('useCookie'=>1)); ?>
+		<?php echo JHtml::_('sliders.start', 'content-sliders-'.(int) $this->user2->id, array('useCookie'=>1)); ?>
 			<?php echo JHtml::_('sliders.panel', JText::_('COM_ADH_OPTIONS'), 'meta-options'); ?>
 				<fieldset class="panelform">
 					<ul class="adminformlist">
@@ -140,43 +140,43 @@ $params = JComponentHelper::getParams('com_adh');
 				</fieldset>
 		<?php echo JHtml::_('sliders.end'); ?>
 
-		<?php echo JHtml::_('sliders.start', 'content-sliders-'.(int) $this->form2->getField('id')->value, array('useCookie'=>1)); ?>
+		<?php echo JHtml::_('sliders.start', 'content-sliders-'.(int) $this->user2->id, array('useCookie'=>1)); ?>
 			<?php echo JHtml::_('sliders.panel', JText::_('COM_ADH_FIELDSET_COTISATIONS'), 'meta-options'); ?>
 				<fieldset class="panelform">
-					<label><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=0&adherent_id='.$this->form2->getField("id")->value); ?>'><?php echo JText::_('COM_ADH_FIELDSET_COTISATIONS_NEW'); ?></a></label>
-					<!--<ul class="adminformlist">-->
+					<label><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=0&adherent_id='.$this->user2->id); ?>'><?php echo JText::_('COM_ADH_FIELDSET_COTISATIONS_NEW'); ?></a></label>
+					<ul id="ul_cotiz_<?php echo $this->user2->id; ?>" class="adminformlist">
 						<?php 
-							if ((int) $this->form2->getField('id')->value != 0) : 
-								$db = JFactory::getDbo();
-								$query = $db->getQuery(true);
-								$query->select('#__adh_cotisations.*, #__adh_tarifs.label as tarif')->from('#__adh_cotisations');
-								$query->leftJoin('#__adh_tarifs ON (#__adh_cotisations.tarif_id = #__adh_tarifs.id)');
-								$query->where('adherent_id = "'.$this->form2->getField("id")->value.'"');
-								$query->order('creation_date DESC');
-								$db->setQuery($query);
-								$db->execute();
-								$rows = $db->loadObjectList();
-								foreach ($rows as $row) : ?>
+							foreach ($this->user2->cotiz as $cotiz) : ?>
 							<li>
-								<label class='cotiz_date hastip' title='<?php echo $row->date_debut_cotiz; ?>'><?php if (!$row->payee) : ?><img src='<?php echo JURI::base(); ?>/components/com_adh/images/ico-16x16/error.png' alt='error.png' style='margin: 0 5px 0 0;' /><?php endif; ?> <?php echo date('Y',strtotime($row->date_debut_cotiz)); ?></label>
-								<input class='readonly prix hastip' readonly='readonly' value="<?php echo($row->montant." ".$params->getValue('symbol')); ?>" title="<?php echo($row->tarif); ?>"/>
+								<label class='cotiz_date hastip' title='<?php echo $cotiz->date_debut_cotiz; ?>'>
+									<?php if (!$cotiz->payee) : ?>
+										<img src='<?php echo JURI::base(); ?>/components/com_adh/images/ico-16x16/error.png' alt='error.png' style='margin: 0 5px 0 0;' />
+									<?php else : ?>
+										<img src='<?php echo JURI::base(); ?>/components/com_adh/images/ico-16x16/accept.png' alt='accept.png' style='margin: 0 5px 0 0;' />
+									<?php endif; ?>
+									&nbsp;<?php echo date('Y',strtotime($cotiz->date_debut_cotiz)); ?>
+								</label>
+								<input id="cotiz<?php echo $cotiz->id; ?>_prix" name="cotiz<?php echo $cotiz->id; ?>[prix]" class='readonly prix hastip' readonly='readonly' value="<?php echo($cotiz->montant." ".$params->getValue('symbol')); ?>" />
 								<span><?php echo JText::_('COM_ADH_FIELDSET_COTISATIONS_PAR'); ?></span>
-								<input class='readonly right' readonly='readonly' value='<?php echo($row->mode_paiement); ?>' size='10' />
-								<span><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=' . $row->id); ?>'><?php echo JText::_('JACTION_EDIT'); ?></a></span>
+								<input id="cotiz<?php echo $cotiz->id; ?>_mode_paiement" name="cotiz<?php echo $cotiz->id; ?>[mode_paiement]" class='readonly right' readonly='readonly' value='<?php echo($cotiz->mode_paiement); ?>' size='10' />
+								<span><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=' . $cotiz->id); ?>'><?php echo JText::_('JACTION_EDIT'); ?></a></span>
 							</li>
 							<?php endforeach; ?>
-						<?php endif; ?>
 					</ul>
 				</fieldset>
 		<?php echo JHtml::_('sliders.end'); ?>
 
 		<input type="hidden" name="task" value="adherent.edit" />
-        <?php JFactory::getApplication()->setUserState('com_adh.edit.1anomalie.user2.id', (int) $this->form2->getField('id')->value); ?>
+        <?php JFactory::getApplication()->setUserState('com_adh.edit.1anomalie.user2.id', (int) $this->user2->id); ?>
 		<?php echo JHtml::_('form.token'); ?>
 
-		<pre><?php var_dump($bar1); ?></pre>
 		<?php $session = JFactory::getSession();
 		$registry = $session->get('registry');?>
-		<pre><?php var_dump($registry->get('com_adh.edit.1anomalie.user2.id')); ?></pre>
 	</div>
 </form>
+
+<?php if (JDEBUG): ?>
+	<pre><?php //var_dump($bar2); ?></pre>
+	<pre><?php //var_dump($registry->get('com_adh.edit.1anomalie.user2.id')); ?></pre>
+	<pre><?php //var_dump($this->form2); ?></pre>
+<?php endif; ?>

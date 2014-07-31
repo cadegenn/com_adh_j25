@@ -226,6 +226,24 @@ class adhModel1anomalie extends JModelAdmin
 		// fetch the entire object from the helper class AdhUser
 		return new AdhUser($pk);
 	}
+	
+	/**
+	 * Method to get the complete 'user1' object
+	 * @since	0.0.34
+	 */
+	public function getUser1() {
+		$userId = JRequest::getInt('user1id');
+		return $this->getItem($userId);
+	}
+
+	/**
+	 * Method to get the complete 'user1' object
+	 * @since	0.0.34
+	 */
+	public function getUser2() {
+		$userId = JRequest::getInt('user2id');
+		return $this->getItem($userId);
+	}
 
 	/**
 	 * Surcharge de la méthode save

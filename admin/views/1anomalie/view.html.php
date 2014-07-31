@@ -77,8 +77,8 @@ class adhView1anomalie extends JView
         $form1 = $this->get('Form1');
         $form2 = $this->get('Form2');
 		//$form1 = $model->getForm($data, true, $user1Id);
-        //$user1 = $this->get('User1');
-        //$user2 = $this->get('User2');
+        $user1 = $this->get('User1');
+        $user2 = $this->get('User2');
 
         // Check for errors.
         if (count($errors = $this->get('Errors'))) 
@@ -89,8 +89,8 @@ class adhView1anomalie extends JView
         // Assign the Data
         $this->form1 = $form1;
         $this->form2 = $form2;
-        //$this->user1 = $form->data[0];
-        //$this->user2 = $form->data[1];
+        $this->user1 = $user1;
+        $this->user2 = $user2;
 
         // Set the toolbar
         $this->addToolBar();
