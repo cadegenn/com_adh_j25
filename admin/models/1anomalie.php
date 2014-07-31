@@ -127,11 +127,12 @@ class adhModel1anomalie extends JModelAdmin
 	 * @param   array    $options  Optional array of options for the form creation.
 	 * @param   boolean  $clear    Optional argument to force load a new form.
 	 * @param   string   $xpath    An optional xpath to search for the fields.
+	 * @param	integer	 $id	   the id of the 'adherent' to load
 	 *
 	 * @return  mixed  JForm object on success, False on error.
 	 *
 	 * @see     JForm
-	 * @since   11.1
+	 * @since   0.0.??
 	 */
 	protected function loadForm($name, $source = null, $options = array(), $clear = false, $xpath = false, $id = 0)
 	{
