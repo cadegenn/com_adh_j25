@@ -8,6 +8,12 @@
 	site:
 	. adherer: utiliser les helpers classes AdhUser et AdhCotiz pour enregistrer les nouveaux adhérents.
 
+@version 0.0.34 - @date 2014.07.31
+	admin:
+	. adherent (table): fix bug $salt non crée proprement
+	. 1anomalie (model): getItem() utilise le helper class AdhUser
+	. 1anomalie (view): utiliser la même boucle générique que "adherent (view)" pour afficher les options de l'adhérent (options de publication, etc...)
+
 @version 0.0.33 - @date 2014.07.30
 	sql:
 	. #__adh_cotisations: ajout du champs 'created_by'
