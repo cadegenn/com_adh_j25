@@ -49,7 +49,10 @@ echo $this->loadTemplate('user1');
 echo $this->loadTemplate('user2');
 
 ?>
-<pre class="clrlft"><?php //echo var_dump($this); ?></pre>
-<?php $session = JFactory::getSession();
-$registry = $session->get('registry');?>
-<pre><?php var_dump($registry->get('com_adh.edit.1anomalie')); ?></pre>
+
+<?php if (JDEBUG): ?>
+	<!--<pre class="clrlft"><?php //echo var_dump($this); ?></pre>
+	<?php //$session = JFactory::getSession();
+	//$registry = $session->get('registry');?>
+	<pre><?php //var_dump($registry->get('com_adh.edit.1anomalie')); ?></pre>-->
+<?php endif; ?>

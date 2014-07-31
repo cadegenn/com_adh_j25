@@ -175,8 +175,8 @@ $params = JComponentHelper::getParams('com_adh');
 	</div>
 </form>
 
-<?php if (JDEBUG): ?>
-	<pre><?php //var_dump($bar2); ?></pre>
-	<pre><?php //var_dump($registry->get('com_adh.edit.1anomalie.user2.id')); ?></pre>
-	<pre><?php //var_dump($this->form2); ?></pre>
-<?php endif; ?>
+<?php if (JDEBUG):
+	//echo("<pre>"); var_dump($bar2); echo("</pre>");
+	//echo("<pre>"); var_dump($registry->get('com_adh.edit.1anomalie.user2.id')); echo("</pre>");
+	//echo("<pre>"); var_dump($this->form2); echo("</pre>");
+endif; ?>
