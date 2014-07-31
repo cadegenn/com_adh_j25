@@ -108,17 +108,10 @@ $params = JComponentHelper::getParams('com_adh');
 			<?php echo JHtml::_('sliders.panel', JText::_('COM_ADH_FIELDSET_PUBLISHING'), 'meta-options'); ?>
 				<fieldset class="panelform">
 					<ul class="adminformlist">
-						<li><?php echo $this->form1->getLabel('creation_date'); ?>
-						<?php echo $this->form1->getInput('creation_date'); ?></li>
-						
-						<li><?php echo $this->form1->getLabel('published'); ?>
-						<?php echo $this->form1->getInput('published'); ?></li>
-						
-						<li><?php echo $this->form1->getLabel('modified_by'); ?>
-						<?php echo $this->form1->getInput('modified_by'); ?></li>
-						
-						<li><?php echo $this->form1->getLabel('modification_date'); ?>
-						<?php echo $this->form1->getInput('modification_date'); ?></li>
+						<?php foreach($this->form1->getFieldset('user_publish_options') as $field) :?>
+							<li><?php echo $field->label; ?>
+							<?php echo $field->input; ?></li>
+						<?php endforeach; ?>
 					</ul>
 				</fieldset>
 		<?php echo JHtml::_('sliders.end'); ?>
@@ -127,14 +120,10 @@ $params = JComponentHelper::getParams('com_adh');
 			<?php echo JHtml::_('sliders.panel', JText::_('COM_ADH_OPTIONS'), 'meta-options'); ?>
 				<fieldset class="panelform">
 					<ul class="adminformlist">
-						<li><?php echo $this->form1->getLabel('imposable'); ?>
-						<?php echo $this->form1->getInput('imposable'); ?></li>
-						
-						<li><?php echo $this->form1->getLabel('recv_newsletter'); ?>
-						<?php echo $this->form1->getInput('recv_newsletter'); ?></li>
-						
-						<li><?php echo $this->form1->getLabel('recv_infos'); ?>
-						<?php echo $this->form1->getInput('recv_infos'); ?></li>
+						<?php foreach($this->form1->getFieldset('user_options') as $field) :?>
+							<li><?php echo $field->label; ?>
+							<?php echo $field->input; ?></li>
+						<?php endforeach; ?>
 					</ul>
 				</fieldset>
 		<?php echo JHtml::_('sliders.end'); ?>
