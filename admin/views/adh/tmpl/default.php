@@ -88,4 +88,6 @@ JHtml::_('behavior.tooltip');
 	</div>
 </form>-->
 <p align="center"><?php echo $this->component->name; ?> - <?php echo $this->manifest->version; ?></p>
-<pre><?php //var_dump($this); ?></pre>
+<?php if (JDEBUG) : ?>
+	<pre><?php //var_dump($this); ?></pre>
+<?php endif; ?>
