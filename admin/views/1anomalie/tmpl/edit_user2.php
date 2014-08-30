@@ -105,55 +105,49 @@ $params = JComponentHelper::getParams('com_adh');
 			</div>
 		</fieldset>
 
-		<?php echo JHtml::_('sliders.start', 'content-sliders-'.(int) $this->user2->id, array('useCookie'=>1)); ?>
-			<?php echo JHtml::_('sliders.panel', JText::_('COM_ADH_FIELDSET_PUBLISHING'), 'meta-options'); ?>
-				<fieldset class="panelform">
-					<ul class="adminformlist">
-						<?php foreach($this->form2->getFieldset('user_publish_options') as $field) :?>
-							<li><?php echo $field->label; ?>
-							<?php echo $field->input; ?></li>
-						<?php endforeach; ?>
-					</ul>
-				</fieldset>
-		<?php echo JHtml::_('sliders.end'); ?>
+		<fieldset class="adminform">
+			<legend><?php echo JText::_( 'COM_ADH_FIELDSET_PUBLISHING' ); ?></legend>
+			<ul class="adminformlist">
+				<?php foreach($this->form2->getFieldset('user_publish_options') as $field) :?>
+					<li><?php echo $field->label; ?>
+					<?php echo $field->input; ?></li>
+				<?php endforeach; ?>
+			</ul>
+		</fieldset>
 
-		<?php echo JHtml::_('sliders.start', 'content-sliders-'.(int) $this->user2->id, array('useCookie'=>1)); ?>
-			<?php echo JHtml::_('sliders.panel', JText::_('COM_ADH_OPTIONS'), 'meta-options'); ?>
-				<fieldset class="panelform">
-					<ul class="adminformlist">
-						<?php foreach($this->form2->getFieldset('user_options') as $field) :?>
-							<li><?php echo $field->label; ?>
-							<?php echo $field->input; ?></li>
-						<?php endforeach; ?>
-					</ul>
-				</fieldset>
-		<?php echo JHtml::_('sliders.end'); ?>
+		<fieldset class="adminform">
+			<legend><?php echo JText::_( 'COM_ADH_OPTIONS' ); ?></legend>
+		<ul class="adminformlist">
+			<?php foreach($this->form2->getFieldset('user_options') as $field) :?>
+				<li><?php echo $field->label; ?>
+				<?php echo $field->input; ?></li>
+			<?php endforeach; ?>
+		</ul>
+		</fieldset>
 
-		<?php echo JHtml::_('sliders.start', 'content-sliders-'.(int) $this->user2->id, array('useCookie'=>1)); ?>
-			<?php echo JHtml::_('sliders.panel', JText::_('COM_ADH_FIELDSET_COTISATIONS'), 'meta-options'); ?>
-				<fieldset class="panelform">
-					<label><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=0&adherent_id='.$this->user2->id); ?>'><?php echo JText::_('COM_ADH_FIELDSET_COTISATIONS_NEW'); ?></a></label>
-					<ul id="ul_cotiz_<?php echo $this->user2->id; ?>" class="adminformlist">
-						<?php 
-							foreach ($this->user2->cotiz as $cotiz) : ?>
-							<li>
-								<label class='cotiz_date hastip' title='<?php echo $cotiz->date_debut_cotiz; ?>'>
-									<?php if (!$cotiz->payee) : ?>
-										<img src='<?php echo JURI::base(); ?>/components/com_adh/images/ico-16x16/error.png' alt='error.png' style='margin: 0 5px 0 0;' />
-									<?php else : ?>
-										<img src='<?php echo JURI::base(); ?>/components/com_adh/images/ico-16x16/accept.png' alt='accept.png' style='margin: 0 5px 0 0;' />
-									<?php endif; ?>
-									&nbsp;<?php echo date('Y',strtotime($cotiz->date_debut_cotiz)); ?>
-								</label>
-								<input id="cotiz<?php echo $cotiz->id; ?>_prix" name="cotiz<?php echo $cotiz->id; ?>[prix]" class='readonly prix hastip' readonly='readonly' value="<?php echo($cotiz->montant." ".$params->getValue('symbol')); ?>" />
-								<span><?php echo JText::_('COM_ADH_FIELDSET_COTISATIONS_PAR'); ?></span>
-								<input id="cotiz<?php echo $cotiz->id; ?>_mode_paiement" name="cotiz<?php echo $cotiz->id; ?>[mode_paiement]" class='readonly right' readonly='readonly' value='<?php echo($cotiz->mode_paiement); ?>' size='10' />
-								<span><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=' . $cotiz->id); ?>'><?php echo JText::_('JACTION_EDIT'); ?></a></span>
-							</li>
-							<?php endforeach; ?>
-					</ul>
-				</fieldset>
-		<?php echo JHtml::_('sliders.end'); ?>
+		<fieldset class="adminform">
+			<legend><?php echo JText::_( 'COM_ADH_FIELDSET_COTISATIONS' ); ?></legend>
+			<label><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=0&adherent_id='.$this->user2->id); ?>'><?php echo JText::_('COM_ADH_FIELDSET_COTISATIONS_NEW'); ?></a></label>
+			<ul id="ul_cotiz_<?php echo $this->user2->id; ?>" class="adminformlist">
+				<?php 
+					foreach ($this->user2->cotiz as $cotiz) : ?>
+					<li>
+						<label class='cotiz_date hastip' title='<?php echo $cotiz->date_debut_cotiz; ?>'>
+							<?php if (!$cotiz->payee) : ?>
+								<img src='<?php echo JURI::base(); ?>/components/com_adh/images/ico-16x16/error.png' alt='error.png' style='margin: 0 5px 0 0;' />
+							<?php else : ?>
+								<img src='<?php echo JURI::base(); ?>/components/com_adh/images/ico-16x16/accept.png' alt='accept.png' style='margin: 0 5px 0 0;' />
+							<?php endif; ?>
+							&nbsp;<?php echo date('Y',strtotime($cotiz->date_debut_cotiz)); ?>
+						</label>
+						<input id="cotiz<?php echo $cotiz->id; ?>_prix" name="cotiz<?php echo $cotiz->id; ?>[prix]" class='readonly prix hastip' readonly='readonly' value="<?php echo($cotiz->montant." ".$params->getValue('symbol')); ?>" />
+						<span><?php echo JText::_('COM_ADH_FIELDSET_COTISATIONS_PAR'); ?></span>
+						<input id="cotiz<?php echo $cotiz->id; ?>_mode_paiement" name="cotiz<?php echo $cotiz->id; ?>[mode_paiement]" class='readonly right' readonly='readonly' value='<?php echo($cotiz->mode_paiement); ?>' size='10' />
+						<span><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=' . $cotiz->id); ?>'><?php echo JText::_('JACTION_EDIT'); ?></a></span>
+					</li>
+					<?php endforeach; ?>
+			</ul>
+		</fieldset>
 
 		<input type="hidden" name="task" value="adherent.edit" />
         <?php JFactory::getApplication()->setUserState('com_adh.edit.1anomalie.user2.id', (int) $this->user2->id); ?>
