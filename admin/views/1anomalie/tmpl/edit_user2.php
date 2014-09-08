@@ -44,16 +44,17 @@ $params = JComponentHelper::getParams('com_adh');
 ?>
 <!--<pre><?php //var_dump($params); ?></pre>-->
 
+<div class='width-50 fltrt'>
 <form action="<?php echo JRoute::_('index.php?option=com_adh&layout=edit&id='.(int) $this->user2->id.'&user1id='.(int) $this->form1->getField('id')->value.'&user2id='.(int) $this->user2->id); ?>"
       method="post" name="adminForm" id="adminFormUser2">
-	<div class='width-50 fltrt'>
+	<div>
 		<?php	$bar1 = JToolBar::getInstance('toolbar-user2');
 				echo $bar1->render();
 		?>
 		<div class="clr"></div>
 		<fieldset class="adminform" id="fs_detailsUser2">
 			<legend><?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS' ); ?> <small>(<?php echo (int) $this->user2->id; ?>)</small></legend>
-			<a class="fltrt" href="#none" onclick="javascript:adh_details_copy('fs_detailsUser2', 'fs_detailsUser1', 'jform2', 'jform1');"><img src="<?php echo JURI::base(); ?>components/com_adh/images/ico-32x32/go-previous-5.png" alt="<?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS_COPY_TO_RIGHT_SIDE' ); ?>" title="<?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS_COPY_TO_RIGHT_SIDE' ); ?>" /></a>
+			<a class="fltrt" href="#none" onclick="javascript:adh_details_copy('fs_detailsUser2', 'fs_detailsUser1', 'jform2', 'jform1');"><img src="<?php echo JURI::base(); ?>components/com_adh/images/ico-32x32/go-previous-5.png" alt="<?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS_COPY_TO_LEFT_SIDE' ); ?>" title="<?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS_COPY_TO_LEFT_SIDE' ); ?>" /></a>
 			<div class="clr"></div>
 			<div class="tr">
 				<div class="tth"><?php echo $this->form2->getField("titre")->label; ?></div>
@@ -109,7 +110,7 @@ $params = JComponentHelper::getParams('com_adh');
 
 		<fieldset class="adminform" id="fs_publishUser2">
 			<legend><?php echo JText::_( 'COM_ADH_FIELDSET_PUBLISHING' ); ?></legend>
-			<a class="fltrt" href="#none" onclick="javascript:adh_details_copy('fs_publishUser2', 'fs_publishUser1', 'jform2', 'jform1');"><img src="<?php echo JURI::base(); ?>components/com_adh/images/ico-32x32/go-previous-5.png" alt="<?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS_COPY_TO_RIGHT_SIDE' ); ?>" title="<?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS_COPY_TO_RIGHT_SIDE' ); ?>" /></a>
+			<a class="fltrt" href="#none" onclick="javascript:adh_details_copy('fs_publishUser2', 'fs_publishUser1', 'jform2', 'jform1');"><img src="<?php echo JURI::base(); ?>components/com_adh/images/ico-32x32/go-previous-5.png" alt="<?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS_COPY_TO_LEFT_SIDE' ); ?>" title="<?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS_COPY_TO_LEFT_SIDE' ); ?>" /></a>
 			<ul class="adminformlist">
 				<?php foreach($this->form2->getFieldset('user_publish_options') as $field) :?>
 					<li><?php echo $field->label; ?>
@@ -120,7 +121,7 @@ $params = JComponentHelper::getParams('com_adh');
 
 		<fieldset class="adminform" id="fs_optionsUser2">
 			<legend><?php echo JText::_( 'COM_ADH_OPTIONS' ); ?></legend>
-			<a class="fltrt" href="#none" onclick="javascript:adh_details_copy('fs_optionsUser2', 'fs_optionsUser1', 'jform2', 'jform1');"><img src="<?php echo JURI::base(); ?>components/com_adh/images/ico-32x32/go-previous-5.png" alt="<?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS_COPY_TO_RIGHT_SIDE' ); ?>" title="<?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS_COPY_TO_RIGHT_SIDE' ); ?>" /></a>
+			<a class="fltrt" href="#none" onclick="javascript:adh_details_copy('fs_optionsUser2', 'fs_optionsUser1', 'jform2', 'jform1');"><img src="<?php echo JURI::base(); ?>components/com_adh/images/ico-32x32/go-previous-5.png" alt="<?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS_COPY_TO_LEFT_SIDE' ); ?>" title="<?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS_COPY_TO_LEFT_SIDE' ); ?>" /></a>
 			<ul class="adminformlist">
 				<?php foreach($this->form2->getFieldset('user_options') as $field) :?>
 					<li><?php echo $field->label; ?>
@@ -129,14 +130,28 @@ $params = JComponentHelper::getParams('com_adh');
 			</ul>
 		</fieldset>
 
+		<input type="hidden" name="task" value="adherent.edit" />
+        <?php JFactory::getApplication()->setUserState('com_adh.edit.1anomalie.user2.id', (int) $this->user2->id); ?>
+		<?php echo JHtml::_('form.token'); ?>
+
+		<?php $session = JFactory::getSession();
+		$registry = $session->get('registry');?>
+	</div>
+</form>
+
+<form action="<?php echo JRoute::_('index.php?option=com_adh&layout=edit&id='.(int) $this->user1->id.'&user1id='.(int) $this->user1->id.'&user2id='.(int) $this->form2->getField('id')->value); ?>"
+      method="post" name="adminForm" id="adminFormUser2Cotiz">
+	<div>
 		<fieldset class="adminform" id="fs_cotizUser2">
 			<legend><?php echo JText::_( 'COM_ADH_FIELDSET_COTISATIONS' ); ?></legend>
-			<a class="fltrt" href="#none" onclick="javascript:adh_details_copy('fs_cotizUser2', 'fs_cotizUser1', 'jform2', 'jform1');"><img src="<?php echo JURI::base(); ?>components/com_adh/images/ico-32x32/go-previous-5.png" alt="<?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS_COPY_TO_RIGHT_SIDE' ); ?>" title="<?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS_COPY_TO_RIGHT_SIDE' ); ?>" /></a>
+			<input type="hidden" id="adherent_id" name="adherent_id" value="<?php echo $this->user2->id; ?>">
+			<a class="fltrt" href="#none" onclick="javascript:Joomla.submitform('1anomalie.moveCotiz', document.getElementById('adminFormUser2Cotiz'));"><img src="<?php echo JURI::base(); ?>components/com_adh/images/ico-32x32/go-previous-5.png" alt="<?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS_COPY_TO_LEFT_SIDE' ); ?>" title="<?php echo JText::_( 'COM_ADH_ADHERENT_DETAILS_COPY_TO_LEFT_SIDE' ); ?>" /></a>
 			<label><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=0&adherent_id='.$this->user2->id); ?>'><?php echo JText::_('COM_ADH_FIELDSET_COTISATIONS_NEW'); ?></a></label>
 			<ul id="ul_cotiz_<?php echo $this->user2->id; ?>" class="adminformlist">
 				<?php 
 					foreach ($this->user2->cotiz as $cotiz) : ?>
 					<li>
+						<input type="hidden" id="cb<?php echo $cotiz->id; ?>" name="cid[]" value="<?php echo $cotiz->id; ?>">
 						<label class='cotiz_date hastip' title='<?php echo $cotiz->date_debut_cotiz; ?>'>
 							<?php if (!$cotiz->payee) : ?>
 								<img src='<?php echo JURI::base(); ?>/components/com_adh/images/ico-16x16/error.png' alt='error.png' style='margin: 0 5px 0 0;' />
@@ -150,11 +165,10 @@ $params = JComponentHelper::getParams('com_adh');
 						<input id="cotiz<?php echo $cotiz->id; ?>_mode_paiement" name="cotiz<?php echo $cotiz->id; ?>[mode_paiement]" class='readonly right' readonly='readonly' value='<?php echo($cotiz->mode_paiement); ?>' size='10' />
 						<span><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=' . $cotiz->id); ?>'><?php echo JText::_('JACTION_EDIT'); ?></a></span>
 					</li>
-					<?php endforeach; ?>
+				<?php endforeach; ?>
 			</ul>
 		</fieldset>
-
-		<input type="hidden" name="task" value="adherent.edit" />
+		<input type="hidden" name="task" value="adherent.moveCotiz" />
         <?php JFactory::getApplication()->setUserState('com_adh.edit.1anomalie.user2.id', (int) $this->user2->id); ?>
 		<?php echo JHtml::_('form.token'); ?>
 
@@ -162,6 +176,7 @@ $params = JComponentHelper::getParams('com_adh');
 		$registry = $session->get('registry');?>
 	</div>
 </form>
+</div>
 
 <?php if (JDEBUG):
 	//echo("<pre>"); var_dump($bar2); echo("</pre>");

@@ -34,7 +34,8 @@ fieldset.adminform div.ttd {
 	max-width: 30%;
 }
 
-fieldset.adminform textarea, fieldset.adminform input:not([type="checkbox"]) {
+/*fieldset.adminform textarea, fieldset.adminform input:not([type="checkbox"]) {*/
+fieldset.adminform textarea, fieldset.adminform input[type="text"] {
 	/*min-width: 500px;*/
 	width: 100% ! important;
 }
@@ -77,7 +78,7 @@ fieldset.radio {
 	display: inline-block;
 	float: none ! important;
 }
-fieldset.radio input[type="radio"] {
+fieldset.radio input[type="radio"], fieldset.readonly {
 	width: auto ! important;
 }
 
@@ -102,4 +103,10 @@ div.list_columns {
 	-moz-column-count:3; /* Firefox */
 	-webkit-column-count:3; /* Safari and Chrome */
 	column-count:3;
+}
+
+ul.jicons_cotiz_action {
+	margin: 5px 5px 5px 0;
+	font-size: 1.091em;
+	padding-top: 1px;
 }

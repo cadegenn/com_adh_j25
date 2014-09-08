@@ -338,5 +338,16 @@ class AdhCotiz extends JObject
 		}
 	}
 	
+	/**
+	 * Method to move a 'cotisation' from one 'adherent' to another
+	 * 
+	 * @param	integer		id of target adherent
+	 * @return	boolean		true on success | false otherwise
+	 */
+	public function move($id = 0) {
+		if ($id == 0) { return false; }
+		$this->adherent_id = $id;
+		return $this->save();
+	}
 	
 }

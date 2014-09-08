@@ -3,10 +3,16 @@
 	. adherents: utiliser le helper class AdhUser pour archiver/(dé)publier un(des) adhérent(s)
 	. cotisations: utiliser le helper class AdhCotiz pour supprimer/archiver/(dé)publier une(des) cotisation(s)
 	. user-adh: pouvoir transférer les cotiz d'un adhérent vers un autre adhérent (pour supprimer les doublons) ?
-	. *anomalies: utiliser les helpers classes AdhUser et AdhCotiz pour modifier les adhérents en doublon
+	. *anomalies: utiliser les helpers classes AdhUser et AdhCotiz pour modifier les adhérents en doublon (fait pour 1anomalies)
 	. 1anomalies: fusionner: faire les contrôles pour passer les infos d'un côté à l'autre
 	site:
 	. adherer: utiliser les helpers classes AdhUser et AdhCotiz pour enregistrer les nouveaux adhérents.
+
+@version 0.0.35 - @date 2014.09.08
+	admin:
+	. adherent: fix bug lorsqu'on cliquait sur 'apply', la page revenait à une page d'édition vide
+	. 1anomalies (view): les sliders sont maintenant des fieldset pour voir toutes les données d'un seul coup d'oeuil
+	. 1anomalies: on peut passer les données d'un côté à l'autre en masse par fieldset
 
 @version 0.0.34 - @date 2014.07.31
 	admin:

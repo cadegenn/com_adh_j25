@@ -36,6 +36,7 @@ defined('_JEXEC') or die('Restricted access');
 // import Joomla modelform library
 jimport('joomla.application.component.modeladmin');
 JLoader::register('AdhUser', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/user-adh.php');
+JLoader::register('AdhCotiz', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/cotiz.php');
 
 /**
  * 1anomalie Model
@@ -360,5 +361,20 @@ class adhModel1anomalie extends JModelAdmin
 		return true;
 	}
 
-	
+
+	/**
+	 * Method to move all cotisations from one adherent to another
+	 * 
+	 * @param	array		array of cotisation id
+	 * @param	int			target adherent's id
+	 * 
+	 */
+	public function moveCotiz($cid, $adherent_id) {
+		//$pk			= (!empty($data['id'])) ? $data['id'] : (int) $this->getState('user.id');
+		//$user		= AdhUser::getInstance($pk);
+		foreach ($cid as $id) {
+			$cotiz = new AdhCotiz($id);
+			$cotiz->move($adherent_id);
+		}
+	}
 }

@@ -316,6 +316,51 @@ class adhController1anomalie extends JControllerForm {
 	}
 	
 	/**
+	 * Method to move existing cotisation record to another adherent
+	 * 
+	 */
+	public function moveCotiz() {
+		// Initialise variables.
+		$app   = JFactory::getApplication();
+		$lang  = JFactory::getLanguage();
+		$model = $this->getModel();
+		$table = $model->getTable();
+		$recordUser1Id = JRequest::getVar('user1id', 0, 'get', 'int');
+		$recordUser2Id = JRequest::getVar('user2id', 0, 'get', 'int');
+		$adherent_id = JRequest::getVar('adherent_id', 0, 'post', 'int');
+		$cid = JRequest::getVar('cid', array(), 'post', 'array');
+		$checkin = property_exists($table, 'checked_out');
+		$context = "$this->option.edit.$this->context";
+		$task = $this->getTask();
+		// Determine the name of the primary key for the data.
+		if (empty($key)) {
+			$key = $table->getKeyName();
+		}
+		// To avoid data collisions the urlVar may be different from the primary key.
+		if (empty($urlVar)) {
+			$urlVar = $key;
+		}
+
+		if ($adherent_id == $recordUser1Id) {
+			// user ask to move cotiz from user1 to user2
+			$model->moveCotiz($cid, $recordUser2Id);
+		}
+		if ($adherent_id == $recordUser2Id) {
+			// user ask to move cotiz from user2 to user1
+			$model->moveCotiz($cid, $recordUser1Id);
+		}
+		
+		$this->setRedirect(
+			JRoute::_(
+				'index.php?option=' . $this->option . '&view=' . $this->view_item . '&user1id='.$recordUser1Id.'&user2id='.$recordUser2Id
+				. $this->getRedirectToItemAppend($recordUser1Id, $urlVar), false
+			)
+		);
+
+		return true;
+	}
+	
+	/**
 	 * Method to merge existing record. taken from JControllerForm::edit() function
 	 *
 	 * @param   string  $key     The name of the primary key of the URL variable.
@@ -401,5 +446,4 @@ class adhController1anomalie extends JControllerForm {
 			return true;
 		}
 	}
-
 }
