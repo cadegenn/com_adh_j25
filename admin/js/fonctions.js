@@ -1,3 +1,24 @@
+/* 
+ *  Copyright (C) 2012-2014 charly
+ *  com_adh is a joomla! 2.5 component [http://www.volontairesnature.org]
+ *  
+ *  This file is part of com_adh.
+ * 
+ *     com_adh is free software: you can redistribute it and/or modify
+ *     it under the terms of the Affero GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * 
+ *     com_adh is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     Affero GNU General Public License for more details.
+ * 
+ *     You should have received a copy of the Affero GNU General Public License
+ *     along with com_adh.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 /**
  * @see	http://phpjs.org/functions/addslashes:303
  */
@@ -64,4 +85,42 @@ function elementExist(elementId) {
 	}
 	//console.log("element "+elementId+" IS undefined OR null.")
 	return false;
+}
+
+/**
+ * Method to copy content of a whole container to another
+ * 
+ * @param	{string}	src		id of source container
+ * @param	{string}	tgt		id of target container
+ * @param	{string}	srctag	filter source elements on id
+ * @param	{string}	tgttag	apply change to objects with id tgttag
+ * 
+ */
+function adh_details_copy(src, tgt, srctag, tgttag) {
+	var srcObj = document.getElementById(src);
+	var tgtObj = document.getElementById(tgt);
+	
+	var els = srcObj.getElementsByTagName('*');
+	for (var i = els.length; i--;) {
+		var elsrc = els[i];
+		if (elsrc.id.search(srctag) > -1) {
+			//console.dir(elsrc);
+			var eltgt = tgtObj.getElementById(elsrc.id.replace(srctag, tgttag));
+			//console.dir(eltgt);
+			switch (elsrc.tagName) {
+				case "INPUT" :	// we need to handle radio buttons differently
+								if (elsrc.type == "radio") {
+									eltgt.checked = elsrc.checked;
+								} else {
+									eltgt.value = elsrc.value;
+								}
+								//console.dir(eltgt);
+								break;
+				case "SELECT":	eltgt.selectedIndex = elsrc.selectedIndex;
+								break;
+				default :		//console.dir(elsrc);
+								break;
+			}
+		}
+	}
 }

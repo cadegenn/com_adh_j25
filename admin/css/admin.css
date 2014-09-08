@@ -42,7 +42,7 @@ fieldset.adminform input.width_auto {
 	width: auto ! important;
 }
 fieldset.adminform input.date {
-	width: 80% ! important;
+	width: 50% ! important;
 }
 fieldset.adminform input.prix {
 	width: 15% ! important;
