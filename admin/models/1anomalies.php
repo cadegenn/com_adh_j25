@@ -77,7 +77,7 @@ class adhModel1anomalies extends JModelList
 		$query = $db->getQuery(true);
 		// Select some fields
 		//$query->select('id, nom, lieu, pays, catid, status')->leftJoin('adherents_categories ON adherents_categories.id = adherents.catid');;
-		$query->select('a.*');
+		$query->select('DISTINCT a.*');
 		$query->from('#__adh_adherents AS a');
 		
 		$anomalies = $this->getState('anomalies.search');
@@ -103,10 +103,18 @@ class adhModel1anomalies extends JModelList
 		// filter by first letter
 		$letter = $this->getState('letter.search');
 		if (!empty($letter)) {
-			// case sensitive
-			//$query->where('(adherents.nom LIKE "%'.$search.'%")', 'OR')->where('(adherents.prenom LIKE "%'.$search.'%")');
-			// case insensitive
-			$query->where('(a.nom COLLATE utf8_unicode_ci LIKE "'.$letter.'%" OR a.personne_morale COLLATE utf8_unicode_ci LIKE "'.$letter.'%")');
+			switch ($anomalies) {
+				case 1 :
+				case 3 :
+					// case sensitive
+					//$query->where('(adherents.nom LIKE "%'.$search.'%")', 'OR')->where('(adherents.prenom LIKE "%'.$search.'%")');
+					// case insensitive
+					$query->where('(a.nom COLLATE utf8_unicode_ci LIKE "'.$letter.'%" OR a.personne_morale COLLATE utf8_unicode_ci LIKE "'.$letter.'%")');
+					break;
+				case 2 :
+					$query->where('a.email COLLATE utf8_unicode_ci LIKE "'.$letter.'%"');
+					break;
+			}
 		}
 				
 		//filter by search
