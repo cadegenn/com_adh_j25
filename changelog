@@ -2,11 +2,13 @@
 	admin:
 	. adherents: utiliser le helper class AdhUser pour archiver/(dé)publier un(des) adhérent(s)
 	. cotisations: utiliser le helper class AdhCotiz pour supprimer/archiver/(dé)publier une(des) cotisation(s)
-	. user-adh: pouvoir transférer les cotiz d'un adhérent vers un autre adhérent (pour supprimer les doublons) ?
 	. *anomalies: utiliser les helpers classes AdhUser et AdhCotiz pour modifier les adhérents en doublon (fait pour 1anomalies)
-	. 1anomalies: fusionner: faire les contrôles pour passer les infos d'un côté à l'autre
 	site:
 	. adherer: utiliser les helpers classes AdhUser et AdhCotiz pour enregistrer les nouveaux adhérents.
+
+@version 0.0.36 - @date 2014.09.09
+	admin:
+	. 1anomalies: on peut supprimer des cotiz à la volée directement dans la page "merge"
 
 @version 0.0.35 - @date 2014.09.08
 	admin:

@@ -110,3 +110,7 @@ ul.jicons_cotiz_action {
 	font-size: 1.091em;
 	padding-top: 1px;
 }
+ul.jicons_cotiz_action li {
+	margin-right: 5px ! important;
+	border-right: solid white 1px;
+}

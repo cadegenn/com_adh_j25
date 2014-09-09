@@ -360,6 +360,46 @@ class adhController1anomalie extends JControllerForm {
 		return true;
 	}
 	
+	/*
+	 * Method to delete a cotiz
+	 */
+	public function deleteCotiz() {
+		// Initialise variables.
+		$app   = JFactory::getApplication();
+		$lang  = JFactory::getLanguage();
+		$model = $this->getModel();
+		$table = $model->getTable();
+		$recordUser1Id = JRequest::getVar('user1id', 0, 'get', 'int');
+		$recordUser2Id = JRequest::getVar('user2id', 0, 'get', 'int');
+		$adherent_id = JRequest::getVar('adherent_id', 0, 'post', 'int');
+		$cotiz_id = JRequest::getVar('cotiz_id', 0, 'get', 'int');
+		$checkin = property_exists($table, 'checked_out');
+		$context = "$this->option.edit.$this->context";
+		$task = $this->getTask();
+		//var_dump($this);
+		//var_dump($task);
+		//die();
+		// Determine the name of the primary key for the data.
+		if (empty($key)) {
+			$key = $table->getKeyName();
+		}
+		// To avoid data collisions the urlVar may be different from the primary key.
+		if (empty($urlVar)) {
+			$urlVar = $key;
+		}
+
+		$model->deleteCotiz($cotiz_id);
+		
+		$this->setRedirect(
+			JRoute::_(
+				'index.php?option=' . $this->option . '&view=' . $this->view_item . '&user1id='.$recordUser1Id.'&user2id='.$recordUser2Id
+				. $this->getRedirectToItemAppend($recordUser1Id, $urlVar), false
+			)
+		);
+
+		return true;
+	}
+	
 	/**
 	 * Method to merge existing record. taken from JControllerForm::edit() function
 	 *

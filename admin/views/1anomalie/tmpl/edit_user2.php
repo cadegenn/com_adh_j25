@@ -160,10 +160,11 @@ $params = JComponentHelper::getParams('com_adh');
 							<?php endif; ?>
 							&nbsp;<?php echo date('Y',strtotime($cotiz->date_debut_cotiz)); ?>
 						</label>
-						<input id="cotiz<?php echo $cotiz->id; ?>_prix" name="cotiz<?php echo $cotiz->id; ?>[prix]" class='readonly prix hastip' readonly='readonly' value="<?php echo($cotiz->montant." ".$params->getValue('symbol')); ?>" />
-						<span><?php echo JText::_('COM_ADH_FIELDSET_COTISATIONS_PAR'); ?></span>
-						<input id="cotiz<?php echo $cotiz->id; ?>_mode_paiement" name="cotiz<?php echo $cotiz->id; ?>[mode_paiement]" class='readonly right' readonly='readonly' value='<?php echo($cotiz->mode_paiement); ?>' size='10' />
-						<span><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=' . $cotiz->id); ?>'><?php echo JText::_('JACTION_EDIT'); ?></a></span>
+						<input id="cotiz<?php echo $cotiz->id; ?>_prix" name="cotiz<?php echo $cotiz->id; ?>[prix]" class='readonly hastip' readonly='readonly' value="<?php echo($cotiz->montant." ".$params->getValue('symbol')." ".JText::_('COM_ADH_FIELDSET_COTISATIONS_PAR')." ".$cotiz->mode_paiement); ?>" />
+						<ul class="jicons_cotiz_action fltrt">
+							<li class="fltlft"><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=' . $cotiz->id); ?>'><?php echo JText::_('JACTION_EDIT'); ?></a></li>
+							<li class="fltlft"><a href='<?php echo JRoute::_('index.php?option=com_adh&layout=edit&id='.(int) $this->user1->id.'&user1id='.(int) $this->user1->id.'&user2id='.(int) $this->form2->getField('id')->value.'&cotiz_id=' . $cotiz->id.'&task=1anomalie.deleteCotiz'); ?>'><?php echo JText::_('JACTION_DELETE'); ?></a></li>
+						</ul>
 					</li>
 				<?php endforeach; ?>
 			</ul>

@@ -149,7 +149,7 @@ $params = JComponentHelper::getParams('com_adh');
 				<?php 
 					foreach ($this->user1->cotiz as $cotiz) : ?>
 					<li>
-						<input type="hidden" id="cb<?php echo $cotiz->id; ?>" name="cid[]" value="<?php echo $cotiz->id; ?>">
+						<input type="checkbox" id="cb<?php echo $cotiz->id; ?>" name="cid[]" value="<?php echo $cotiz->id; ?>">
 						<label class='cotiz_date hastip' title='<?php echo $cotiz->date_debut_cotiz; ?>'>
 							<?php if (!$cotiz->payee) : ?>
 								<img src='<?php echo JURI::base(); ?>/components/com_adh/images/ico-16x16/error.png' alt='error.png' style='margin: 0 5px 0 0;' />
@@ -159,8 +159,10 @@ $params = JComponentHelper::getParams('com_adh');
 							&nbsp;<?php echo date('Y',strtotime($cotiz->date_debut_cotiz)); ?>
 						</label>
 						<input id="cotiz<?php echo $cotiz->id; ?>_prix" name="cotiz<?php echo $cotiz->id; ?>[prix]" class='readonly hastip' readonly='readonly' value="<?php echo($cotiz->montant." ".$params->getValue('symbol')." ".JText::_('COM_ADH_FIELDSET_COTISATIONS_PAR')." ".$cotiz->mode_paiement); ?>" />
-						<ul class="jicons_cotiz_action fltlft">
+						<ul class="jicons_cotiz_action fltrt">
 							<li class="fltlft"><a href='<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=' . $cotiz->id); ?>'><?php echo JText::_('JACTION_EDIT'); ?></a></li>
+							<li class="fltlft"><a href='<?php echo JRoute::_('index.php?option=com_adh&layout=edit&id='.(int) $this->user1->id.'&user1id='.(int) $this->user1->id.'&user2id='.(int) $this->form2->getField('id')->value.'&cotiz_id=' . $cotiz->id.'&task=1anomalie.deleteCotiz'); ?>'><?php echo JText::_('JACTION_DELETE'); ?></a></li>
+							<!--<li class="fltlft"><a href="#none" onclick="javascript:Joomla.submitform('1anomalie.deleteCotiz', document.getElementById('adminFormUser1Cotiz'));"><?php echo JText::_('JACTION_DELETE'); ?></a></li>-->
 						</ul>
 					</li>
 					<?php endforeach; ?>
@@ -169,9 +171,6 @@ $params = JComponentHelper::getParams('com_adh');
 		<input type="hidden" name="task" value="adherent.moveCotiz" />
         <?php JFactory::getApplication()->setUserState('com_adh.edit.1anomalie.user1.id', (int) $this->user1->id); ?>
 		<?php echo JHtml::_('form.token'); ?>
-
-		<?php $session = JFactory::getSession();
-		$registry = $session->get('registry');?>
 	</div>
 </form>
 </div>
