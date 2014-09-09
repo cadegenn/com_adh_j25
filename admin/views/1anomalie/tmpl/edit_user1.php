@@ -149,7 +149,7 @@ $params = JComponentHelper::getParams('com_adh');
 				<?php 
 					foreach ($this->user1->cotiz as $cotiz) : ?>
 					<li>
-						<input type="checkbox" id="cb<?php echo $cotiz->id; ?>" name="cid[]" value="<?php echo $cotiz->id; ?>">
+						<input type="hidden" id="cb<?php echo $cotiz->id; ?>" name="cid[]" value="<?php echo $cotiz->id; ?>">
 						<label class='cotiz_date hastip' title='<?php echo $cotiz->date_debut_cotiz; ?>'>
 							<?php if (!$cotiz->payee) : ?>
 								<img src='<?php echo JURI::base(); ?>/components/com_adh/images/ico-16x16/error.png' alt='error.png' style='margin: 0 5px 0 0;' />
