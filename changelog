@@ -6,6 +6,13 @@
 	site:
 	. adherer: utiliser les helpers classes AdhUser et AdhCotiz pour enregistrer les nouveaux adhérents.
 
+@version 0.0.37 - @date 2014.09.10
+	admin:
+	. 1anomalies (view): fix bug cotiz checkbox -> hidden
+	. 1anomalies (model): select DISTINCT pour éviter les doublon avec le même id
+	. 1anomalies (model): dans le cas "emails identiques", le filtre "lettres" s'applique sur les email et non plus sur les noms
+	. 1anomalies: possibilité de supprimer 1 des 2 adhérent directement depuis la page de fusion
+
 @version 0.0.36 - @date 2014.09.09
 	admin:
 	. 1anomalies: on peut supprimer des cotiz à la volée directement dans la page "merge"
