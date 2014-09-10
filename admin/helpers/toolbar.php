@@ -88,6 +88,23 @@ class AdhToolBarHelper extends JToolBarHelper {
 		$bar->appendButton('submitForm', 'apply', $alt, $task, false, $formId);
 	}
 
+	/**
+	 * Writes a delete button for a given option.
+	 * Apply operation leads to a delete action
+	 *
+	 * @param	string	$task	An override for the task.
+	 * @param	string	$alt	An override for the alt text.
+	 * @param	string	$formId	id of the form to submit
+	 * @since	1.0
+	 */
+	public static function delete($task = 'delete', $alt = 'JTOOLBAR_DELETE', $toolbar = 'toolbar', $formId = 'adminForm')
+	{
+		$bar = JToolBar::getInstance($toolbar);
+		// add path to our button
+		$bar->addButtonPath(JPATH_COMPONENT_ADMINISTRATOR . "/libraries/html/toolbar/button");
+		// Add an apply button
+		$bar->appendButton('submitForm', 'delete', $alt, $task, false, $formId);
+	}
 	
 }
 

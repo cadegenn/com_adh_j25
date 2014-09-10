@@ -486,4 +486,56 @@ class adhController1anomalie extends JControllerForm {
 			return true;
 		}
 	}
+	
+	public function deleteUser() {
+		// Initialise variables.
+		$app   = JFactory::getApplication();
+		$lang  = JFactory::getLanguage();
+		$model = $this->getModel();
+		$table = $model->getTable();
+		$recordUser1Id = JRequest::getVar('user1id', 0, 'get', 'int');
+		$recordUser2Id = JRequest::getVar('user2id', 0, 'get', 'int');
+		$checkin = property_exists($table, 'checked_out');
+		$context = "$this->option.edit.$this->context";
+		$task = $this->getTask();
+
+		// first try to retrieve jform1 data
+		$data  = JRequest::getVar('jform1', array(), 'post', 'array');
+		// if $data is null, try to getch data from jform2
+		if (!empty($data)) {
+			//$data  = JRequest::getVar('jform1', array(), 'post', 'array');
+			// set correct record's id
+			$recordId = $recordUser1Id;
+			// set correct context
+			$context .= ".user1";
+		} else {
+			$data  = JRequest::getVar('jform2', array(), 'post', 'array');
+			// set correct record's id
+			$recordId = $recordUser2Id;
+			// set correct context
+			$context .= ".user2";
+		}
+		
+		if ($model->deleteUser($recordId)) {
+			$this->setMessage(JText::sprintf('COM_ADH_N_ITEMS_DELETED', 1));
+			$this->setRedirect(
+				JRoute::_(
+					'index.php?option=' . $this->option . '&view=' . $this->view_list
+					. $this->getRedirectToListAppend(), false
+				)
+			);
+		} else {
+			// delete failed, display a notice but allow the user to see the record.
+			$this->setError(JText::sprintf('COM_ADH_APPLICATION_DELETE_FAILED', $recordId, $model->getError()));
+			$this->setMessage($this->getError(), 'error');
+
+			$this->setRedirect(
+				JRoute::_(
+					'index.php?option=' . $this->option . '&view=' . $this->view_item . '&user1id='.$recordUser1Id.'&user2id='.$recordUser2Id
+					. $this->getRedirectToItemAppend($recordUser1Id, $urlVar), false
+				)
+			);
+		}
+		
+	}
 }

@@ -381,12 +381,23 @@ class adhModel1anomalie extends JModelAdmin
 	/**
 	 * Method to delete a cotisations
 	 * 
-	 * @param	array		array of cotisation id
-	 * @param	int			target adherent's id
+	 * @param	int		cotisation id
 	 * 
 	 */
 	public function deleteCotiz($id) {
 		$cotiz = new AdhCotiz($id);
-		$cotiz->delete($id);
+		return $cotiz->delete($id);
 	}
+
+	/**
+	 * Method to delete a adherent
+	 * 
+	 * @param	int		adherent id
+	 * 
+	 */
+	public function deleteUser($id) {
+		$user = new AdhUser($id);
+		return $user->delete($id);
+	}
+	
 }
