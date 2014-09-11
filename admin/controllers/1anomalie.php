@@ -341,13 +341,12 @@ class adhController1anomalie extends JControllerForm {
 			$urlVar = $key;
 		}
 
-		if ($adherent_id == $recordUser1Id) {
-			// user ask to move cotiz from user1 to user2
-			$model->moveCotiz($cid, $recordUser2Id);
-		}
-		if ($adherent_id == $recordUser2Id) {
-			// user ask to move cotiz from user2 to user1
-			$model->moveCotiz($cid, $recordUser1Id);
+		if ($model->moveCotiz($cid, $adherent_id)) {
+			$this->setMessage(JText::sprintf('COM_ADH_N_ITEMS_DELETED', count($cid)));
+		} else {
+			// delete failed, display a notice but allow the user to see the record.
+			$this->setError(JText::sprintf('COM_ADH_APPLICATION_DELETE_FAILED', $recordId, $model->getError()));
+			$this->setMessage($this->getError(), 'error');
 		}
 		
 		$this->setRedirect(
