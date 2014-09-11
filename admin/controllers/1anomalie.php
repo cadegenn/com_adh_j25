@@ -321,25 +321,11 @@ class adhController1anomalie extends JControllerForm {
 	 */
 	public function moveCotiz() {
 		// Initialise variables.
-		$app   = JFactory::getApplication();
-		$lang  = JFactory::getLanguage();
 		$model = $this->getModel();
-		$table = $model->getTable();
 		$recordUser1Id = JRequest::getVar('user1id', 0, 'get', 'int');
 		$recordUser2Id = JRequest::getVar('user2id', 0, 'get', 'int');
 		$adherent_id = JRequest::getVar('adherent_id', 0, 'post', 'int');
 		$cid = JRequest::getVar('cid', array(), 'post', 'array');
-		$checkin = property_exists($table, 'checked_out');
-		$context = "$this->option.edit.$this->context";
-		$task = $this->getTask();
-		// Determine the name of the primary key for the data.
-		if (empty($key)) {
-			$key = $table->getKeyName();
-		}
-		// To avoid data collisions the urlVar may be different from the primary key.
-		if (empty($urlVar)) {
-			$urlVar = $key;
-		}
 
 		if ($model->moveCotiz($cid, $adherent_id)) {
 			$this->setMessage(JText::sprintf('COM_ADH_N_ITEMS_DELETED', count($cid)));
@@ -364,28 +350,11 @@ class adhController1anomalie extends JControllerForm {
 	 */
 	public function deleteCotiz() {
 		// Initialise variables.
-		$app   = JFactory::getApplication();
-		$lang  = JFactory::getLanguage();
 		$model = $this->getModel();
 		$table = $model->getTable();
 		$recordUser1Id = JRequest::getVar('user1id', 0, 'get', 'int');
 		$recordUser2Id = JRequest::getVar('user2id', 0, 'get', 'int');
-		$adherent_id = JRequest::getVar('adherent_id', 0, 'post', 'int');
 		$cotiz_id = JRequest::getVar('cotiz_id', 0, 'get', 'int');
-		$checkin = property_exists($table, 'checked_out');
-		$context = "$this->option.edit.$this->context";
-		$task = $this->getTask();
-		//var_dump($this);
-		//var_dump($task);
-		//die();
-		// Determine the name of the primary key for the data.
-		if (empty($key)) {
-			$key = $table->getKeyName();
-		}
-		// To avoid data collisions the urlVar may be different from the primary key.
-		if (empty($urlVar)) {
-			$urlVar = $key;
-		}
 
 		if ($model->deleteCotiz($cotiz_id)) {
 			$this->setMessage(JText::sprintf('COM_ADH_N_ITEMS_DELETED', 1));
@@ -494,15 +463,10 @@ class adhController1anomalie extends JControllerForm {
 	
 	public function deleteUser() {
 		// Initialise variables.
-		$app   = JFactory::getApplication();
-		$lang  = JFactory::getLanguage();
 		$model = $this->getModel();
-		$table = $model->getTable();
 		$recordUser1Id = JRequest::getVar('user1id', 0, 'get', 'int');
 		$recordUser2Id = JRequest::getVar('user2id', 0, 'get', 'int');
-		$checkin = property_exists($table, 'checked_out');
 		$context = "$this->option.edit.$this->context";
-		$task = $this->getTask();
 
 		// first try to retrieve jform1 data
 		$data  = JRequest::getVar('jform1', array(), 'post', 'array');
