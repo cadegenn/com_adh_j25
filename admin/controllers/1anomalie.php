@@ -388,7 +388,13 @@ class adhController1anomalie extends JControllerForm {
 			$urlVar = $key;
 		}
 
-		$model->deleteCotiz($cotiz_id);
+		if ($model->deleteCotiz($cotiz_id)) {
+			$this->setMessage(JText::sprintf('COM_ADH_N_ITEMS_DELETED', 1));
+		} else {
+			// delete failed, display a notice but allow the user to see the record.
+			$this->setError(JText::sprintf('COM_ADH_APPLICATION_DELETE_FAILED', $recordId, $model->getError()));
+			$this->setMessage($this->getError(), 'error');
+		}
 		
 		$this->setRedirect(
 			JRoute::_(
