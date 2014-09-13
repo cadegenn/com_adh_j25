@@ -6,6 +6,12 @@
 	site:
 	. adherer: utiliser les helpers classes AdhUser et AdhCotiz pour enregistrer les nouveaux adhérents.
 
+@version 0.0.38 - @date2014.09.13
+	admin:
+	. 1anomalies (controller): nettoyage du code
+	. 1anomalies (controller): affichage d'un message lors de chaque action deleteCotiz(), deleteUser() et moveCotiz()
+	. 1anomalies (model): moveCotiz() calcul le nombre de déplacement réussi
+
 @version 0.0.37 - @date 2014.09.10
 	admin:
 	. 1anomalies (view): fix bug cotiz checkbox -> hidden
