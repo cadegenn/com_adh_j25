@@ -65,6 +65,9 @@ root {
   background-repeat: no-repeat;
   padding-left: 20px;
 }
+.adherent_status a.jgrid span.trash {
+  background-image: url(../images/ico-16x16/skull-and-crossbones-2.png);
+}
 .blue {
   color: navy;
 }

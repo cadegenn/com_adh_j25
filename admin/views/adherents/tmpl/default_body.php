@@ -87,7 +87,7 @@ $userId         = $user->get('id');
 		<td>
 			<?php echo $item->pays; ?>
 		</td>
-		<td class="center">
+		<td class="center adherent_status">
 			<?php //echo $item->visible; ?>
 			<?php echo JHtml::_('jgrid.published', $item->published, $i, 'adherents.', $canChange, 'cb', '', ''); ?>
 			<?php //		+-> /libraries/joomla/html/html/jgrid.php : published() ?>

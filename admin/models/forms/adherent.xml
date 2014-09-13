@@ -163,10 +163,10 @@
 				description="JFIELD_PUBLISHED_DESC" class="inputbox"
 				filter="intval" size="1" default="1"
 		>
-			<option value="1">JPUBLISHED</option>
-			<option value="0">JUNPUBLISHED</option>
-			<option value="2">JARCHIVED</option>
-			<option value="-2">JTRASHED</option>
+			<option value="1">COM_ADH_USER_PUBLISHED</option>
+			<option value="0">COM_ADH_USER_UNPUBLISHED</option>
+			<option value="2">COM_ADH_USER_ARCHIVED</option>
+			<option value="-2">COM_ADH_USER_TRASHED</option>
 		</field>
 		<field
 			name="creation_date" type="calendar"
