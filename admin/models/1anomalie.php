@@ -372,10 +372,16 @@ class adhModel1anomalie extends JModelAdmin
 	public function moveCotiz($cid, $adherent_id) {
 		//$pk			= (!empty($data['id'])) ? $data['id'] : (int) $this->getState('user.id');
 		//$user		= AdhUser::getInstance($pk);
+		$success = 0;
 		foreach ($cid as $id) {
 			$cotiz = new AdhCotiz($id);
-			$cotiz->move($adherent_id);
+			if ($cotiz->move($adherent_id)) {
+				$success++;
+			}
 		}
+		if ($success > 0) { return $success; }
+
+		return false;
 	}
 
 	/**
