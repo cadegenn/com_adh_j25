@@ -74,6 +74,9 @@ $userId         = $user->get('id');
 				$label = $item->nom." ".$item->prenom;
 			}?>
 			<a class="icon-<?php echo $class; ?>" href="<?php echo JRoute::_('index.php?option=com_adh&view=adherent&layout=edit&id=' . $item->id); ?>"><?php echo($label); ?></a>
+			<?php if ($item->personne_morale == "") : ?>
+				<small>(<?php echo $item->date_naissance; ?>)</small>
+			<?php endif; ?>
 		</td>
 		<td>
 			<a href='mailto:<?php echo $item->email; ?>'><?php echo $item->email; ?></a>
