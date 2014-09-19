@@ -4,6 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/1anomalie/tmpl/edit_user2.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/adherents/tmpl/default_body.php</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/controllers/1anomalie.php</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/1anomalie/view.html.php</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/controllers/adherent.php</file>
@@ -15,6 +16,7 @@
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/changelog</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/1anomalie/tmpl/edit_user1.php</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/controllers/1anomalies.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/views/1anomalies/tmpl/default_body.php</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/models/adherent.php</file>
         </group>
     </open-files>

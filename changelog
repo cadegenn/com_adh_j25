@@ -6,7 +6,15 @@
 	site:
 	. adherer: utiliser les helpers classes AdhUser et AdhCotiz pour enregistrer les nouveaux adhérents.
 
-@version 0.0.38 - @date2014.09.13
+@version 0.0.39 - @date 2014.09.19
+	admin:
+	. adherent.xml: modification des intitulés de status des adhérent
+	. adherents (view): ajout d'un classe "adherent_status" pour pouvoir modifier l'icône de publication... ajout de l'icône crossbones pour les adhérents décédés
+	. 1anomalies (view): ajout d'un classe "adherent_status" pour pouvoir modifier l'icône de publication... ajout de l'icône crossbones pour les adhérents décédés
+	. 1anomalies (view): affichage de la date de naissance de l'adhérent pour voir rapidement si c'est un homonyme ou la même personne dupliquée
+	. adherents (view): affichage de la date de naissance de l'adhérent pour pouvoir différencier rapidement des homonymes
+
+@version 0.0.38 - @date 2014.09.13
 	admin:
 	. 1anomalies (controller): nettoyage du code
 	. 1anomalies (controller): affichage d'un message lors de chaque action deleteCotiz(), deleteUser() et moveCotiz()
