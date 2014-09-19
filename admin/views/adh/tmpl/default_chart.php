@@ -1,16 +1,7 @@
 <?php
-/**
- * @package		com_adh
- * @subpackage	
- * @brief		com_adh helps you manage the people within an association
- * @copyright	Copyright (C) 2010 - 2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
- * @license		Affero GNU General Public License version 3 or later; see LICENSE.txt
- * 
- * @TODO		
- */
 
-/** 
- *  Copyright (C) 2012-2014 DEGENNES Charles-Antoine <cadegenn@gmail.com>
+/* 
+ *  Copyright (C) 2012-2014 charly
  *  com_adh is a joomla! 2.5 component [http://www.volontairesnature.org]
  *  
  *  This file is part of com_adh.
@@ -30,19 +21,26 @@
  * 
  */
 
-// No direct access to this file
-defined('_JEXEC') or die('Restricted Access');
- 
-// load tooltip behavior
-JHtml::_('behavior.tooltip');
 ?>
 
+<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'nb cotisations', 'primo-adhérents'],
+		  <?php foreach ($this->stats_cotiz_by_year as $i => $stat) : ?>
+			['<?php echo $stat->year; ?>', <?php echo $stat->nb; ?>, <?php echo $stat->primo; ?>],
+		  <?php endforeach; ?>
+        ]);
 
-<?php echo $this->loadTemplate('dashboard');?>
-<?php echo $this->loadTemplate('chart');?>
-<?php //echo $this->loadTemplate('map');?>
+        var options = {
+          title: 'nb adhésions par année'
+        };
 
-<p align="center"><?php echo $this->component->name; ?> - <?php echo $this->manifest->version; ?></p>
-<?php if (JDEBUG) : ?>
-	<pre><?php var_dump($this); ?></pre>
-<?php endif; ?>
+        var chart = new google.visualization.LineChart(document.getElementById('chart_cotiz_div'));
+        chart.draw(data, options);
+      }
+</script>
+
+<div id="chart_cotiz_div" style="width: 100%; height: 500px;"></div>

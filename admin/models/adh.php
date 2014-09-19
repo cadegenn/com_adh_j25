@@ -140,6 +140,20 @@ class adhModelAdh extends JModelAdmin
 		
 		return $db->loadObjectList();
 	}
+	
+	/**
+	 * @brief	getAdherents()	get some informations on all adherents
+	 * @return	(array)			array of object
+	 */
+	public function getAdherents() {
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		//$query->select('a.*')->from('#__adh_adherents AS a')->where('a.published = 0')->order('a.creation_date DESC');
+		$query->select('a.id, CONCAT_WS(" ", a.personne_morale, a.nom, a.prenom) as nom, CONCAT_WS(" ", a.adresse, a.cp, a.ville, a.pays) as address')->from('#__adh_adherents AS a')->where('a.published = 1');
+		$db->setQuery($query, 0, 10);
+		
+		return $db->loadObjectList();
+	}
 
 	/**
 	 * @brief	getComponent()	get version of component from Joomla!'s database

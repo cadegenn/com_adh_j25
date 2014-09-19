@@ -57,6 +57,7 @@ class adhViewadh extends JView
 		$online_registrations = $this->get('OnlineRegistrations');
 		$pending_payments = $this->get('PendingPayments');
 		$pagination = $this->get('Pagination');
+		//$adherents = $this->get('Adherents');
  
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) 
@@ -71,6 +72,7 @@ class adhViewadh extends JView
 		$this->pagination = $pagination;
  		$this->component = $this->get('Component');
 		$this->manifest = json_decode($this->component->manifest_cache);
+		//$this->adherents = $adherents;
 
 		// Set the toolbar
 		$this->addToolBar();
