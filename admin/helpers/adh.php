@@ -178,6 +178,8 @@ abstract class ADHHelper {
 		}
 		
 		$body .= "<br />".JText::_('JDate').' '.JFactory::getDate();
+		$body .= "<br />";
+		$body .= "<br /><small>user agent : ".$_SERVER['HTTP_USER_AGENT']."</small>";
 		
 		return $body;
 	}
