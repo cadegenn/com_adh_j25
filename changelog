@@ -6,6 +6,14 @@
 	site:
 	. adherer: utiliser les helpers classes AdhUser et AdhCotiz pour enregistrer les nouveaux adhérents.
 
+@version 0.0.41 - @date
+	admin:
+	. adherent (view): le lien "ajouter une cotisation" ouvre la page dans une nouvelle fenêtre pour ne pas perdre les modifs
+
+@version 0.0.40 - @date 2014.11.17
+	site:
+	. le bulletin d'adhésion affiche maintenant le user-agent pour débugger les problèmes de champs non remplis
+
 @version 0.0.39 - @date 2014.09.19
 	admin:
 	. adherent.xml: modification des intitulés de status des adhérent
