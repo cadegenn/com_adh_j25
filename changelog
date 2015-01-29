@@ -9,6 +9,8 @@
 @version 0.0.41 - @date
 	admin:
 	. adherent (view): le lien "ajouter une cotisation" ouvre la page dans une nouvelle fenêtre pour ne pas perdre les modifs
+	site:
+	. adhérer (css): espacer les input box
 
 @version 0.0.40 - @date 2014.11.17
 	site:

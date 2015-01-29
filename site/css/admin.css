@@ -51,6 +51,7 @@ fieldset.adminform div.ttd {
 fieldset.adminform textarea, fieldset.adminform input:not([type="checkbox"]):not([type="radio"]):not([type="number"]) {
 	/*min-width: 500px;*/
 	width: 100%;
+	margin: 3px 0px;
 }
 fieldset.adminform input.date {
 	width: 90% ! important;
