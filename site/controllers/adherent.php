@@ -118,6 +118,7 @@ class adhControllerAdherent extends JControllerForm
 		if ($cotizId) {
 			$app->enqueueMessage(JText::_('COM_ADH_COTISATION_SAVED'));
 			$body .= ADHHelper::buildBulletinAdhesionCotiz($cotizId);
+			$body .= ADHHelper::buildBulletinAdhesionConfirm($cotizId);
 		} else {
 			$app->enqueueMessage(JText::_('COM_ADH_COTISATION_NOT_SAVED'), 'Error');
 			//JError::raiseError( 4711, JText::_('COM_ADH_COTISATION_NOT_SAVED') );

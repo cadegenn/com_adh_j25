@@ -6,7 +6,11 @@
 	site:
 	. adherer: utiliser les helpers classes AdhUser et AdhCotiz pour enregistrer les nouveaux adhérents.
 
-@version 0.0.41 - @date
+@version 0.0.42 - @date
+	site:
+	. adhérer : afficher un texte lors du paiement par virement
+
+@version 0.0.41 - @date 2015.01.29
 	admin:
 	. adherent (view): le lien "ajouter une cotisation" ouvre la page dans une nouvelle fenêtre pour ne pas perdre les modifs
 	site:

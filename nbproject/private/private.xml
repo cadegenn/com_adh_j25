@@ -4,10 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/helpers/cotiz.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/site/css/admin.css</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/helpers/adh.php</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/admin/models/cotisation.php</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/changelog</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/site/views/adherent/tmpl/adherer.php</file>
+            <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/site/models/adherent.php</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/site/controllers/adherent.php</file>
             <file>file:/home/charly/Documents/Mes%20applis/com_adh_j25/adh.xml</file>
         </group>

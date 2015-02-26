@@ -173,6 +173,9 @@ class adhModelAdherent extends JModelForm
 		$query  = $db->getQuery(true);
 		//echo("<pre>"); var_dump($data); echo("</pre>");
 		
+		/*
+		 * @TODO use AdhCotiz class !!
+		 */
 		$cotiz = new stdClass();
 		$cotiz->id = 0;
 		$cotiz->adherent_id = $adherent_id;
@@ -185,7 +188,7 @@ class adhModelAdherent extends JModelForm
 		$cotiz->payee = false;
 		//$cotiz->commentaire = $data['commentaire'];
 		
-		// check if adherent has already register this year
+		// check if adherent has already registered this year
 		$query->clear();
 		$query->select('c.id')->from('#__adh_cotisations AS c')->where('c.adherent_id = '.$adherent_id.' AND YEAR(date_debut_cotiz) = '.date("Y",strtotime($cotiz->date_debut_cotiz)));
 		$db->setQuery($query, 0, 1);		// $query, $offset, $limit

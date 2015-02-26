@@ -148,8 +148,6 @@ abstract class ADHHelper {
 	 */
 	public static function buildBulletinAdhesionCotiz($cotizId) {
 		$cotiz = new AdhCotiz($cotizId);
-		$contacts = JContact::getFeatured();
-		$contact = $contacts[0];
 		self::$params = JComponentHelper::getParams('com_adh');
 		
 		$body = "";
@@ -170,11 +168,29 @@ abstract class ADHHelper {
 		}
 		$body .= '</table><br />';
 		
+		return $body;
+	}
+	
+	/**
+	 * @brief	buildBulletinAdhesionConfirm()	build a membership form suitable to be send by email. build only confirmation part.
+	 * @param	(int)		$cotizId			cotisation's id from the database
+	 * @return	(string)	$body				body of the email in HTML format
+	 */
+	public static function buildBulletinAdhesionConfirm($cotizId) {
+		$cotiz = new AdhCotiz($cotizId);
+		$contacts = JContact::getFeatured();
+		$contact = $contacts[0];
+		self::$params = JComponentHelper::getParams('com_adh');
+		
+		$body = "";
 		switch ($cotiz->mode_paiement) {
-			case 'chèque' :	$body .= '<span>'.JText::sprintf('COM_ADH_ADHERER_REGLEMENT_CHEQUE_DESC', "<span class='apl'>".self::$params->get('nom_assoc')."</span>");
-							$body .= JText::sprintf('COM_ADH_ADHERER_REGLEMENT_CHEQUE_DESC2')."</span><br /><br /></br />";
-							$body .= '<address>'.$contact->name.'<br />'.$contact->address.'<br />'.$contact->postcode.' '.$contact->suburb.' '.$contact->country.'</address><br />';
-							break;
+			case 'chèque' :		$body .= '<span>'.JText::sprintf('COM_ADH_ADHERER_REGLEMENT_CHEQUE_DESC', "<span class='apl'>".self::$params->get('nom_assoc')."</span>");
+								$body .= JText::_('COM_ADH_ADHERER_REGLEMENT_CHEQUE_DESC2')."</span><br /><br /></br />";
+								$body .= '<address>'.$contact->name.'<br />'.$contact->address.'<br />'.$contact->postcode.' '.$contact->suburb.' '.$contact->country.'</address><br />';
+								break;
+			case 'virement' :	$body .= '<span>'.JText::sprintf('COM_ADH_ADHERER_REGLEMENT_VIREMENT_DESC',  JRoute::_('index.php?option=com_contact&view=contact&id='.$contact->id));
+								$body .= JText::_('COM_ADH_ADHERER_REGLEMENT_VIREMENT_DESC2')."</span><br /><br /></br />";
+								break;
 		}
 		
 		$body .= "<br />".JText::_('JDate').' '.JFactory::getDate();
