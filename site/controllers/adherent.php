@@ -70,63 +70,41 @@ class adhControllerAdherent extends JControllerForm
 		$id = 0;
 		$body = "";
 
-		// will we need to send an email ? if so prepare things up
-		if ((int)$params->get('alert_sendmail_on_inscription_cb') == 1) {
-			// @url http://docs.joomla.org/Sending_email_from_extensions
-			$mailer = JFactory::getMailer();
-			$config = JFactory::getConfig();
-			$sender = array( 
-				$config->getValue( 'config.mailfrom' ),
-				$config->getValue( 'config.fromname' ) );
-			$mailer->setSender($sender);
-			// get members of the recipient's group
-			//$groupId = JGroupHelper::getGroupId($params->alert_sendmail_on_inscription_dest);
-			$group_vpn = new JGroup($params->get('alert_sendmail_on_inscription_dest'));
-			$users = $group_vpn->getUsers();
-			foreach ($users as $uid) {
-				$user = JFactory::getUser($uid);
-				$recipient = $user->email;
-				// hide VPN users from recipient's list
-				//$mailer->addRecipient($recipient);
-				$mailer->addBCC($recipient);
-				$mailer->addReplyTo($recipient);
-			}
-			$mailer->isHTML(true);
-			$mailer->Encoding = 'base64';
-		}
-
 		// Get the data from the form POST
 		$data = JRequest::getVar('jform', array(), 'post', 'array');
 		//$app->enqueueMessage('<pre>'.var_dump($data).'</pre>', 'Notice');
 		// Now update the loaded data to the database via a function in the model
 		// record new adherent
-		$userId = $model->adherer($data);	// -> models/adherent.php -> adherer()
+		$adhId = $model->adherer($data);	// -> models/adherent.php -> adherer()
 		// check if ok and display appropriate message.  This can also have a redirect if desired.
-		if ($userId) {
-			$app->enqueueMessage(JText::_('COM_ADH_ADHERENT_SAVED'));
-			// add the new user to recipient of confirmation email
-			$mailer->addRecipient($data['email']);
-			$body = ADHHelper::buildBulletinAdhesionUser($userId);
-		} else {
+		if (!$adhId) {
 			$app->enqueueMessage(JText::_('COM_ADH_ADHERENT_NOT_SAVED'), 'Error');
 			//JError::raiseError( 4711, JText::_('COM_ADH_ADHERENT_NOT_SAVED') );
+			return false;
 		}
+		
+		$app->enqueueMessage(JText::_('COM_ADH_ADHERENT_SAVED'));
+		// add the new user to recipient of confirmation email
+		//$mailer->addRecipient($data['email']);
+		//$body = ADHHelper::buildBulletinAdhesionUser($adhId);
 
 		// record soon-to-be-paid cotisation :-)
-		$cotizId = $model->enregistrer_cotiz($data, $userId);	// -> models/adherent.php -> enregistrer_cotiz()
+		$cotizId = $model->enregistrer_cotiz($data, $adhId);	// -> models/adherent.php -> enregistrer_cotiz()
 		// check if ok and display appropriate message.  This can also have a redirect if desired.
-		if ($cotizId) {
-			$app->enqueueMessage(JText::_('COM_ADH_COTISATION_SAVED'));
-			$body .= ADHHelper::buildBulletinAdhesionCotiz($cotizId);
-			$body .= ADHHelper::buildBulletinAdhesionConfirm($cotizId);
-		} else {
+		if (!$cotizId) {
 			$app->enqueueMessage(JText::_('COM_ADH_COTISATION_NOT_SAVED'), 'Error');
 			//JError::raiseError( 4711, JText::_('COM_ADH_COTISATION_NOT_SAVED') );
+			return false;
 		}
+
+		$app->enqueueMessage(JText::_('COM_ADH_COTISATION_SAVED'));
+
+		//$body .= ADHHelper::buildBulletinAdhesionCotiz($cotizId);
+		//$body .= ADHHelper::buildBulletinAdhesionConfirm($cotizId);
 
 		// @TODO	route to display summary to let user print it
 		// workaround: display it here: it is the mail's body
-		echo $body;
+		/*echo $body;
 
 		if ((int)$params->get('alert_sendmail_on_inscription_cb') == 1) {
 			$mailer->setSubject(JText::sprintf('COM_ADH_ADHERER_MAIL_SUBJECT', JURI::base(), strtoupper($data['nom']), $data['prenom']));
@@ -139,9 +117,10 @@ class adhControllerAdherent extends JControllerForm
 			} else {
 				$app->enqueueMessage(JText::_('COM_ADH_ADHERER_MAIL_SENT'));
 			}
-		}
-		
-		
+		}*/
+
+		$app->redirect(JRoute::_('index.php?option=com_adh&view=confirm&adhId='.$adhId.'&cotizId='.$cotizId), false);
+
 		return true;
 	}
 
