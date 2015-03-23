@@ -6,9 +6,10 @@
 	site:
 	. adherer: utiliser les helpers classes AdhUser et AdhCotiz pour enregistrer les nouveaux adhérents.
 
-@version 0.0.42 - @date
+@version 0.0.42 - @date 2015.03.23
 	site:
-	. adhérer : afficher un texte lors du paiement par virement
+	. adhérer : rediriger la page de confirmation d'adhésion vers un MVC complet
+	. confirm : créer une page de confirmation complète avec MVC
 
 @version 0.0.41 - @date 2015.01.29
 	admin:
