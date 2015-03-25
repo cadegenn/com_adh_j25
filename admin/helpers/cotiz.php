@@ -40,6 +40,7 @@
  */
 
 defined('JPATH_PLATFORM') or die;
+jimport('joomla.application.component.helper');
 
 /**
  * define some constants
@@ -156,6 +157,14 @@ class AdhCotiz extends JObject
 	{
 		// me
 		$my = JFactory::getUser();
+
+		// Bind the array
+		if (!$this->setProperties($array))
+		{
+			$this->setError(JText::_('JLIB_USER_ERROR_BIND_ARRAY'));
+			return false;
+		}
+
 		// Let's check to see if the cotiz is new or not
 		if (empty($this->id))
 		{
@@ -168,16 +177,28 @@ class AdhCotiz extends JObject
 			$this->set('modified_by', $my->id);
 		}
 
-		// Bind the array
-		if (!$this->setProperties($array))
-		{
-			$this->setError(JText::_('JLIB_USER_ERROR_BIND_ARRAY'));
-			return false;
+		// comply to the site general cotization policy
+		$params = JComponentHelper::getParams('com_adh');
+		switch ($params->get('validite_cotisation')) {
+			case COTISATION_VALIDITY_ENDLESS :
+				$this->set('date_fin_cotiz', date('Y-m-d', PHP_INT_MAX));
+				break;
+			case COTISATION_VALIDITY_FROM0101TO3112 :
+				$this->set('date_debut_cotiz', date('Y-01-01', strtotime($this->date_debut_cotiz)));
+				$this->set('date_fin_cotiz', date('Y-12-31', strtotime($this->date_fin_cotiz)));
+				break;
+			case COTISATION_VALIDITY_1YEARFROMREGISTRATIONDATE :
+				$this->set('date_debut_cotiz', date('Y-m-d'));
+				$this->set('date_fin_cotiz', date("Y-m-d",strtotime($this->date_debut_cotiz." +1 year")));
+				break;
 		}
+		//var_dump($this);
 
 		// Make sure its an integer
 		$this->id = (int) $this->id;
 
+		//var_dump($this) & die();
+		
 		return true;
 	}
 
@@ -259,7 +280,6 @@ class AdhCotiz extends JObject
 		// Create the user table object
 		$table = $this->getTable();
 		$table->bind($this->getProperties());
-
 
 		// Allow an exception to be thrown.
 		try	{
