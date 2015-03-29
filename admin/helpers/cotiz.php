@@ -165,35 +165,6 @@ class AdhCotiz extends JObject
 			return false;
 		}
 
-		// Let's check to see if the cotiz is new or not
-		if (empty($this->id))
-		{
-			$this->set('creation_date', JFactory::getDate()->toSql());
-			$this->set('created_by', $my->id);
-		}
-		else
-		{
-			$this->set('modification_date', JFactory::getDate()->toSql());
-			$this->set('modified_by', $my->id);
-		}
-
-		// comply to the site general cotization policy
-		$params = JComponentHelper::getParams('com_adh');
-		switch ($params->get('validite_cotisation')) {
-			case COTISATION_VALIDITY_ENDLESS :
-				$this->set('date_fin_cotiz', date('Y-m-d', PHP_INT_MAX));
-				break;
-			case COTISATION_VALIDITY_FROM0101TO3112 :
-				$this->set('date_debut_cotiz', date('Y-01-01', strtotime($this->date_debut_cotiz)));
-				$this->set('date_fin_cotiz', date('Y-12-31', strtotime($this->date_fin_cotiz)));
-				break;
-			case COTISATION_VALIDITY_1YEARFROMREGISTRATIONDATE :
-				$this->set('date_debut_cotiz', date('Y-m-d'));
-				$this->set('date_fin_cotiz', date("Y-m-d",strtotime($this->date_debut_cotiz." +1 year")));
-				break;
-		}
-		//var_dump($this);
-
 		// Make sure its an integer
 		$this->id = (int) $this->id;
 
@@ -370,4 +341,23 @@ class AdhCotiz extends JObject
 		return $this->save();
 	}
 	
+	/**
+	 * Method to search for an exiting cotiz given year and adhId
+	 * 
+	 * @param integer $adhId	id of adherent
+	 * @param integer $year		year of cotisation
+	 * @return bool				id of a cotiz found | 0 otherwise
+	 * @since	0.0.43
+	 */
+	public function search($adhId, $year) {
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select('*')->from('#__adh_cotisations as c')->where('YEAR(c.date_debut_cotiz) = '.date('Y',$year))->where('c.adherent_id = '.(int)$adhId);
+		$db->setQuery($query, 0, 1);
+		if ($db->execute()) {
+			return $db->loadObject()->id;
+		} else {
+			return 0;
+		}
+	}
 }

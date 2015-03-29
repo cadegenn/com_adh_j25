@@ -30,6 +30,8 @@ class adhTableCotisation extends JTable
 	public function store($updateNulls = false) {
 		$date   = JFactory::getDate();
 		$user   = JFactory::getUser();
+
+		// Let's check to see if the cotiz is new or not
 		if ($this->id) {
 			// Existing item
 			$this->modification_date= $date->toSql();
@@ -43,6 +45,21 @@ class adhTableCotisation extends JTable
 			if (empty($this->created_by)) {
 				$this->created_by = $user->get('id');
 			}
+		}
+		// comply to the site general cotization policy
+		$params = JComponentHelper::getParams('com_adh');
+		switch ($params->get('validite_cotisation')) {
+			case COTISATION_VALIDITY_ENDLESS :
+				$this->set('date_fin_cotiz', date('Y-m-d', PHP_INT_MAX));
+				break;
+			case COTISATION_VALIDITY_FROM0101TO3112 :
+				$this->set('date_debut_cotiz', date('Y-01-01', strtotime($this->date_debut_cotiz)));
+				$this->set('date_fin_cotiz', date('Y-12-31', strtotime($this->date_debut_cotiz)));
+				break;
+			case COTISATION_VALIDITY_1YEARFROMREGISTRATIONDATE :
+				$this->set('date_debut_cotiz', date('Y-m-d'));
+				$this->set('date_fin_cotiz', date("Y-m-d",strtotime($this->date_debut_cotiz." +1 year")));
+				break;
 		}
 		
 		// Attempt to store the data.
