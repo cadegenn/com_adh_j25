@@ -41,6 +41,12 @@ jimport('joomla.application.component.modelitem');
 // Include dependancy of the dispatcher
 jimport('joomla.event.dispatcher');
 
+// Use AdhUser helper
+JLoader::register('AdhUser', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/user-adh.php');
+// Use AdhCotiz helper
+JLoader::register('AdhCotiz', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/cotiz.php');
+
+
 /**
  * Adherer Model
  */
@@ -176,8 +182,8 @@ class adhModelAdherent extends JModelForm
 		/*
 		 * @TODO use AdhCotiz class !!
 		 */
-		$cotiz = new stdClass();
-		$cotiz->id = 0;
+		$cotiz = new AdhCotiz();
+		$cotiz->id = $cotiz->search($adherent_id, date('Y'));
 		$cotiz->adherent_id = $adherent_id;
 		$cotiz->tarif_id = $data['tarif_id'];
 		$cotiz->montant = $data['montant'.$cotiz->tarif_id];
@@ -186,29 +192,9 @@ class adhModelAdherent extends JModelForm
 		$cotiz->date_debut_cotiz = date('Y-m-d');
 		$cotiz->date_fin_cotiz = date("Y-m-d",strtotime($cotiz->date_debut_cotiz." +1 year"));
 		$cotiz->payee = false;
-		//$cotiz->commentaire = $data['commentaire'];
-		
-		// check if adherent has already registered this year
-		$query->clear();
-		$query->select('c.id')->from('#__adh_cotisations AS c')->where('c.adherent_id = '.$adherent_id.' AND YEAR(date_debut_cotiz) = '.date("Y",strtotime($cotiz->date_debut_cotiz)));
-		$db->setQuery($query, 0, 1);		// $query, $offset, $limit
-		if ($db->query()) {
-			$cotiz_record = $db->loadObject();
-			$cotiz->id = $cotiz_record->id;
-		}
-		if ($cotiz->id == 0) {	// insert new record into database
-			//echo("<pre>insert : "); var_dump($cotiz); echo("</pre>"); die();
-			$cotiz->creation_date = date('Y-m-d H:M:S');
-			$saved = $db->insertObject('#__adh_cotisations', $cotiz);
-			if ($saved) { return $db->insertid(); }
-		} else {						// update existing record into database
-			//echo("<pre>update : "); var_dump($cotiz); echo("</pre>"); die();
-			$cotiz->modification_date = date('Y-m-d H:M:S');
-			$cotiz->modified_by = $adherent_id;
-			// users can not update their own cotiz, only staff can do that
-			//$saved = $db->updateObject('#__adh_cotisations', $cotiz, 'id');
-			//if ($saved) { return $cotiz->id; }
-			return $cotiz->id;
+
+		if ($cotiz->id == 0) { 
+			$saved = $cotiz->save();
 		}
 
 		return $saved;
