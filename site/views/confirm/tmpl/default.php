@@ -69,7 +69,7 @@ if ((int)$params->get('alert_sendmail_on_inscription_cb') == 1) {
 	}
 	$mailer->isHTML(true);
 	$mailer->Encoding = 'base64';
-	$mailer->setSubject(JText::sprintf('COM_ADH_ADHERER_MAIL_SUBJECT', JURI::base(), strtoupper($data['nom']), $data['prenom']));
+	$mailer->setSubject(JText::sprintf('COM_ADH_ADHERER_MAIL_SUBJECT', JURI::base(), strtoupper($this->adherent->nom), $this->adherent->prenom));
 	$mailer->setBody($body);
 	$send = $mailer->Send();
 	if ($send !== true) {
