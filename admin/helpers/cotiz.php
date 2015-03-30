@@ -352,9 +352,11 @@ class AdhCotiz extends JObject
 	public function search($adhId, $year) {
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		$query->select('*')->from('#__adh_cotisations as c')->where('YEAR(c.date_debut_cotiz) = '.date('Y',$year))->where('c.adherent_id = '.(int)$adhId);
+		$query->select('*')->from('#__adh_cotisations as c')->where('YEAR(c.date_debut_cotiz) = YEAR('.$year.'-01-01)')->where('c.adherent_id = '.(int)$adhId);
 		$db->setQuery($query, 0, 1);
 		if ($db->execute()) {
+			//echo("<pre>"); var_dump($query); echo("</pre>");
+			//echo("<pre>"); var_dump($db->loadObject()); echo("</pre>"); die();
 			return $db->loadObject()->id;
 		} else {
 			return 0;
