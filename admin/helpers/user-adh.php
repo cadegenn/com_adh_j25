@@ -112,6 +112,10 @@ class AdhUser extends JObject
 		if (!empty($identifier))
 		{
 			$this->load($identifier);
+			$this->profession = $this->getProfession();
+			$this->origine = $this->getOrigine();
+			$this->cotiz = $this->getCotiz();
+
 		}
 		else
 		{
