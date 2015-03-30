@@ -111,17 +111,21 @@ class adhModelAdherent extends JModelForm
 		//echo("<pre>"); var_dump($data); echo("</pre>");
 
 		// build object
-		$adherent = new stdClass();
+		$adherent = new AdhUser();
 		$adherent->id = 0;
-		$adherent->titre = $data['titre'];
-		$adherent->personne_morale = $data['personne_morale'];
 		$adherent->nom = strtoupper($data['nom']);
 		$adherent->prenom = ucwords($data['prenom']);
+		$adherent->email = $data['email'];
+		// search for an existing adherent with this NAME / FIRSTNAME / EMAIL tuplet and return its id
+		$adherent->search(true);
+		//echo("<pre>"); var_dump($adherent); echo("</pre>");die();
+		// then update record with data
+		$adherent->titre = $data['titre'];
+		$adherent->personne_morale = $data['personne_morale'];
 		//$adherent->date_naissance = $data['date_naissance'];
 		$myDateTime = DateTime::createFromFormat('d/m/Y', $data['date_naissance']);
 		$adherent->date_naissance = $myDateTime->format('Y-m-d');
 		$adherent->profession_id = $data['profession_id'];
-		$adherent->email = $data['email'];
 		$adherent->telephone = $data['telephone'];
 		$adherent->gsm = $data['gsm'];
 		$adherent->adresse = $data['adresse'];
@@ -136,35 +140,8 @@ class adhModelAdherent extends JModelForm
 		$adherent->recv_newsletter = 0;		// by default, do not receive newsletter
 		$adherent->recv_infos = 1;			// by default DO receive important informations
 
-		// check if adherent already exist into database
-		$query->clear();
-		$query->select('id')->from('#__adh_adherents')->where('UPPER(nom) = UPPER("'.$adherent->nom.'") AND UPPER(prenom) = UPPER("'.$adherent->prenom.'") AND UPPER(email) = UPPER("'.$adherent->email.'")');// AND date_naissance = "'.$adherent->date_naissance.'"');
-		$db->setQuery($query->__toString(), 0, 1);		// $query, $offset, $limit
-		if ($db->query()) {
-			$adh_record = $db->loadObject();
-			$adherent->id = $adh_record->id;
-		}
-		
-		if ($adherent->id == 0) {	// insert new record into database
-			//echo("<pre>insert : "); var_dump($adherent); echo("</pre>"); die();
-			$adherent->creation_date = date("Y-m-d H:i:s");
-			$saved = $db->insertObject('#__adh_adherents', $adherent);
-			if ($saved) return $db->insertid();
-		} else {						// update existing record into database
-			//echo("<pre>update : "); var_dump($adherent); echo("</pre>"); die();
-			$adherent->modification_date = date("Y-m-d H:i:s");
-			$saved = $db->updateObject('#__adh_adherents', $adherent, 'id');
-			if ($saved) return $adherent->id;
-		}
-
-		return $saved;
-		
-		/*if (!$db->query()) {
-			JError::raiseError(500, $db->getErrorMsg());
-			return false;
-		} else {
-			return true;
-		}*/
+		if ($adherent->save()) { return $adherent->id; }
+		return false;
 	}
 	
 	/**
@@ -194,10 +171,11 @@ class adhModelAdherent extends JModelForm
 		$cotiz->payee = false;
 
 		if ($cotiz->id == 0) { 
-			$saved = $cotiz->save();
+			if ($cotiz->save()) { return $cotiz->id; }
 		}
+		
+		return 0;
 
-		return $saved;
 	}
 
 	/**
