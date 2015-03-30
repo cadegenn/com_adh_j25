@@ -40,7 +40,7 @@ abstract class JContact {
 	 * @brief	getFeatured()	return contact marked as 'featured'
 	 * @return	(array)			array of featured contacts
 	 */
-	public function getFeatured() {
+	static function getFeatured() {
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(TRUE);
 		$query->select('*')->from('#__contact_details as cd')->where('featured = 1');
