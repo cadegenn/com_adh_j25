@@ -112,16 +112,15 @@ class AdhUser extends JObject
 		if (!empty($identifier))
 		{
 			$this->load($identifier);
-			$this->profession = $this->getProfession();
-			$this->origine = $this->getOrigine();
-			$this->cotiz = $this->getCotiz();
 		}
 		else
 		{
 			//initialise
 			$this->id = 0;
 			$this->profession = new stdClass();
+			$this->profession_id = 0;
 			$this->origine = new stdClass();
+			$this->origine_id = 0;
 			$this->cotiz = array();
 		}
 	}
@@ -313,6 +312,7 @@ class AdhUser extends JObject
 	 * 
 	 */
 	public function getProfession() {
+		if (!$this->profession_id) { $this->profession_id = 0; }
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('*')->from('#__adh_professions as p')->where('p.id = '.$this->profession_id);
@@ -329,6 +329,7 @@ class AdhUser extends JObject
 	 * 
 	 */
 	public function getOrigine() {
+		if (!$this->origine_id) { $this->origine_id = 0; }
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('*')->from('#__adh_origines as o')->where('o.id = '.$this->origine_id);
@@ -345,6 +346,7 @@ class AdhUser extends JObject
 	 * 
 	 */
 	public function getCotiz() {
+		if (!isset($this->id)) return false;
 		$array = array();
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
@@ -397,7 +399,35 @@ class AdhUser extends JObject
 		// Make sure its an integer
 		$this->id = (int) $this->id;
 
+		$this->profession = $this->getProfession();
+		$this->origine = $this->getOrigine();
+		$this->cotiz = $this->getCotiz();
+
 		return true;
 	}
 
+	/**
+	 * Method to search for an exiting adherent
+	 * 
+	 * @param integer $adhId	id of adherent
+	 * @param bool	  $replace	true: load user into current object | false: do nothing
+	 * @return bool				id of an adherent found | 0 otherwise
+	 * @since	0.0.43
+	 */
+	public function search($replace = false) {
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select('id')->from('#__adh_adherents')->where('UPPER(nom) = UPPER("'.$this->nom.'") AND UPPER(prenom) = UPPER("'.$this->prenom.'") AND UPPER(email) = UPPER("'.$this->email.'")');// AND date_naissance = "'.$adherent->date_naissance.'"');
+		$db->setQuery($query, 0, 1);
+		if ($db->execute()) {
+			$found = $db->loadObject();
+			if ($replace) {
+				$this->load($found->id);
+				$this->bind($found);
+			}
+			return $found->id;
+		} else {
+			return 0;
+		}
+	}
 }
