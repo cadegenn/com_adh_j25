@@ -91,7 +91,7 @@ abstract class ADHHelper {
 	 * @brief	get all the tarifs availables
 	 * 
 	 */
-	public function getTarifs() {
+	static function getTarifs() {
 		// Create a new query object.		
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
