@@ -4,7 +4,13 @@
 	. cotisations: utiliser le helper class AdhCotiz pour supprimer/archiver/(dé)publier une(des) cotisation(s)
 	. *anomalies: utiliser les helpers classes AdhUser et AdhCotiz pour modifier les adhérents en doublon (fait pour 1anomalies)
 	site:
-	. adherer: utiliser les helpers classes AdhUser et AdhCotiz pour enregistrer les nouveaux adhérents.
+
+@version 0.0.43 - @date 2015.03.30
+	admin:
+	. cotisation (table) :	store() prends enfin en compte le paramètre du site 'validite_cotisation' et modifie les dates_(debut|fin)_cotiz en conséquence
+	site:
+	. adherent (model) :	utilisation de l'objet adhCotiz
+	. adherent (model) :	utilisation de l'objet adhUser
 
 @version 0.0.42 - @date 2015.03.23
 	site:

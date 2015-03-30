@@ -7,10 +7,10 @@
 	<author>Charles-Antoine DEGENNES</author>
 	<authorEmail>cadegenn@gmail.com</authorEmail>
 	<authorUrl></authorUrl>
-	<copyright>Copyright (C) 2012 - 2014 Volontaires Pour la Nature</copyright>
+	<copyright>Copyright (C) 2012 - 2015 Volontaires Pour la Nature</copyright>
 	<license>AGPL v3</license>
 	<!--  The version string is recorded in the components table -->
-	<version>0.0.42</version>
+	<version>0.0.43</version>
 	<!-- The description is optional and defaults to the name -->
 	<description>COM_ADH_COMPONENT_DESCRIPTION</description>
 	
