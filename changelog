@@ -5,6 +5,13 @@
 	. *anomalies: utiliser les helpers classes AdhUser et AdhCotiz pour modifier les adhérents en doublon (fait pour 1anomalies)
 	site:
 
+@version 0.0.44 - @date 2015.03.30
+	helpers:
+	. adh :		getTarifs() devient une méthode static
+	. contact :	getFeatured() devient une méthode static
+	. user-adh: load() charge à nouveau les cotisations, la profession et l'origine
+	. cotiz :	search() utilise correctement l'argument $year
+
 @version 0.0.43 - @date 2015.03.30
 	admin:
 	. cotisation (table) :	store() prends enfin en compte le paramètre du site 'validite_cotisation' et modifie les dates_(debut|fin)_cotiz en conséquence
