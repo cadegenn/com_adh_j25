@@ -77,6 +77,7 @@ class adhModel2anomalies extends JModelList
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
 		// Select some fields
+		$query->select('a.*');
 		$query->select('c.*')->from('#__adh_cotisations AS c');//, a.personne_morale AS personne_morale, a.nom AS nom, a.prenom AS prenom');
 		//$query->from('#__adh_cotisations AS c, #__adh_adherents AS a');
 		//$query->where('c.adherent_id = a.id');
@@ -84,7 +85,11 @@ class adhModel2anomalies extends JModelList
 		$anomalies = $this->getState('anomalies.search');
 		if (!empty($anomalies)) {
 			switch ($anomalies) {
+				// orphans cotisations
 				case 1 :	$query->where("c.adherent_id NOT IN (SELECT id from #__adh_adherents AS a)");
+							break;
+				// doubles cotisations
+				case 2 :	$query->innerJoin('#__adh_cotisations AS d ON (c.adherent_id = d.adherent_id)')->where('YEAR(c.date_debut_cotiz) = YEAR(d.date_debut_cotiz)')->where('c.id <> d.id');
 							break;
 				//case 3 :	$query->select('a.')
 			}
@@ -92,10 +97,12 @@ class adhModel2anomalies extends JModelList
 			// do not display anything until we choose a type of abnormalities
 			$query->where("0 = 1");
 		}
+		// joining with adherents
+		$query->leftJoin('#__adh_adherents AS a ON(c.adherent_id = a.id)');
 
 		$year = $this->getState('year.search');
 		if (!empty($year)) {
-			$query->where('YEAR(date_debut_cotiz) = '.$year);
+			$query->where('YEAR(c.date_debut_cotiz) = '.$year);
 		}
 				
 		// Add the list ordering clause.
