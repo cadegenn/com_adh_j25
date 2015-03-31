@@ -53,7 +53,7 @@ $userId         = $user->get('id');
 			<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 		</td>
 		<td>
-			<a href="<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=' . $item->id); ?>"><?php echo ($item->personne_morale != "" ? $item->personne_morale : $item->nom." ".$item->prenom); ?></a>
+			<a href="<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=' . $item->adherent_id); ?>"><?php echo ($item->personne_morale != "" ? $item->personne_morale : $item->nom." ".$item->prenom); ?></a>
 		</td>
 		<td>
 			<?php echo $item->date_debut_cotiz; ?>
@@ -73,7 +73,7 @@ $userId         = $user->get('id');
 			<?php //echo JHtml::_('cotisations.paid', $item->payee, $i, 'cotisations.'); ?>
 		</td>
 		<td class="right">
-			<?php echo $item->id; ?>
+			<a href="<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=' . $item->id); ?>"><?php echo $item->id; ?></a>
 		</td>
 	</tr>
 <?php endforeach; ?>
