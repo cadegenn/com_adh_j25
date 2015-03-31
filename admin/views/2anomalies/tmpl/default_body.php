@@ -55,7 +55,7 @@ $userId         = $user->get('id');
 			<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 		</td>
 		<td>
-			<a href="<?php echo JRoute::_('index.php?option=com_adh&view=cotisation&layout=edit&id=' . $item->adherent_id); ?>">
+			<a href="<?php echo JRoute::_('index.php?option=com_adh&view=adherent&layout=edit&id=' . $item->adherent_id); ?>">
 				<?php echo ($item->nom.' '); ?>
 				<?php echo ($item->prenom.' '); ?>
 			</a>
