@@ -5,7 +5,7 @@
 	. *anomalies: utiliser les helpers classes AdhUser et AdhCotiz pour modifier les adhérents en doublon (fait pour 1anomalies)
 	site:
 
-@version 0.0.44 - @date 2015.03.30
+@version 0.0.44 - @date 2015.03.31
 	helpers:
 	. adh :		getTarifs() devient une méthode static
 	. contact :	getFeatured() devient une méthode static
