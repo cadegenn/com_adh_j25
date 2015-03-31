@@ -44,7 +44,7 @@ JLoader::register('AdhToolBarHelper', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/
 class adhView2anomalies extends JView
 {
 	/**
-	 * adherents view display method
+	 * cotisations view display method
 	 * @return void
 	 */
 	function display($tpl = null) 
@@ -87,14 +87,14 @@ class adhView2anomalies extends JView
 	{
 		// voir d'autres boutons dans /administrator/includes/toolbar.php
 		JToolBarHelper::title(JText::_('COM_ADH').' : '.JText::_('COM_ADH_SUBMENU_ANOMALIES'), 'adh');
-		//JToolBarHelper::editListX('adherent.edit');
-		AdhToolBarHelper::mergeList('2anomalie.merge');
+		//JToolBarHelper::editListX('cotisation.edit');
+		//AdhToolBarHelper::mergeList('2anomalie.merge');
 		JToolBarHelper::divider();
-		//JToolBarHelper::publishList('adherents.publish');
-		//JToolBarHelper::unpublishList('adherents.unpublish');
+		//JToolBarHelper::publishList('cotisations.publish');
+		//JToolBarHelper::unpublishList('cotisations.unpublish');
 		//JToolBarHelper::divider();
-		JToolBarHelper::archiveList('adherents.archive');
-		JToolBarHelper::deleteListX(JText::_('COM_ADH_AREYOUSURE'),'adherents.delete');
+		//JToolBarHelper::archiveList('cotisations.archive');
+		JToolBarHelper::deleteListX(JText::_('COM_ADH_AREYOUSURE'),'cotisations.delete');
 		JToolBarHelper::divider();
 		JToolBarHelper::preferences('com_adh');
 	}

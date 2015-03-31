@@ -50,7 +50,7 @@ class adhModel2anomalie extends JModelAdmin
 	 * @return	JTable	A database object
 	 * @since	2.5
 	 */
-	public function getTable($type = 'adherent', $prefix = 'adhTable', $config = array()) 
+	public function getTable($type = 'cotisation', $prefix = 'adhTable', $config = array()) 
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
@@ -67,7 +67,7 @@ class adhModel2anomalie extends JModelAdmin
 	public function getForm($data = array(), $loadData = true) 
 	{
 		// Get the form.
-		$form = $this->loadForm('com_adh.adherent', 'adherent' /* --> models/forms/adherent.xml */,
+		$form = $this->loadForm('com_adh.cotisation', 'cotisation' /* --> models/forms/cotisation.xml */,
 		                        array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) 
 		{
@@ -88,7 +88,7 @@ class adhModel2anomalie extends JModelAdmin
 	{
 		$userId = JRequest::getInt('user1id');
 		// Get the form.
-		$form = $this->loadForm('com_adh.2anomalie.form1', 'adherent' /* --> models/forms/adherent.xml */,
+		$form = $this->loadForm('com_adh.2anomalie.form1', 'cotisation' /* --> models/forms/cotisation.xml */,
 		                        array('control' => 'jform1', 'load_data' => $loadData), false, false, $userId);
 		if (empty($form)) 
 		{
@@ -109,7 +109,7 @@ class adhModel2anomalie extends JModelAdmin
 	{
 		$userId = JRequest::getInt('user2id');
 		// Get the form.
-		$form = $this->loadForm('com_adh.2anomalie.form2', 'adherent' /* --> models/forms/adherent.xml */,
+		$form = $this->loadForm('com_adh.2anomalie.form2', 'cotisation' /* --> models/forms/cotisation.xml */,
 		                        array('control' => 'jform2', 'load_data' => $loadData), true, false, $userId);
 		if (empty($form)) 
 		{
