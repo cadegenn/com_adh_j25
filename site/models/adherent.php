@@ -171,10 +171,10 @@ class adhModelAdherent extends JModelForm
 		$cotiz->payee = false;
 
 		if ($cotiz->id == 0) { 
-			if ($cotiz->save()) { return $cotiz->id; }
+			if (!$cotiz->save()) { return -1; }
 		}
 		
-		return 0;
+		return $cotiz->id;
 
 	}
 

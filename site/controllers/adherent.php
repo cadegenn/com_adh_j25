@@ -91,7 +91,7 @@ class adhControllerAdherent extends JControllerForm
 		// record soon-to-be-paid cotisation :-)
 		$cotizId = $model->enregistrer_cotiz($data, $adhId);	// -> models/adherent.php -> enregistrer_cotiz()
 		// check if ok and display appropriate message.  This can also have a redirect if desired.
-		if (!$cotizId) {
+		if ($cotizId < 0) {
 			$app->enqueueMessage(JText::_('COM_ADH_COTISATION_NOT_SAVED'), 'Error');
 			//JError::raiseError( 4711, JText::_('COM_ADH_COTISATION_NOT_SAVED') );
 			return false;
