@@ -5,6 +5,14 @@
 	. *anomalies: utiliser les helpers classes AdhUser et AdhCotiz pour modifier les adhérents en doublon (fait pour 1anomalies)
 	site:
 
+@version 0.0.46
+	helpers:
+	. adh : buildBulletinAdhesionUser() fix une régression dans l'affichage de la date de naissance
+	admin:
+	. cotisations (view) : afficher 2 liens: 1 lien vers la fiche adhérent et 1 lien vers la fiche cotisation
+	site:
+	. adherent (model) : fixed issue #11
+
 @version 0.0.45 - @date 2015.04.04
 	admin:
 	. 2anomalies (MVC) :	utilisation de la table #__adh_cotisations au lieu de #__adh_adherents
