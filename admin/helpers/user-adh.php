@@ -424,6 +424,9 @@ class AdhUser extends JObject
 		$query->select('id')->from('#__adh_adherents')->where('UPPER(nom) = UPPER("'.$this->nom.'") AND UPPER(prenom) = UPPER("'.$this->prenom.'") AND UPPER(email) = UPPER("'.$this->email.'")');// AND date_naissance = "'.$adherent->date_naissance.'"');
 		$db->setQuery($query, 0, 1);
 		if ($db->execute()) {
+			// if no user found in database, return 0
+			if ($db->getNumRows() == 0) { return 0; }
+			// if a user is found, get it
 			$found = $db->loadObject();
 			if ($replace) {
 				$this->load($found->id);
