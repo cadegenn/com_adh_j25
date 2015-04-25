@@ -124,9 +124,10 @@ abstract class ADHHelper {
 			$body .= '<tr><th align="left">'.  JText::_('COM_ADH_PERS_MORALE_LABEL').'</th><td>'.$user->personne_morale.'</td></tr>';
 		}
 		$body .= '<tr><th align="left">'.  JText::_('COM_ADH_NOM_LABEL').'</th><td>'.strtoupper($user->nom).'</td><th align="left">'.  JText::_('COM_ADH_PRENOM_LABEL').'</th><td>'.$user->prenom.'</td>';
-		//$myDateTime = DateTime::createFromFormat('Y-m-d', $user->date_naissance);
-		$myDateTime = new JDate();
-		$myDateTime->createFromFormat('Y-m-d', $user->date_naissance);
+		$myDateTime = DateTime::createFromFormat('Y-m-d', $user->date_naissance);
+		// 2015.04.25, DCA code below do not work !
+		//$myDateTime = new JDate();
+		//$myDateTime->createFromFormat('Y-m-d', $user->date_naissance);
 		$body .= '<tr><th align="left">'.  JText::_('COM_ADH_DATE_NAISSANCE_LABEL').'</th><td>'.$myDateTime->format('d/m/Y').'</td><th align="left">'.  JText::_('COM_ADH_PROFESSION_LABEL').'</th><td>'.$user->profession->label.'</td>';
 		$body .= '<tr><th align="left">'.  JText::_('COM_ADH_EMAIL_LABEL').'</th><td>'.$user->email.'</td></tr>';
 		$body .= '<tr><th align="left">'.  JText::_('COM_ADH_TELEPHONE_LABEL').'</th><td>'.$user->telephone.'</td><th align="left">'.  JText::_('COM_ADH_GSM_LABEL').'</th><td>'.$user->gsm.'</td>';
