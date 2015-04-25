@@ -104,12 +104,7 @@ class adhModelAdherent extends JModelForm
 	 * @return type			id de l'adhérent on success, false otherwise
 	 */
 	public function adherer($data) {
-		$date   = JFactory::getDate();
-		// set the data into a query to update the record
-		$db = $this->getDbo();
-		$query  = $db->getQuery(true);
 		//echo("<pre>"); var_dump($data); echo("</pre>");
-
 		// build object
 		$adherent = new AdhUser();
 		$adherent->id = 0;
