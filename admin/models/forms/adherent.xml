@@ -114,7 +114,7 @@
 			name="description" type="editor"
 			label="COM_ADH_DESCRIPTION_LABEL"
 			description="COM_ADH_DESCRIPTION_DESC"
-			class="inputbox" buttons="true"
+			class="inputbox" buttons="true" filter="safehtml"
 		/>
 		<field
 			name="origine_id" type="origine"
