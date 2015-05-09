@@ -44,5 +44,5 @@ JHtml::_('behavior.tooltip');
 
 <p align="center"><?php echo $this->component->name; ?> - <?php echo $this->manifest->version; ?></p>
 <?php if (JDEBUG) : ?>
-	<pre><?php var_dump($this); ?></pre>
+	<pre><?php //var_dump($this); ?></pre>
 <?php endif; ?>
