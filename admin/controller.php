@@ -27,21 +27,17 @@ class adhController extends JController
 		//aplHelper::addSubmenu('chantiers');	// => admin/helpers/chantiers.php
 	}
 	
-	/**
-	 * @brief	getUsersFromGroup()		Method to retrieve members of a given group
-	 * @param	(integer)				$groupId id of a group in the database
-	 * @return	(array)					json-encoded array of users's ids members of the groupId
-	 * @deprecated since version 0.0.22
+	/*
+	 * @brief	exdport()		export all data
+	 * @since	0.0.47
 	 */
-	/*public function getUsersFromGroup($groupId = 0) {
-		// pour debug, on prend d'abord la valeur via la méthode 'get', puis on surcharge par une éventuelle donnée dans le 'post'
-		//$groupId = intval(JRequest::getVar('groupid', 0, 'get', 'int'));		
-		$groupId = JRequest::getVar('groupid', $groupId, 'post', 'int');		
-		$group = new JGroup($groupId);
-		$users = $group->getUsers();
-		
-		echo json_encode($users);
-	}*/
+	public function export() {
+		$app    = JFactory::getApplication();
+		$model	= $this->getModel();
+		$export_file = $model->export();
+		$app->enqueueMessage('database exported at <a href='.$export_file.'>'.$export_file.'</a>');
+		$app->redirect(JRoute::_('index.php?option=com_adh'), false);
+	}
 }
 
 ?>

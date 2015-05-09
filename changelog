@@ -5,7 +5,12 @@
 	. *anomalies: utiliser les helpers classes AdhUser et AdhCotiz pour modifier les adhérents en doublon (fait pour 1anomalies)
 	site:
 
-@version 0.0.46
+@version 0.0.47 - @date 
+	admin:
+	. adherent (form) : ajout du tag safehtml pour autoriser les codes HTML dans le champs description
+	. adh (MVC) : ajout de la possibilité d'exporter toutes les données de la base
+
+@version 0.0.46 - @date 2015.04.25
 	helpers:
 	. adh : buildBulletinAdhesionUser() fix une régression dans l'affichage de la date de naissance
 	admin:

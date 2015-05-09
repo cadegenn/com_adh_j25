@@ -176,5 +176,43 @@ class adhModelAdh extends JModelAdmin
 		return $db->loadObject();
 	}
 
+	/**
+	 * @brief	export()	export sql data
+	 * @return (string) file path and file name of sql file
+	 * @since 0.0.47
+	 */
+	public function export() {
+		$db = JFactory::getDBO();
+		$config = JFactory::getConfig();
+		$component = JRequest::getVar('option', '','get','string');
+		$date = date('Ymd.His');
+		$filename = JPATH_ADMINISTRATOR . '/backups/'.$component.'-'.$date.'.sql';
+		$url = JUri::base().'/backups/'.$component.'-'.$date.'.sql';
+		echo("<pre>"); var_dump($config); echo("</pre>");
+		echo("<pre>"); var_dump($db); echo("</pre>");
+		//system("mysqldump --databases '.$db->database.' '.$db->prefix.'adh_adherents --flush-privileges --force --hex-blob -h localhost --password='.$db->password.' --dump-date -u .$db->user.' --events > ".$filename);
+		//echo("executing passthru : ");
+		$tables = array (
+			$config->get('dbprefix').'adh_adherents',
+			$config->get('dbprefix').'adh_groups',
+			$config->get('dbprefix').'adh_groups_members',
+			$config->get('dbprefix').'adh_tarifs',
+			$config->get('dbprefix').'adh_origines',
+			$config->get('dbprefix').'adh_professions',
+			$config->get('dbprefix').'adh_cotisations',
+		);
+		$options = "--extended-insert --flush-privileges --force --hex-blob --events";
+		echo('mysqldump '.$config->get('db').' '.implode(' ', $tables).' '.$options.' -h '.$config->get('host').' --password='.$config->get('password').' --dump-date -u '.$config->get('user').' | sed s/'.$config->get('dbprefix').'/#__/g > '.$filename);
+		passthru('mysqldump '.$config->get('db').' '.implode(' ', $tables).' '.$options.' -h '.$config->get('host').' --password='.$config->get('password').' --dump-date -u '.$config->get('user').' | sed s/'.$config->get('dbprefix').'/#__/g > '.$filename);
+		//die();
+		/*$exporter = $db->getExporter();
+		$exporter->withStructure(true);
+		$xml = $exporter->from('#__adh_adherents')->asXml()->__toString();
+		echo("<pre>"); var_dump($xml); echo("</pre>");
+		 * 
+		 */
+		
+		return $url;
+	}
 	
 }

@@ -98,6 +98,8 @@ class adhViewadh extends JView
 		AdhToolBarHelper::link('group-add', JText::_('COM_ADH_MANAGER_GROUPE_NEW'), 'index.php?option=com_adh&view=groupe&layout=edit');
 		AdhToolBarHelper::link('cotisation-add', JText::_('COM_ADH_MANAGER_COTISATION_NEW'), 'index.php?option=com_adh&view=cotisation&layout=edit');
 		JToolBarHelper::divider();
+		AdhToolBarHelper::link('export', JText::_('JTOOLBAR_EXPORT'), 'index.php?option=com_adh&task=export');
+		JToolBarHelper::divider();
 		JToolBarHelper::preferences('com_adh');
 	}
 	
