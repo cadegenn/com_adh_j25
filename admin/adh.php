@@ -19,7 +19,7 @@ JLoader::register('adhHelper', dirname(__FILE__).'/helpers/adh.php');
 jimport('joomla.application.component.controller');
  
 // Get an instance of the controller prefixed by chantiers
-$controller = JController::getInstance('adh');
+$controller = JController::getInstance('adh');	// => admin/controller.php et non admin/controllers/adh.php
  
 // Perform the Request task
 $controller->execute(JRequest::getCmd('task'));
