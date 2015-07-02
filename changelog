@@ -5,10 +5,11 @@
 	. *anomalies: utiliser les helpers classes AdhUser et AdhCotiz pour modifier les adhérents en doublon (fait pour 1anomalies)
 	site:
 
-@version 0.0.47 - @date 
+@version 0.0.47 - @date 2015.07.02
 	admin:
 	. adherent (form) : ajout du tag safehtml pour autoriser les codes HTML dans le champs description
 	. adh (MVC) : ajout de la possibilité d'exporter toutes les données de la base
+	. confirm (view) : le destinataire du mail de confirmation est le mail de l'adhérent. Les membres du groupe d'admin sont ajoutés en fonction de la configuration du composant
 
 @version 0.0.46 - @date 2015.04.25
 	helpers:
