@@ -46,8 +46,6 @@ $body .= ADHHelper::buildBulletinAdhesionConfirm($this->cotiz->id);
 echo $body;
 
 // send email
-// will we need to send an email ? if so prepare things up
-if ((int)$params->get('alert_sendmail_on_inscription_cb') == 1) {
 	// @url http://docs.joomla.org/Sending_email_from_extensions
 	$mailer = JFactory::getMailer();
 	$config = JFactory::getConfig();
@@ -55,18 +53,22 @@ if ((int)$params->get('alert_sendmail_on_inscription_cb') == 1) {
 		$config->getValue( 'config.mailfrom' ),
 		$config->getValue( 'config.fromname' ) );
 	$mailer->setSender($sender);
+	$mailer->addRecipient($this->adherent->email);
+// will we need to send an email to admin group ?
+if ((int)$params->get('alert_sendmail_on_inscription_cb') == 1) {
 	// get members of the recipient's group
 	//$groupId = JGroupHelper::getGroupId($params->alert_sendmail_on_inscription_dest);
-	$group_vpn = new JGroup($params->get('alert_sendmail_on_inscription_dest'));
-	$users = $group_vpn->getUsers();
+	$group_admin = new JGroup($params->get('alert_sendmail_on_inscription_dest'));
+	$users = $group_admin->getUsers();
 	foreach ($users as $uid) {
 		$user = JFactory::getUser($uid);
 		$recipient = $user->email;
-		// hide VPN users from recipient's list
+		// hide admin users from recipient's list
 		//$mailer->addRecipient($recipient);
 		$mailer->addBCC($recipient);
 		$mailer->addReplyTo($recipient);
 	}
+}
 	$mailer->isHTML(true);
 	$mailer->Encoding = 'base64';
 	$mailer->setSubject(JText::sprintf('COM_ADH_ADHERER_MAIL_SUBJECT', JURI::base(), strtoupper($this->adherent->nom), $this->adherent->prenom));
@@ -79,7 +81,7 @@ if ((int)$params->get('alert_sendmail_on_inscription_cb') == 1) {
 	} else {
 		$app->enqueueMessage(JText::_('COM_ADH_ADHERER_MAIL_SENT'));
 	}
-}
+
 ?>
 <!--<pre class="debug">
 	<?php /* var_dump(JRequest::getVar('adhId', 0, 'get'));
